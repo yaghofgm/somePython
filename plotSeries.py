@@ -7,9 +7,10 @@ a = [0]*N
 
 a[0]=0
 a[1]=1
+v=5
 
 for n in range(2,N):
-    a[n]=((n-2)*(n-1)-30)/((n*(n-1)))*a[n-2]
+    a[n]=((n-2)*(n-1)-v*(v+1))/((n*(n-1)))*a[n-2]
 for n in range(N):
     print(f"a_{n} = {a[n]}")
 
