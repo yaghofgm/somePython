@@ -45,8 +45,7 @@ def update_plot(emprestimo=100000, juros=0.01, salary=500):
     else:
         print(f"Excedeu 1.8x empréstimo. Divida restante: {divida_list[-1]}")
 
-# update_plot()
-# Sliders
+
 interact(
     update_plot,
     emprestimo=IntSlider(min=1000, max=200000, step=1000, value=100000, description="Empréstimo"),
