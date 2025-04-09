@@ -1,1 +1,2 @@
 sudo cp -r ~/python/edubridge_site/* /var/www/html/edubridge_site/
+no folder do edubridge_site, sudo systemtcl start apache2; ngrok http 80; access the <stuff>/edubridge_site/index.html
