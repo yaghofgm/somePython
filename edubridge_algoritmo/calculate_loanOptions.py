@@ -3,6 +3,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from ipywidgets import interact, FloatSlider, IntSlider, Dropdown
 from IPython.display import display
+# import sys
+# import platform
+
+# # Print Python version info at startup
+# print(f"Python version: {sys.version}")
+# print(f"Architecture: {platform.architecture()[0]}")
+# print(f"Running on: {platform.platform()}")
+# print("-" * 50)
 
 import warnings
 warnings.filterwarnings("ignore")  # só pra não poluir o output com mensagens do matplotlib
@@ -59,27 +67,31 @@ def test1(emprestimo, juros, GPA, sex, university, course):
 
             gpa_data = {
                 "Tecnologico de Monterrey Estado de Mexico": {
-                    "Ingenieria Mecanica": 3.5,
-                    "Ingeniería Quimica": 3.6,
-                    "Ingeniería Computacion y Tecnologias de la informacion": 3.7,
+                    "Ingenieria Mecanica": 3.4,
+                    "Ingeniería Quimica": 3.4,
+                    "Ingeniería Computacion y Tecnologias de la informacion": 3.4,
                 },
                 "Anahuac": {
-                    "Ingenieria Industrial": 3.5,
-                    "Ingenieria Mecanica": 3.4,
+                    "Ingenieria Industrial": 3.0,
+                    "Ingenieria Mecanica": 3.0,
                 },
                 "University of Michigan Ann Arbor": {
-                    "Electrical & Computer Engineering": 3.7,
-                    "Mechanical Engineering": 3.6,
+                    "Electrical & Computer Engineering": 3.8,
+                    "Mechanical Engineering": 3.8,
                 }
             }
 
-            raw_salary = salary_data.get(university, {}).get(course, 50000) #default salary is 50000
+            raw_salary = salary_data.get(university, {}).get(course, 50000)*0.15/12 #default salary is 50000
             gpa_avg = gpa_data.get(university, {}).get(course, 3.5) #default GPA is 3.5
 
+            # if sex == "male":
+            #     beta = 0.1185
+            # elif sex == "female":
+            #     beta = 0.1377
             if sex == "male":
-                beta = 0.1185
+                beta = 0.12
             elif sex == "female":
-                beta = 0.1377
+                beta = 0.12
             else:
                 raise ValueError("Invalid value for 'sex'. It must be either 'male' or 'female'.")
 
@@ -286,8 +298,8 @@ def detectar_subintervalos(lista):
 def interactive_range_display(
     GPA=3.5,
     sex="male",
-    university="University A",
-    course="Engineering",
+    university="Tecnologico de Monterrey Estado de Mexico",
+    course="Ingenieria Mecanica",
     profit_threshold=1.1,
     country="MX"
 ):
@@ -318,13 +330,55 @@ def interactive_range_display(
     with pd.option_context('display.max_colwidth', None):
         display(df)
 
-# Interface interativa (sem sliders de empréstimo e juros)
+# Define course options for each university
+course_options = {
+    "Tecnologico de Monterrey Estado de Mexico": [
+        "Ingenieria Mecanica", 
+        "Ingeniería Quimica", 
+        "Ingeniería Computacion y Tecnologias de la informacion"
+    ],
+    "Anahuac": [
+        "Ingenieria Industrial", 
+        "Ingenieria Mecanica"
+    ],
+    "University of Michigan Ann Arbor": [
+        "Electrical & Computer Engineering", 
+        "Mechanical Engineering"
+    ]
+}
+
+# Function to update course options based on university selection
+def update_course_options(change):
+    university = change.new
+    course_dropdown.options = course_options[university]
+    course_dropdown.value = course_options[university][0]  # Set default to first option
+
+# Create widgets
+gpa_slider = FloatSlider(min=2.0, max=4.0, step=0.1, value=3.5, description="GPA")
+profit_threshold_slider = FloatSlider(min=1.0, max=2.0, step=0.01, value=1.1, description="Lucro Mínimo")
+university_dropdown = Dropdown(
+    options=list(course_options.keys()), 
+    value="Tecnologico de Monterrey Estado de Mexico", 
+    description="Universidade"
+)
+course_dropdown = Dropdown(
+    options=course_options["Tecnologico de Monterrey Estado de Mexico"],
+    value="Ingenieria Mecanica",
+    description="Curso"
+)
+country_dropdown = Dropdown(options=["BR", "US", "MX"], value="MX", description="País")
+sex_dropdown = Dropdown(options=["male", "female"], value="male", description="Sexo")
+
+# Register the observer
+university_dropdown.observe(update_course_options, names='value')
+
+# Create interactive widget
 interact(
     interactive_range_display,
-    GPA=FloatSlider(min=2.0, max=4.0, step=0.1, value=3.5, description="GPA"),
-    profit_threshold=FloatSlider(min=1.0, max=2.0, step=0.01, value=1.1, description="Lucro Mínimo"),
-    university=Dropdown(options=["University A", "University B"], value="University A", description="Universidade"),
-    course=Dropdown(options=["Engineering", "Arts"], value="Engineering", description="Curso"),
-    country=Dropdown(options=["BR", "US", "MX"], value="MX", description="País"),
-    sex=Dropdown(options=["male", "female"], value="male", description="Sexo")
-) 
+    GPA=gpa_slider,
+    profit_threshold=profit_threshold_slider,
+    university=university_dropdown,
+    course=course_dropdown,
+    country=country_dropdown,
+    sex=sex_dropdown
+)

@@ -1,25 +1,498 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - EduBridge</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #3066BE;
+            --secondary-color: #119DA4;
+            --accent-color: #6D9DC5;
+            --light-color: #F2F5FF;
+            --dark-color: #253237;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            padding-top: 90px;
+        }
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .registro-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+        }
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(109, 157, 197, 0.25);
+        }
+        .progress-step {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .progress-step::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #dee2e6;
+            z-index: 1;
+        }
+        .step {
+            position: relative;
+            z-index: 2;
+            background-color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #dee2e6;
+        }
+        .step.active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .step.completed {
+            border-color: var(--secondary-color);
+            background-color: var(--secondary-color);
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h2>Cadastro de Usuário</h2>
-    <form action="salvar_usuario.php" method="post">
-        Nome: <input type="text" name="nome" required><br><br>
-        Sobrenome: <input type="text" name="sobrenome" required><br><br>
-        Email: <input type="email" name="email" required><br><br>
-        Senha: <input type="password" name="senha" required><br><br>
-        Telefone: <input type="text" name="telefone" required><br><br>
-        Categoria:
-        <select name ="categoria" required>
-            <option value="investidor">Investidor</option>
-            <option value="estudante">Estudante</option>
-            <option value="universidade">Universidade</option>
-            <option value="empresa">Empresa</option>
-        </select>
-        <input type="submit" value="Cadastrar">
-    </form>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-mortarboard-fill"></i> EduBridge
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Voltar para Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary ms-2" href="login.php">Já tenho uma conta</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card registro-card">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i>Cadastre-se no EduBridge</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="progress-step mb-4">
+                            <div class="step active" id="step1">1</div>
+                            <div class="step" id="step2">2</div>
+                            <div class="step" id="step3">3</div>
+                        </div>
+
+                        <form id="registrationForm" action="salvar_usuario.php" method="post" class="needs-validation" novalidate>
+                            <!-- Step 1: Basic Information -->
+                            <div class="step-content" id="step1-content">
+                                <h5 class="card-title mb-4">Informações Básicas</h5>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="nome" name="nome" required>
+                                        <div class="invalid-feedback">
+                                            Por favor, informe seu nome.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="sobrenome" class="form-label">Sobrenome <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
+                                        <div class="invalid-feedback">
+                                            Por favor, informe seu sobrenome.
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <div class="invalid-feedback">
+                                        Por favor, informe um email válido.
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="telefone" class="form-label">Telefone</label>
+                                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(DDD) 99999-9999">
+                                    <div class="form-text">Opcional, mas recomendado para comunicações importantes.</div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary next-step" data-step="1">Próximo <i class="bi bi-arrow-right"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Profile Information -->
+                            <div class="step-content d-none" id="step2-content">
+                                <h5 class="card-title mb-4">Perfil do Usuário</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="categoria" class="form-label">Qual a sua relação com o EduBridge? <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="categoria" name="categoria" required>
+                                        <option value="" selected disabled>Selecione uma opção</option>
+                                        <option value="estudante">Sou Estudante buscando financiamento</option>
+                                        <option value="investidor">Sou Investidor interessado em financiar estudantes</option>
+                                        <option value="universidade">Represento uma Universidade</option>
+                                        <option value="empresa">Represento uma Empresa</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Por favor, selecione uma opção.
+                                    </div>
+                                </div>
+                                
+                                <!-- Conditional fields based on categoria -->
+                                <div id="estudante-fields" class="categoria-fields d-none">
+                                    <div class="mb-3">
+                                        <label for="universidade" class="form-label">Universidade</label>
+                                        <input type="text" class="form-control" id="universidade" name="universidade">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="curso" class="form-label">Curso</label>
+                                        <input type="text" class="form-control" id="curso" name="curso">
+                                    </div>
+                                </div>
+                                
+                                <div id="investidor-fields" class="categoria-fields d-none">
+                                    <div class="mb-3">
+                                        <label for="area_interesse" class="form-label">Áreas de interesse</label>
+                                        <select class="form-select" multiple id="area_interesse" name="area_interesse[]">
+                                            <option value="engenharia">Engenharia</option>
+                                            <option value="medicina">Medicina</option>
+                                            <option value="direito">Direito</option>
+                                            <option value="tecnologia">Tecnologia</option>
+                                            <option value="negocios">Negócios</option>
+                                            <option value="artes">Artes e Humanidades</option>
+                                        </select>
+                                        <div class="form-text">Opcional. Segure CTRL para selecionar múltiplos.</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-outline-primary prev-step" data-step="2"><i class="bi bi-arrow-left"></i> Anterior</button>
+                                    <button type="button" class="btn btn-primary next-step" data-step="2">Próximo <i class="bi bi-arrow-right"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Account Security -->
+                            <div class="step-content d-none" id="step3-content">
+                                <h5 class="card-title mb-4">Segurança da Conta</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="senha" class="form-label">Senha <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="senha" name="senha" required minlength="8">
+                                        <button class="btn btn-outline-secondary toggle-password" type="button"><i class="bi bi-eye"></i></button>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        A senha deve ter pelo menos 8 caracteres.
+                                    </div>
+                                    <div class="form-text">
+                                        <div class="password-strength mt-2">
+                                            <small>Força da senha:</small>
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                        <ul class="small mt-2">
+                                            <li id="length" class="text-muted">Mínimo de 8 caracteres</li>
+                                            <li id="uppercase" class="text-muted">Pelo menos uma letra maiúscula</li>
+                                            <li id="lowercase" class="text-muted">Pelo menos uma letra minúscula</li>
+                                            <li id="number" class="text-muted">Pelo menos um número</li>
+                                            <li id="special" class="text-muted">Pelo menos um caractere especial</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="confirmar_senha" class="form-label">Confirmar Senha <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha" required>
+                                        <button class="btn btn-outline-secondary toggle-password" type="button"><i class="bi bi-eye"></i></button>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        As senhas não conferem.
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="termos" name="termos" required>
+                                    <label class="form-check-label" for="termos">Concordo com os <a href="#" target="_blank">Termos de Serviço</a> e a <a href="#" target="_blank">Política de Privacidade</a> <span class="text-danger">*</span></label>
+                                    <div class="invalid-feedback">
+                                        Você deve concordar com os termos para continuar.
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="newsletter" name="newsletter">
+                                    <label class="form-check-label" for="newsletter">Desejo receber atualizações e novidades por email</label>
+                                </div>
+                                
+                                <div class="alert alert-info" role="alert">
+                                    <i class="bi bi-info-circle"></i> Ao se cadastrar, você reconhece que leu e entendeu nossa política de privacidade e uso de dados.
+                                </div>
+                                
+                                <div id="form-error" class="alert alert-danger d-none" role="alert"></div>
+                                <div id="form-success" class="alert alert-success d-none" role="alert"></div>
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-outline-primary prev-step" data-step="3"><i class="bi bi-arrow-left"></i> Anterior</button>
+                                    <button type="submit" class="btn btn-success"><i class="bi bi-check2-circle"></i> Finalizar Cadastro</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer bg-white text-center py-3">
+                        <p class="mb-0">Já tem uma conta? <a href="login.php" class="text-decoration-none">Faça login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white text-center p-3 mt-5">
+        <p class="text-muted mb-0">&copy; 2025 EduBridge. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Multi-step form navigation
+            document.querySelectorAll('.next-step').forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = parseInt(this.getAttribute('data-step'));
+                    const currentContent = document.getElementById(`step${currentStep}-content`);
+                    const nextContent = document.getElementById(`step${currentStep+1}-content`);
+                    const currentStepIndicator = document.getElementById(`step${currentStep}`);
+                    const nextStepIndicator = document.getElementById(`step${currentStep+1}`);
+                    
+                    // Validate current step
+                    let isValid = true;
+                    currentContent.querySelectorAll('input[required], select[required]').forEach(input => {
+                        if (!input.validity.valid) {
+                            isValid = false;
+                            input.classList.add('is-invalid');
+                        } else {
+                            input.classList.remove('is-invalid');
+                        }
+                    });
+                    
+                    if (isValid) {
+                        currentContent.classList.add('d-none');
+                        nextContent.classList.remove('d-none');
+                        currentStepIndicator.classList.remove('active');
+                        currentStepIndicator.classList.add('completed');
+                        nextStepIndicator.classList.add('active');
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.prev-step').forEach(button => {
+                button.addEventListener('click', function() {
+                    const currentStep = parseInt(this.getAttribute('data-step'));
+                    const currentContent = document.getElementById(`step${currentStep}-content`);
+                    const prevContent = document.getElementById(`step${currentStep-1}-content`);
+                    const currentStepIndicator = document.getElementById(`step${currentStep}`);
+                    const prevStepIndicator = document.getElementById(`step${currentStep-1}`);
+                    
+                    currentContent.classList.add('d-none');
+                    prevContent.classList.remove('d-none');
+                    currentStepIndicator.classList.remove('active');
+                    prevStepIndicator.classList.remove('completed');
+                    prevStepIndicator.classList.add('active');
+                });
+            });
+            
+            // Show/hide conditional fields based on category selection
+            const categoriaSelect = document.getElementById('categoria');
+            categoriaSelect.addEventListener('change', function() {
+                document.querySelectorAll('.categoria-fields').forEach(field => field.classList.add('d-none'));
+                
+                const selectedValue = this.value;
+                if (selectedValue) {
+                    const fieldElement = document.getElementById(`${selectedValue}-fields`);
+                    if (fieldElement) {
+                        fieldElement.classList.remove('d-none');
+                    }
+                }
+            });
+            
+            // Toggle password visibility
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.previousElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('bi-eye');
+                        icon.classList.add('bi-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('bi-eye-slash');
+                        icon.classList.add('bi-eye');
+                    }
+                });
+            });
+            
+            // Password strength meter
+            const passwordInput = document.getElementById('senha');
+            const progressBar = document.querySelector('.password-strength .progress-bar');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                
+                // Reset all indicators
+                document.getElementById('length').classList.remove('text-success');
+                document.getElementById('uppercase').classList.remove('text-success');
+                document.getElementById('lowercase').classList.remove('text-success');
+                document.getElementById('number').classList.remove('text-success');
+                document.getElementById('special').classList.remove('text-success');
+                
+                // Check password criteria
+                if (password.length >= 8) {
+                    strength += 20;
+                    document.getElementById('length').classList.add('text-success');
+                }
+                
+                if (password.match(/[A-Z]/)) {
+                    strength += 20;
+                    document.getElementById('uppercase').classList.add('text-success');
+                }
+                
+                if (password.match(/[a-z]/)) {
+                    strength += 20;
+                    document.getElementById('lowercase').classList.add('text-success');
+                }
+                
+                if (password.match(/[0-9]/)) {
+                    strength += 20;
+                    document.getElementById('number').classList.add('text-success');
+                }
+                
+                if (password.match(/[^A-Za-z0-9]/)) {
+                    strength += 20;
+                    document.getElementById('special').classList.add('text-success');
+                }
+                
+                // Update progress bar
+                progressBar.style.width = `${strength}%`;
+                
+                // Color the progress bar based on password strength
+                if (strength < 40) {
+                    progressBar.classList.remove('bg-warning', 'bg-success');
+                    progressBar.classList.add('bg-danger');
+                } else if (strength < 80) {
+                    progressBar.classList.remove('bg-danger', 'bg-success');
+                    progressBar.classList.add('bg-warning');
+                } else {
+                    progressBar.classList.remove('bg-danger', 'bg-warning');
+                    progressBar.classList.add('bg-success');
+                }
+            });
+            
+            // Check if passwords match
+            const confirmarSenha = document.getElementById('confirmar_senha');
+            confirmarSenha.addEventListener('input', function() {
+                if (this.value !== passwordInput.value) {
+                    this.setCustomValidity('As senhas não conferem');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+
+            // Form submission with AJAX
+            const form = document.getElementById('registrationForm');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                if (!this.checkValidity()) {
+                    event.stopPropagation();
+                    this.classList.add('was-validated');
+                    return;
+                }
+                
+                // Reset messages
+                const errorDiv = document.getElementById('form-error');
+                const successDiv = document.getElementById('form-success');
+                errorDiv.classList.add('d-none');
+                successDiv.classList.add('d-none');
+                
+                // Submit using fetch API
+                fetch('salvar_usuario.php', {
+                    method: 'POST',
+                    body: new FormData(this)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.sucesso) {
+                        successDiv.textContent = data.mensagem;
+                        successDiv.classList.remove('d-none');
+                        form.reset();
+                        setTimeout(() => {
+                            window.location.href = 'login.php?cadastro=sucesso';
+                        }, 3000);
+                    } else {
+                        errorDiv.textContent = data.mensagem;
+                        errorDiv.classList.remove('d-none');
+                    }
+                })
+                .catch(error => {
+                    errorDiv.textContent = 'Erro ao processar o cadastro. Tente novamente.';
+                    errorDiv.classList.remove('d-none');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

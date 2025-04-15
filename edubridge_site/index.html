@@ -2,18 +2,576 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduBridge - Financiamento Educacional para um Futuro Melhor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #119DA4;
+            --accent-color: #6D9DC5;
+            --light-color: #F2F5FF;
+            --dark-color: #253237;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .nav-link {
+            font-weight: 500;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 100px 0;
+            border-radius: 0 0 50px 0;
+        }
+        .hero h1 {
+            font-weight: 700;
+            font-size: 3rem;
+        }
+        .feature-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        .testimonial {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .quote-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+        }
+        .cta-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 80px 0;
+            border-radius: 50px 0 0 0;
+        }
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        .social-icon {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: all 0.3s;
+        }
+        .social-icon:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Login de Usuário</h2>
-    <form action="login.php" method="post">
-        <label>Email:</label>
-        <input type="email" name="email" required><br><br>
-        <label>Senha:</label>
-        <input type="password" name="senha" required><br><br>
-        <input type="submit" value="Entrar">
-    </form>
-    <p>🔐 Ainda não tem uma conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-mortarboard-fill"></i> EduBridge
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#como-funciona">Como Funciona</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#para-quem">Para Quem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#depoimentos">Depoimentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1>Invista no futuro, invista em educação</h1>
+                    <p class="lead mb-4">Conectamos estudantes talentosos a investidores que acreditam no potencial da educação como transformação social e oportunidade de investimento.</p>
+                    <button class="btn btn-light btn-lg me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">
+                        <i class="bi bi-person-plus"></i> Junte-se à nossa comunidade
+                    </button>
+                    <a href="#como-funciona" class="btn btn-outline-light btn-lg">Saiba mais</a>
+                </div>
+                <div class="col-md-6 text-center d-none d-md-block">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Estudantes universitários" class="img-fluid rounded-3 shadow" style="max-height: 400px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-5" id="como-funciona">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Como Funciona</h2>
+                <p class="lead text-muted">Uma plataforma que conecta investidores e estudantes em um modelo sustentável</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <h4 class="card-title">1. Investidores encontram talentos</h4>
+                            <p class="card-text text-muted">Investidores buscam estudantes promissores com base em seus perfis acadêmicos e de carreira.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="bi bi-cash-coin"></i>
+                            </div>
+                            <h4 class="card-title">2. Financiamento educacional</h4>
+                            <p class="card-text text-muted">Estudantes recebem o financiamento necessário para concluir seus estudos com tranquilidade.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3">
+                                <i class="bi bi-graph-up-arrow"></i>
+                            </div>
+                            <h4 class="card-title">3. Retorno gradual</h4>
+                            <p class="card-text text-muted">Após formados, os estudantes devolvem o investimento de forma gradual com uma parte dos seus rendimentos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Who Section -->
+    <section class="py-5 bg-white" id="para-quem">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Para Quem é o EduBridge?</h2>
+                <p class="lead text-muted">Nossa plataforma atende diversos perfis</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="card feature-card shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5><i class="bi bi-mortarboard me-2 text-primary"></i>Estudantes</h5>
+                            <p class="text-muted small">Jovens talentos que buscam financiamento para sua formação superior.</p>
+                            <ul class="small">
+                                <li>Acesso a financiamento justo</li>
+                                <li>Mentoria de investidores</li>
+                                <li>Networking profissional</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card feature-card shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5><i class="bi bi-cash me-2 text-success"></i>Investidores</h5>
+                            <p class="text-muted small">Pessoas e empresas que querem investir em educação com retorno financeiro.</p>
+                            <ul class="small">
+                                <li>Impacto social positivo</li>
+                                <li>Retorno financeiro atrativo</li>
+                                <li>Diversificação de portfólio</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card feature-card shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5><i class="bi bi-building me-2 text-info"></i>Universidades</h5>
+                            <p class="text-muted small">Instituições que desejam aumentar sua atratividade e reduzir evasão.</p>
+                            <ul class="small">
+                                <li>Mais alunos com suporte financeiro</li>
+                                <li>Menor taxa de evasão</li>
+                                <li>Parceria com setor privado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card feature-card shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5><i class="bi bi-briefcase me-2 text-danger"></i>Empresas</h5>
+                            <p class="text-muted small">Organizações em busca de talentos e responsabilidade social.</p>
+                            <ul class="small">
+                                <li>Pipeline de talentos qualificados</li>
+                                <li>Engajamento social</li>
+                                <li>Oportunidade de recrutamento</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5" id="depoimentos">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">O Que Dizem Sobre Nós</h2>
+                <p class="lead text-muted">Histórias de sucesso da nossa comunidade</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <div class="mb-3">
+                            <i class="bi bi-quote quote-icon"></i>
+                        </div>
+                        <p class="mb-4">"Graças ao EduBridge consegui me formar em Engenharia sem preocupações financeiras e já comecei a devolver o investimento de forma tranquila."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-3" width="50" height="50" alt="Maria Silva">
+                            <div>
+                                <h6 class="mb-0">Maria Silva</h6>
+                                <small class="text-muted">Engenheira, formada em 2024</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <div class="mb-3">
+                            <i class="bi bi-quote quote-icon"></i>
+                        </div>
+                        <p class="mb-4">"Como investidor, encontrei no EduBridge uma forma de diversificar minha carteira enquanto contribuo para a educação de jovens talentosos."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" width="50" height="50" alt="Ricardo Gomes">
+                            <div>
+                                <h6 class="mb-0">Ricardo Gomes</h6>
+                                <small class="text-muted">Investidor desde 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <div class="mb-3">
+                            <i class="bi bi-quote quote-icon"></i>
+                        </div>
+                        <p class="mb-4">"Nossa universidade reduziu significativamente a taxa de evasão após a parceria com o EduBridge. Os alunos estão mais engajados."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle me-3" width="50" height="50" alt="Dra. Luciana Mendes">
+                            <div>
+                                <h6 class="mb-0">Dra. Luciana Mendes</h6>
+                                <small class="text-muted">Coordenadora Universitária</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Pronto para transformar o futuro da educação?</h2>
+            <p class="lead mb-4">Junte-se a milhares de estudantes, investidores, universidades e empresas na nossa plataforma.</p>
+            <button class="btn btn-light btn-lg px-4 me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se Gratuitamente</button>
+            <button class="btn btn-outline-light btn-lg px-4" data-bs-toggle="modal" data-bs-target="#loginModal">Já Tenho Conta</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="mb-3"><i class="bi bi-mortarboard-fill me-2"></i> EduBridge</h5>
+                    <p>Conectando talentos e oportunidades através da educação. Uma plataforma que transforma vidas e gera retornos para todos.</p>
+                    <div class="mt-3">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6 class="mb-3">Links Rápidos</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Home</a></li>
+                        <li><a href="#como-funciona" class="text-white text-decoration-none mb-2 d-block">Como Funciona</a></li>
+                        <li><a href="#para-quem" class="text-white text-decoration-none mb-2 d-block">Para Quem</a></li>
+                        <li><a href="#depoimentos" class="text-white text-decoration-none mb-2 d-block">Depoimentos</a></li>
+                        <li><a href="#contato" class="text-white text-decoration-none mb-2 d-block">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h6 class="mb-3">Informações</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Sobre Nós</a></li>
+                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Blog</a></li>
+                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">FAQ</a></li>
+                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Termos de Uso</a></li>
+                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4" id="contato">
+                    <h6 class="mb-3">Contato</h6>
+                    <p><i class="bi bi-geo-alt me-2"></i> Av. Paulista, 1000, São Paulo - SP</p>
+                    <p><i class="bi bi-envelope me-2"></i> contato@edubridge.com.br</p>
+                    <p><i class="bi bi-telephone me-2"></i> (11) 99999-9999</p>
+                    <form class="mt-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Seu e-mail" required>
+                            <button class="btn btn-light" type="submit">Inscrever</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3 border-light opacity-25">
+            <p class="text-center small mb-0">&copy; 2025 EduBridge. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-person-circle me-2"></i>Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm" action="login.php" method="post">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginSenha" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="loginSenha" name="senha" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="lembrar">
+                            <label class="form-check-label" for="lembrar">Lembrar-me</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="small text-decoration-none">Esqueceu a senha?</a>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Ainda não tem conta? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal fade" id="cadastroModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-person-plus-fill me-2"></i>Cadastro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="cadastroForm" action="salvar_usuario.php" method="post" class="needs-validation" novalidate>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome" name="nome" required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe seu nome.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="sobrenome" class="form-label">Sobrenome</label>
+                                <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
+                                <div class="invalid-feedback">
+                                    Por favor, informe seu sobrenome.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="invalid-feedback">
+                                Por favor, informe um email válido.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefone" class="form-label">Telefone (opcional)</label>
+                            <input type="tel" class="form-control" id="telefone" name="telefone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Você é:</label>
+                            <select class="form-select" id="categoria" name="categoria" required>
+                                <option value="" selected disabled>Selecione uma opção</option>
+                                <option value="estudante">Estudante</option>
+                                <option value="investidor">Investidor</option>
+                                <option value="universidade">Universidade</option>
+                                <option value="empresa">Empresa</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor, selecione uma opção.
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="senha" name="senha" required minlength="8">
+                                <div class="invalid-feedback">
+                                    A senha deve ter pelo menos 8 caracteres.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="confirmar_senha" class="form-label">Confirmar Senha</label>
+                                <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha" required>
+                                <div class="invalid-feedback">
+                                    As senhas não conferem.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="termos" required>
+                            <label class="form-check-label" for="termos">Concordo com os <a href="#" target="_blank">Termos de Serviço</a> e a <a href="#" target="_blank">Política de Privacidade</a></label>
+                            <div class="invalid-feedback">
+                                Você deve concordar com os termos para continuar.
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Já tem uma conta? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">Faça login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form validation
+        (function() {
+            'use strict';
+            
+            // Fetch all forms with needs-validation class
+            var forms = document.querySelectorAll('.needs-validation');
+            
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    
+                    // Check if passwords match for registration form
+                    if (form.id === 'cadastroForm') {
+                        var senha = document.getElementById('senha');
+                        var confirmarSenha = document.getElementById('confirmar_senha');
+                        
+                        if (senha.value !== confirmarSenha.value) {
+                            confirmarSenha.setCustomValidity('As senhas não conferem');
+                            event.preventDefault();
+                            event.stopPropagation();
+                        } else {
+                            confirmarSenha.setCustomValidity('');
+                        }
+                    }
+                    
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') !== '#' && !this.getAttribute('data-bs-toggle')) {
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 

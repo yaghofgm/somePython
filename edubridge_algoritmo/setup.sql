@@ -1,12 +1,6 @@
-CREATE DATABASE IF NOT EXISTS portalusuarios;
-USE portalusuarios;
-
--- Drop existing tables if needed for clean reinstall
--- DROP TABLE IF EXISTS usuarios_logs;
--- DROP TABLE IF EXISTS financiamentos;
--- DROP TABLE IF EXISTS usuarios;
-
--- User table with enhanced fields
+use portalusuarios;
+--usuarios
+-- Table structure for table `usuarios`
 CREATE TABLE
   `usuarios` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -36,30 +30,8 @@ CREATE TABLE
     KEY `idx_categoria` (`categoria`),
     KEY `idx_status` (`status`)
   ) ENGINE = InnoDB AUTO_INCREMENT = 10 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
-
--- Student-specific profile information
-CREATE TABLE
-  `perfil_estudante` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `usuario_id` int(11) NOT NULL,
-    `universidade_id` int(11) DEFAULT NULL,
-    `curso_id` int(11) DEFAULT NULL,
-    `ano_ingresso` int(11) DEFAULT NULL,
-    `semestre_atual` int(11) DEFAULT NULL,
-    `nacionalidade` enum('US', 'MEX', 'BR') DEFAULT NULL,
-    `gpa` decimal(3, 2) DEFAULT NULL,
-    `cv_path` varchar(255) DEFAULT NULL,
-    `linkedin` varchar(255) DEFAULT NULL,
-    `data_atualizacao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    PRIMARY KEY (`id`),
-    KEY `usuario_id` (`usuario_id`),
-    KEY `idx_universidade` (`universidade_id`),
-    KEY `idx_curso` (`curso_id`),
-    CONSTRAINT `perfil_estudante_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `perfil_estudante_relation_2` FOREIGN KEY (`universidade_id`) REFERENCES `perfil_universidade` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `perfil_estudante_relation_3` FOREIGN KEY (`curso_id`) REFERENCES `curso_universidade` (`id`) ON DELETE CASCADE
-  ) ENGINE = InnoDB AUTO_INCREMENT = 3 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci
-
+--perfil universidade
+-- Table structure for table `perfil_universidade`
 CREATE TABLE
   `perfil_universidade` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -70,7 +42,29 @@ CREATE TABLE
     KEY `perfil_universidade_relation_1` (`usuario_id`),
     CONSTRAINT `perfil_universidade_relation_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
   ) ENGINE = InnoDB AUTO_INCREMENT = 5 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
-
+--perfil estudante
+-- Table structure for table `perfil_estudante`
+CREATE TABLE
+  `perfil_estudante` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `usuario_id` int(11) NOT NULL,
+    `universidade_id` int(11) DEFAULT NULL,
+    `curso` varchar(100) NOT NULL DEFAULT 'NULL',
+    `ano_ingresso` int(11) DEFAULT NULL,
+    `semestre_atual` int(11) DEFAULT NULL,
+    `gpa` decimal(3, 2) DEFAULT NULL,
+    `cv_path` varchar(255) DEFAULT NULL,
+    `linkedin` varchar(255) DEFAULT NULL,
+    `data_atualizacao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+    PRIMARY KEY (`id`),
+    KEY `usuario_id` (`usuario_id`),
+    KEY `idx_universidade` (`universidade_id`),
+    KEY `idx_curso` (`curso`),
+    CONSTRAINT `perfil_estudante_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `perfil_estudante_relation_2` FOREIGN KEY (`universidade_id`) REFERENCES `perfil_universidade` (`id`) ON DELETE CASCADE
+  ) ENGINE = InnoDB AUTO_INCREMENT = 2 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+--curso-universidade
+-- Table structure for table `curso_universidade`
 CREATE TABLE
   `curso_universidade` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -84,19 +78,3 @@ CREATE TABLE
     KEY `curso_universidade_relation_2` (`universidade_id`),
     CONSTRAINT `curso_universidade_relation_2` FOREIGN KEY (`universidade_id`) REFERENCES `perfil_universidade` (`id`) ON DELETE CASCADE
   ) ENGINE = InnoDB AUTO_INCREMENT = 9 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
-
-CREATE TABLE
-  `usuarios_logs` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `usuario_id` int(11) NOT NULL,
-    `acao` varchar(50) NOT NULL,
-    `ip` varchar(45) DEFAULT NULL,
-    `user_agent` varchar(255) DEFAULT NULL,
-    `data_hora` timestamp NOT NULL DEFAULT current_timestamp(),
-    `detalhes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`detalhes`)),
-    PRIMARY KEY (`id`),
-    KEY `idx_usuario` (`usuario_id`),
-    KEY `idx_acao` (`acao`),
-    KEY `idx_data` (`data_hora`),
-    CONSTRAINT `usuarios_logs_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
-  ) ENGINE = InnoDB AUTO_INCREMENT = 68 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci

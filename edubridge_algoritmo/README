@@ -1,0 +1,58 @@
+python3 edubridge_algoritmo/student_loan_analyzer.py --id 4 --country US --amount 259536 --percentage 0.35 --max_months 240 --ratio 2.0
+ngrok http 80
+
+interesante que a universidade muito cara americana leva mais de 10 anos pagando com 15 por cento do salario. 
+ai o modelo so vai emprestar parte do total q a pessa consiga pagar
+pra anahuac, a pessoa so consegue pagar pouco, mas a universidade tambem e mais barata 
+
+
+python3 edubridge_algoritmo/student_loan_analyzer.py --id 4 --country BR --amount 259536 --percentage 0.25 --max_months 2400 --ratio 3
+
+Analizando préstamos para: Yagho Franco Grossi Mota
+Universidad: University of Michigan Ann Arbor
+Curso: Electrical & Computer Engineering
+GPA: 4.00
+Salario esperado: 77300.0
+Costo semestral: 32442.0
+Costo total estimado (8 semestres): 259536.0
+
+Análisis para préstamo de US$ 259536.00:
+Con 25% del salario mensual y plazo máximo de 2400 meses
+Proporción máxima de pago total: 3.00x el préstamo original
+---------------------------------------------------
+
+1. Tasa de interés: 1.00% mensual (12.68% anual equivalente)
+   Préstamo: US$ 260000.00 (cercano a US$ 259536.00)
+   ✅ Préstamo pagado en 200 meses
+   💵 Monto total pagado: US$ 772240.23 (2.97x el préstamo original)
+   ✅ El valor esperado está por encima del umbral de riesgo (10%)
+   💰 Beneficio esperado: US$ 150956.15 | Porcentaje de beneficio: 58.06%
+
+2. Tasa de interés: 2.00% mensual (26.82% anual equivalente)
+   Préstamo: US$ 100000.00 (cercano a US$ 259536.00)
+   ✅ Préstamo pagado en 116 meses
+   💵 Monto total pagado: US$ 299913.86 (3.00x el préstamo original)
+   ✅ El valor esperado está por encima del umbral de riesgo (10%)
+   💰 Beneficio esperado: US$ 59944.01 | Porcentaje de beneficio: 59.94%
+
+3. Tasa de interés: 3.00% mensual (42.58% anual equivalente)
+   Préstamo: US$ 60000.00 (cercano a US$ 259536.00)
+   ✅ Préstamo pagado en 77 meses
+   💵 Monto total pagado: US$ 167337.20 (2.79x el préstamo original)
+   ✅ El valor esperado está por encima del umbral de riesgo (10%)
+   💰 Beneficio esperado: US$ 27769.18 | Porcentaje de beneficio: 46.28%
+
+Resultados del análisis de préstamos:
+-------------------------------------
+ Tasa de Interés Mensual (%) Intervalos de Préstamos Válidos (US$)
+                         1.0                      [210000, 260000]
+                         2.0                       [85000, 100000]
+                         3.0                        [55000, 60000]
+                         4.0                        [40000, 40000]
+                         5.0                        [35000, 35000]
+                         6.0                               Ninguno
+                         7.0                        [25000, 25000]
+                         8.0                        [20000, 20000]
+                         9.0                               Ninguno
+                        10.0                               Ninguno
+yagho@yagho-Inspiron-3501:~/python$ 
