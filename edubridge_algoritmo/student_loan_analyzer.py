@@ -10,6 +10,8 @@ import pandas as pd
 import argparse
 from db_calculateLoan import student_loan_range_analysis, get_all_students
 
+
+
 def main():
     parser = argparse.ArgumentParser(description='Analizador de rangos de préstamos para estudiantes')
     parser.add_argument('-i', '--id', type=int, help='ID del estudiante a analizar')
