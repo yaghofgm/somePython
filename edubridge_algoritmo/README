@@ -1,12 +1,14 @@
 python3 edubridge_algoritmo/student_loan_analyzer.py --id 4 --country US --amount 259536 --percentage 0.35 --max_months 240 --ratio 2.0
 ngrok http 80
 
+COM LISTA E ANALISE BASICA
+python3 edubridge_algoritmo/student_loan_analyzer.py --id 4 --country BR --amount 259536 --percentage 0.25 --max_months 2400 --ratio 3
+SEM LISTA E OPCOES 
+python3 edubridge_algoritmo/standaloneV3.py -i 4 
+
 interesante que a universidade muito cara americana leva mais de 10 anos pagando com 15 por cento do salario. 
 ai o modelo so vai emprestar parte do total q a pessa consiga pagar
 pra anahuac, a pessoa so consegue pagar pouco, mas a universidade tambem e mais barata 
-
-
-python3 edubridge_algoritmo/student_loan_analyzer.py --id 4 --country BR --amount 259536 --percentage 0.25 --max_months 2400 --ratio 3
 
 Analizando préstamos para: Yagho Franco Grossi Mota
 Universidad: University of Michigan Ann Arbor
@@ -55,4 +57,3 @@ Resultados del análisis de préstamos:
                          8.0                        [20000, 20000]
                          9.0                               Ninguno
                         10.0                               Ninguno
-yagho@yagho-Inspiron-3501:~/python$ 
