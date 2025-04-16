@@ -132,6 +132,9 @@
                         </div>
 
                         <form id="registrationForm" action="salvar_usuario.php" method="post" class="needs-validation" novalidate>
+                            <!-- Alerta para mostrar errores -->
+                            <div id="form-error" class="alert alert-danger d-none" role="alert"></div>
+
                             <!-- Step 1: Basic Information -->
                             <div class="step-content" id="step1-content">
                                 <h5 class="card-title mb-4">Informações Básicas</h5>
@@ -281,7 +284,6 @@
                                     <i class="bi bi-info-circle"></i> Ao se cadastrar, você reconhece que leu e entendeu nossa política de privacidade e uso de dados.
                                 </div>
                                 
-                                <div id="form-error" class="alert alert-danger d-none" role="alert"></div>
                                 <div id="form-success" class="alert alert-success d-none" role="alert"></div>
                                 
                                 <div class="d-flex justify-content-between">
@@ -451,45 +453,47 @@
                 }
             });
 
-            // Form submission with AJAX
+            // Form submission
             const form = document.getElementById('registrationForm');
             form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                
                 if (!this.checkValidity()) {
+                    event.preventDefault();
                     event.stopPropagation();
                     this.classList.add('was-validated');
                     return;
                 }
+
+                // Mostrar indicador de carga
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalText = submitButton.innerHTML;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cadastrando...';
                 
-                // Reset messages
-                const errorDiv = document.getElementById('form-error');
-                const successDiv = document.getElementById('form-success');
-                errorDiv.classList.add('d-none');
-                successDiv.classList.add('d-none');
+                // En caso de que la redirección del servidor falle, capturaremos la respuesta JSON
+                const formData = new FormData(this);
                 
-                // Submit using fetch API
                 fetch('salvar_usuario.php', {
                     method: 'POST',
-                    body: new FormData(this)
+                    body: formData
                 })
                 .then(response => response.json())
-                .then(data => {
-                    if (data.sucesso) {
-                        successDiv.textContent = data.mensagem;
-                        successDiv.classList.remove('d-none');
-                        form.reset();
-                        setTimeout(() => {
-                            window.location.href = 'login.php?cadastro=sucesso';
-                        }, 3000);
-                    } else {
-                        errorDiv.textContent = data.mensagem;
-                        errorDiv.classList.remove('d-none');
-                    }
-                })
                 .catch(error => {
-                    errorDiv.textContent = 'Erro ao processar o cadastro. Tente novamente.';
+                    console.error('Error:', error);
+                    // Si llegamos aquí, significa que el servidor no redireccionó correctamente
+                    // Esto podría ser debido a un error o porque hay errores de validación
+                    
+                    // Restaurar botón de envío
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalText;
+                    
+                    // Mostrar mensaje de error genérico
+                    const errorDiv = document.getElementById('form-error');
+                    errorDiv.textContent = 'Houve um erro ao processar seu cadastro. Por favor, tente novamente.';
                     errorDiv.classList.remove('d-none');
+                    errorDiv.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Prevenir el envío del formulario después de manejar errores
+                    event.preventDefault();
                 });
             });
         });

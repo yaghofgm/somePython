@@ -6,9 +6,6 @@ ini_set('display_errors', 0);
 // Inclui a conexão com o banco de dados
 include 'conexao.php';
 
-// Define o cabeçalho para JSON
-header('Content-Type: application/json');
-
 // Inicializa a resposta
 $resposta = [
     'sucesso' => false,
@@ -118,8 +115,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Procesos específicos por categoria de usuario
                     if ($categoria === 'estudante') {
                         // Crear entrada en perfil_estudante con valores iniciales
-                        // Inicialmente, universidade_id y curso_id son NULL
-                        // El usuario deberá completar su perfil después de registrarse
                         $perfil_sql = "INSERT INTO perfil_estudante (usuario_id) VALUES (?)";
                         $perfil_stmt = $conn->prepare($perfil_sql);
                         
@@ -163,6 +158,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
                     $resposta['sucesso'] = true;
                     $resposta['mensagem'] = "Cadastro realizado com sucesso! Você já pode fazer login.";
+                    
+                    // Fecha a conexão com o banco de dados
+                    $conn->close();
+                    
+                    // SOLUÇÃO: Redirecionamento direto do servidor em vez de resposta JSON
+                    header("Location: login.php?cadastro=sucesso&email=" . urlencode($email));
+                    exit(); // Termina a execução do script após o redirecionamento
+                    
                 } else {
                     throw new Exception("Erro ao cadastrar: " . $stmt->error);
                 }
@@ -188,6 +191,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resposta['mensagem'] = "Método de requisição inválido.";
 }
 
-// Retorna a resposta como JSON
+// Se chegou até aqui (não houve redirecionamento), define cabeçalho JSON e retorna a resposta
+header('Content-Type: application/json');
 echo json_encode($resposta);
 ?>

@@ -1,2 +1,3 @@
-sudo cp -r ~/python/edubridge_site/* /var/www/html/edubridge_site/
-no folder do edubridge_site, sudo systemtcl start apache2; ngrok http 80; access the <stuff>/edubridge_site/index.html
+// sudo cp -r ~/python/edubridge_site/* /var/www/html/edubridge_site/
+// rsync -av --ignore-existing /var/www/html/edubridge_site/ /home/yagho/python/edubridge_site/
+// no folder do edubridge_site, sudo systemtcl start apache2; ngrok http 80; access the <stuff>/edubridge_site/index.html

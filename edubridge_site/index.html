@@ -6,120 +6,19 @@
     <title>EduBridge - Financiamento Educacional para um Futuro Melhor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <style>
-        :root {
-            --primary-color: #FFD700;
-            --secondary-color: #119DA4;
-            --accent-color: #6D9DC5;
-            --light-color: #F2F5FF;
-            --dark-color: #253237;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark-color);
-            background-color: var(--light-color);
-        }
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .navbar-brand {
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        .nav-link {
-            font-weight: 500;
-        }
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        .btn-outline-primary {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 100px 0;
-            border-radius: 0 0 50px 0;
-        }
-        .hero h1 {
-            font-weight: 700;
-            font-size: 3rem;
-        }
-        .feature-card {
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s;
-            height: 100%;
-        }
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-        }
-        .testimonial {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        .quote-icon {
-            font-size: 2rem;
-            color: var(--accent-color);
-            opacity: 0.3;
-        }
-        .cta-section {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 80px 0;
-            border-radius: 50px 0 0 0;
-        }
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        .social-icon {
-            color: white;
-            font-size: 1.5rem;
-            margin-right: 15px;
-            transition: all 0.3s;
-        }
-        .social-icon:hover {
-            color: var(--accent-color);
-            transform: translateY(-5px);
-        }
-        .modal-content {
-            border-radius: 15px;
-            border: none;
-        }
-        .modal-header {
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 15px 15px 0 0;
-        }
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-        }
-    </style>
+    <!-- Adicionando o novo CSS para a página inicial -->
+    <link rel="stylesheet" href="assets/css/homepage.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="bi bi-mortarboard-fill"></i> EduBridge
+                <img src="img/EduBridge-logo.png" alt="EduBridge" class="logo" style="height: 90px; width: auto; transition: all 0.3s ease;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -139,31 +38,88 @@
                         <a class="nav-link" href="#depoimentos">Depoimentos</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#nossa-equipe">Nossa Equipe</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#contato">Contato</a>
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</button>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</button>
+                    <a href="#" class="btn-signup me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</a>
+                    <a href="#" class="btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- User Type Selector Section -->
+    <section class="user-type-selector py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="user-selector-card shadow-sm">
+                        <h3 class="text-center mb-3">Escolha sua Experiência</h3>
+                        <p class="text-center text-muted mb-4">Personalize o conteúdo com base no seu perfil</p>
+                        <div class="user-type-buttons">
+                            <a href="index.html" class="user-type-btn default-btn active">
+                                <i class="bi bi-house"></i>
+                                <span>Página Inicial</span>
+                            </a>
+                            <a href="painel_estudante.php" class="user-type-btn student-btn">
+                                <i class="bi bi-mortarboard"></i>
+                                <span>Estudantes</span>
+                            </a>
+                            <a href="painel_investidor.php" class="user-type-btn investor-btn">
+                                <i class="bi bi-cash-coin"></i>
+                                <span>Investidores</span>
+                            </a>
+                            <a href="painel_universidade.php" class="user-type-btn university-btn">
+                                <i class="bi bi-building"></i>
+                                <span>Universidades</span>
+                            </a>
+                            <a href="painel_empresa.php" class="user-type-btn company-btn">
+                                <i class="bi bi-briefcase"></i>
+                                <span>Empresas</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section com fundo gradiente amarelo -->
     <section class="hero">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6">
+                <div class="col-md-6 animate-fade-in delay-100">
                     <h1>Invista no futuro, invista em educação</h1>
                     <p class="lead mb-4">Conectamos estudantes talentosos a investidores que acreditam no potencial da educação como transformação social e oportunidade de investimento.</p>
-                    <button class="btn btn-light btn-lg me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">
-                        <i class="bi bi-person-plus"></i> Junte-se à nossa comunidade
-                    </button>
-                    <a href="#como-funciona" class="btn btn-outline-light btn-lg">Saiba mais</a>
+                    <a href="#" class="btn btn-primary btn-lg me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">
+                        Junte-se à nossa comunidade
+                    </a>
+                    <a href="#como-funciona" class="btn btn-outline-primary btn-lg">Saiba mais</a>
                 </div>
-                <div class="col-md-6 text-center d-none d-md-block">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Estudantes universitários" class="img-fluid rounded-3 shadow" style="max-height: 400px;">
+                <div class="col-md-6 text-center d-none d-md-block animate-fade-in delay-200">
+                    <img src="img/graduation.jpg" alt="Estudantes universitários" class="img-fluid rounded-3 shadow" style="max-height: 400px;">
+                </div>
+            </div>
+        </div>
+        <div class="wave-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Us Link Section -->
+    <section class="about-us-link py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3>Conheça Nossa Equipe</h3>
+                    <p>Descubra a equipe e a missão por trás da EduBridge. Uma iniciativa criada por estudantes internacionais para estudantes internacionais.</p>
+                    <a href="#nossa-equipe" class="btn btn-info">Conheça Nossa Equipe</a>
                 </div>
             </div>
         </div>
@@ -173,7 +129,7 @@
     <section class="py-5" id="como-funciona">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="fw-bold">Como Funciona</h2>
+                <h2>Como Funciona</h2>
                 <p class="lead text-muted">Uma plataforma que conecta investidores e estudantes em um modelo sustentável</p>
             </div>
             
@@ -296,7 +252,7 @@
                         </div>
                         <p class="mb-4">"Graças ao EduBridge consegui me formar em Engenharia sem preocupações financeiras e já comecei a devolver o investimento de forma tranquila."</p>
                         <div class="d-flex align-items-center">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-3" width="50" height="50" alt="Maria Silva">
+                            <img src="img/testimonial1.jpg" class="rounded-circle me-3" width="50" height="50" alt="Maria Silva">
                             <div>
                                 <h6 class="mb-0">Maria Silva</h6>
                                 <small class="text-muted">Engenheira, formada em 2024</small>
@@ -311,7 +267,7 @@
                         </div>
                         <p class="mb-4">"Como investidor, encontrei no EduBridge uma forma de diversificar minha carteira enquanto contribuo para a educação de jovens talentosos."</p>
                         <div class="d-flex align-items-center">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" width="50" height="50" alt="Ricardo Gomes">
+                            <img src="img/testimonial2.jpg" class="rounded-circle me-3" width="50" height="50" alt="Ricardo Gomes">
                             <div>
                                 <h6 class="mb-0">Ricardo Gomes</h6>
                                 <small class="text-muted">Investidor desde 2023</small>
@@ -326,7 +282,7 @@
                         </div>
                         <p class="mb-4">"Nossa universidade reduziu significativamente a taxa de evasão após a parceria com o EduBridge. Os alunos estão mais engajados."</p>
                         <div class="d-flex align-items-center">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle me-3" width="50" height="50" alt="Dra. Luciana Mendes">
+                            <img src="img/testimonial3.jpg" class="rounded-circle me-3" width="50" height="50" alt="Dra. Luciana Mendes">
                             <div>
                                 <h6 class="mb-0">Dra. Luciana Mendes</h6>
                                 <small class="text-muted">Coordenadora Universitária</small>
@@ -338,22 +294,134 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container text-center">
-            <h2 class="fw-bold mb-4">Pronto para transformar o futuro da educação?</h2>
-            <p class="lead mb-4">Junte-se a milhares de estudantes, investidores, universidades e empresas na nossa plataforma.</p>
-            <button class="btn btn-light btn-lg px-4 me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se Gratuitamente</button>
-            <button class="btn btn-outline-light btn-lg px-4" data-bs-toggle="modal" data-bs-target="#loginModal">Já Tenho Conta</button>
+    <!-- Our Team Section -->
+    <section class="py-5 bg-white" id="nossa-equipe">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Nossa Equipe</h2>
+                <p class="lead text-muted">Construído por Estudantes Internacionais, para Estudantes Internacionais</p>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <!-- Team Member 1 -->
+                <div class="col-md-4">
+                    <div class="card team-card shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="position-relative">
+                                <img src="img/karen.jpg" class="rounded-circle mb-3" width="150" height="150" alt="Karen">
+                                <img src="img/mexico-icon.png" alt="Mexico Flag" class="position-absolute" style="width: 40px; height: 40px; bottom: 0; right: 35%;">
+                            </div>
+                            <h4>Karen Vera Sanchez</h4>
+                            <p class="text-muted">CEO</p>
+                            <p class="small">BSE Hons Industrial and Operations Engineering & Entrepreneurship Minor | University of Michigan</p>
+                            <p class="small"><u>Fun Fact:</u> My first business? Selling homemade Arroz con Leche! As a kid, 
+                            I turned my love for my mom's legendary recipe into a mini venture—sweet, cinnamon-y happiness. 
+                            Still a huge fan, but now I enjoy it more than I sell it!</p>
+                            <div class="social-icons">
+                                <a href="#" class="text-decoration-none"><i class="bi bi-linkedin"></i></a>
+                                <a href="mailto:k.vera@education-bridge.com" class="text-decoration-none"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="col-md-4">
+                    <div class="card team-card shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="position-relative">
+                                <img src="img/analucia.jpg" class="rounded-circle mb-3" width="150" height="150" alt="Ana Lucia">
+                                <img src="img/peru-icon.png" alt="Peru Flag" class="position-absolute" style="width: 40px; height: 40px; bottom: 0; right: 35%;">
+                            </div>
+                            <h4>Ana Lucia Hurtado Luperdi</h4>
+                            <p class="text-muted">CTO</p>
+                            <p class="small">BSE Hons Robotics & Data Science <br>Dual Degree | University of Michigan</p>
+                            <p class="small"><u>Fun Fact:</u> I'm obsessed with Flatland—even did my senior paper on it! 
+                            Abbott uses a 2D world to explain higher dimensions, like how a 3D sphere looks like a changing circle. 
+                            If you haven't seen the movie, check it out!</p>
+                            <div class="social-icons">
+                                <a href="https://www.linkedin.com/in/analuciahurtado/" class="text-decoration-none"><i class="bi bi-linkedin"></i></a>
+                                <a href="mailto:a.hurtado@education-bridge.com" class="text-decoration-none"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="col-md-4">
+                    <div class="card team-card shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="position-relative">
+                                <img src="img/yagho.jpg" class="rounded-circle mb-3" width="150" height="150" alt="Yagho">
+                                <img src="img/brasil-icon.png" alt="Brasil Flag" class="position-absolute" style="width: 40px; height: 40px; bottom: 0; right: 35%;">
+                            </div>
+                            <h4>Yagho Franco Grossi Mota</h4>
+                            <p class="text-muted">CDO</p>
+                            <p class="small">BSE Hons Electrical Engineering & <br>Mathematics Minor | University of Michigan</p>
+                            <p class="small"><u>Fun Fact:</u> I take Amèlie Poulain's lifestyle as a mantra for life, for coding and for problem solving in general! 
+                            A poetic approach to the "Theory Builder"-type of problem solver that 3b1b mentions on the cube shadow video.</p>
+                            <div class="social-icons">
+                                <a href="#" class="text-decoration-none"><i class="bi bi-linkedin"></i></a>
+                                <a href="mailto:y.grossi@education-bridge.com" class="text-decoration-none"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Agendamento de Reunião -->
+            <div class="text-center mt-5">
+                <h3>Agende uma Reunião Conosco</h3>
+                <p>Vamos conversar sobre como podemos ajudar você a alcançar seus objetivos. Agende uma reunião hoje!</p>
+                <a href="#" class="btn btn-primary">Agendar Reunião</a>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
+    <!-- Partners Section -->
+    <section class="py-5" id="parceiros">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Nossos Parceiros</h2>
+                <p class="lead text-muted">Instituições que confiam no EduBridge</p>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-6 col-md-2">
+                    <div class="partner-logo p-3 bg-white shadow-sm rounded text-center">
+                        <img src="img/UM-logo.png" alt="Universidade" class="img-fluid" style="max-height: 80px;">
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="partner-logo p-3 bg-white shadow-sm rounded text-center">
+                        <img src="img/BZL-flag.png" alt="Brasil" class="img-fluid" style="max-height: 80px;">
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="partner-logo p-3 bg-white shadow-sm rounded text-center">
+                        <img src="img/MEX-flag.png" alt="México" class="img-fluid" style="max-height: 80px;">
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="partner-logo p-3 bg-white shadow-sm rounded text-center">
+                        <img src="img/PER-flag.png" alt="Perú" class="img-fluid" style="max-height: 80px;">
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="partner-logo p-3 bg-white shadow-sm rounded text-center"></div>
+                        <img src="img/USA-flag.png" alt="USA" class="img-fluid" style="max-height: 80px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5 bg-white" id="contato">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-4">
-                    <h5 class="mb-3"><i class="bi bi-mortarboard-fill me-2"></i> EduBridge</h5>
+                    <h5 class="mb-3">EduBridge</h5>
                     <p>Conectando talentos e oportunidades através da educação. Uma plataforma que transforma vidas e gera retornos para todos.</p>
                     <div class="mt-3">
                         <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
@@ -365,24 +433,24 @@
                 <div class="col-md-2">
                     <h6 class="mb-3">Links Rápidos</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Home</a></li>
-                        <li><a href="#como-funciona" class="text-white text-decoration-none mb-2 d-block">Como Funciona</a></li>
-                        <li><a href="#para-quem" class="text-white text-decoration-none mb-2 d-block">Para Quem</a></li>
-                        <li><a href="#depoimentos" class="text-white text-decoration-none mb-2 d-block">Depoimentos</a></li>
-                        <li><a href="#contato" class="text-white text-decoration-none mb-2 d-block">Contato</a></li>
+                        <li><a href="#" class="text-decoration-none mb-2 d-block">Home</a></li>
+                        <li><a href="#como-funciona" class="text-decoration-none mb-2 d-block">Como Funciona</a></li>
+                        <li><a href="#para-quem" class="text-decoration-none mb-2 d-block">Para Quem</a></li>
+                        <li><a href="#depoimentos" class="text-decoration-none mb-2 d-block">Depoimentos</a></li>
+                        <li><a href="#contato" class="text-decoration-none mb-2 d-block">Contato</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2">
                     <h6 class="mb-3">Informações</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Sobre Nós</a></li>
-                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Blog</a></li>
-                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">FAQ</a></li>
-                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Termos de Uso</a></li>
-                        <li><a href="#" class="text-white text-decoration-none mb-2 d-block">Privacidade</a></li>
+                        <li><a href="#" class="text-decoration-none mb-2 d-block">Sobre Nós</a></li>
+                        <li><a href="#" class="text-decoration-none mb-2 d-block">Blog</a></li>
+                        <li><a href="#" class="text-decoration-none mb-2 d-block">FAQ</a></li>
+                        <li><a href="#" class="text-decoration-none mb-2 d-block">Termos de Uso</a></li>
+                        <li><a href="#" class="text-decoration-none mb-2 d-block">Privacidade</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4" id="contato">
+                <div class="col-md-4">
                     <h6 class="mb-3">Contato</h6>
                     <p><i class="bi bi-geo-alt me-2"></i> Av. Paulista, 1000, São Paulo - SP</p>
                     <p><i class="bi bi-envelope me-2"></i> contato@edubridge.com.br</p>
@@ -390,139 +458,136 @@
                     <form class="mt-3">
                         <div class="input-group">
                             <input type="email" class="form-control" placeholder="Seu e-mail" required>
-                            <button class="btn btn-light" type="submit">Inscrever</button>
+                            <button class="btn btn-primary" type="submit">Inscrever</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <hr class="mt-4 mb-3 border-light opacity-25">
+            <hr class="mt-4 mb-3">
             <p class="text-center small mb-0">&copy; 2025 EduBridge. Todos os direitos reservados.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-3">EduBridge</h5>
+                    <p class="text-muted mb-3">Conectando estudantes talentosos a investidores visionários.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h6 class="mb-3">Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Home</a></li>
+                        <li class="mb-2"><a href="#como-funciona" class="text-decoration-none text-muted">Como Funciona</a></li>
+                        <li class="mb-2"><a href="#para-quem" class="text-decoration-none text-muted">Para Quem</a></li>
+                        <li class="mb-2"><a href="#nossa-equipe" class="text-decoration-none text-muted">Nossa Equipe</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h6 class="mb-3">Legal</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Termos de Uso</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Privacidade</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="mb-3">Contato</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> contato@edubridge.com</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i> +55 (11) 9999-9999</li>
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> São Paulo, Brasil</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center text-muted">
+                <small>&copy; 2025 EduBridge. Todos os direitos reservados.</small>
+            </div>
         </div>
     </footer>
 
     <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1">
-        <div class="modal-dialog">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-person-circle me-2"></i>Login</h5>
+                    <h5 class="modal-title" id="loginModalLabel">Entrar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="loginForm" action="login.php" method="post">
+                    <form action="login.php" method="post">
                         <div class="mb-3">
                             <label for="loginEmail" class="form-label">Email</label>
                             <input type="email" class="form-control" id="loginEmail" name="email" required>
                         </div>
                         <div class="mb-3">
-                            <label for="loginSenha" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="loginSenha" name="senha" required>
+                            <label for="loginPassword" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="loginPassword" name="senha" required>
                         </div>
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="lembrar">
-                            <label class="form-check-label" for="lembrar">Lembrar-me</label>
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Lembrar de mim</label>
                         </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Entrar</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
                     </form>
                     <div class="text-center mt-3">
-                        <a href="#" class="small text-decoration-none">Esqueceu a senha?</a>
+                        <a href="#" class="text-decoration-none">Esqueceu sua senha?</a>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <p class="mb-0">Ainda não tem conta? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</a></p>
+                    <p class="mb-0">Não tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#cadastroModal" data-bs-dismiss="modal">Cadastre-se</a></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Registration Modal -->
-    <div class="modal fade" id="cadastroModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+    <!-- Signup Modal -->
+    <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-person-plus-fill me-2"></i>Cadastro</h5>
+                    <h5 class="modal-title" id="cadastroModalLabel">Cadastro</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="cadastroForm" action="salvar_usuario.php" method="post" class="needs-validation" novalidate>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome" name="nome" required>
-                                <div class="invalid-feedback">
-                                    Por favor, informe seu nome.
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="sobrenome" class="form-label">Sobrenome</label>
-                                <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
-                                <div class="invalid-feedback">
-                                    Por favor, informe seu sobrenome.
-                                </div>
-                            </div>
+                    <form action="cadastro.html" method="get">
+                        <div class="mb-3">
+                            <label for="signupName" class="form-label">Nome completo</label>
+                            <input type="text" class="form-control" id="signupName" name="nome" required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                            <div class="invalid-feedback">
-                                Por favor, informe um email válido.
-                            </div>
+                            <label for="signupEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="signupEmail" name="email" required>
                         </div>
                         <div class="mb-3">
-                            <label for="telefone" class="form-label">Telefone (opcional)</label>
-                            <input type="tel" class="form-control" id="telefone" name="telefone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="categoria" class="form-label">Você é:</label>
-                            <select class="form-select" id="categoria" name="categoria" required>
-                                <option value="" selected disabled>Selecione uma opção</option>
+                            <label for="signupType" class="form-label">Tipo de usuário</label>
+                            <select class="form-select" id="signupType" name="tipo" required>
+                                <option value="" selected disabled>Selecione...</option>
                                 <option value="estudante">Estudante</option>
                                 <option value="investidor">Investidor</option>
                                 <option value="universidade">Universidade</option>
                                 <option value="empresa">Empresa</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Por favor, selecione uma opção.
-                            </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="senha" name="senha" required minlength="8">
-                                <div class="invalid-feedback">
-                                    A senha deve ter pelo menos 8 caracteres.
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="confirmar_senha" class="form-label">Confirmar Senha</label>
-                                <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha" required>
-                                <div class="invalid-feedback">
-                                    As senhas não conferem.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="termos" required>
-                            <label class="form-check-label" for="termos">Concordo com os <a href="#" target="_blank">Termos de Serviço</a> e a <a href="#" target="_blank">Política de Privacidade</a></label>
-                            <div class="invalid-feedback">
-                                Você deve concordar com os termos para continuar.
-                            </div>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Continuar</button>
                     </form>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <p class="mb-0">Já tem uma conta? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">Faça login</a></p>
+                    <p class="mb-0">Já tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Entrar</a></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap and JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Form validation

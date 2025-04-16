@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduBridge - Para Estudantes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/homepage.css">
+    <link rel="stylesheet" href="assets/css/estudantes.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/EduBridge-logo.png" alt="EduBridge" class="logo" style="height: 90px; width: auto; transition: all 0.3s ease;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="estudantes.html">Estudantes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="investidores.html">Investidores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="universidades.html">Universidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="empresas.html">Empresas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nossa-equipe">Nossa Equipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn-signup me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</a>
+                    <a href="#" class="btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- User Type Selector Section -->
+    <section class="user-type-selector py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="user-selector-card shadow-sm">
+                        <h3 class="text-center mb-3">Escolha sua Experiência</h3>
+                        <p class="text-center text-muted mb-4">Personalize o conteúdo com base no seu perfil</p>
+                        <div class="user-type-buttons">
+                            <a href="index.html" class="user-type-btn default-btn">
+                                <i class="bi bi-house"></i>
+                                <span>Página Inicial</span>
+                            </a>
+                            <a href="estudantes.html" class="user-type-btn student-btn active">
+                                <i class="bi bi-mortarboard"></i>
+                                <span>Estudantes</span>
+                            </a>
+                            <a href="investidores.html" class="user-type-btn investor-btn">
+                                <i class="bi bi-cash-coin"></i>
+                                <span>Investidores</span>
+                            </a>
+                            <a href="universidades.html" class="user-type-btn university-btn">
+                                <i class="bi bi-building"></i>
+                                <span>Universidades</span>
+                            </a>
+                            <a href="empresas.html" class="user-type-btn company-btn">
+                                <i class="bi bi-briefcase"></i>
+                                <span>Empresas</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="student-hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-1 animate-fade-in delay-100">
+                    <div class="student-hero-content">
+                        <h1 class="display-4">Desbloquei seu futuro com <span class="student-highlight">EduBridge</span></h1>
+                        <p class="lead mb-4">Dê o primeiro passo para financiar sua educação e alcançar seus sonhos acadêmicos.</p>
+                        <div class="student-cta-container">
+                            <a href="#" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#cadastroModal">Registre-se Hoje →</a>
+                            <a href="#caminho" class="btn btn-outline-primary btn-lg">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-2 text-center d-none d-md-block animate-fade-in delay-200">
+                    <img src="img/graduation.jpg" alt="Estudantes" class="img-fluid rounded-3 shadow student-hero-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Resources Section -->
+    <section class="py-5 bg-white" id="caminho">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Seu Caminho para o Sucesso Acadêmico</h2>
+                <p class="lead text-muted">A candidatura para universidades pode parecer complicada, mas nós simplificamos o processo para você</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Step 1 -->
+                <div class="col-md-3">
+                    <div class="student-step-card shadow-sm h-100">
+                        <div class="student-step-number">1</div>
+                        <h4 class="student-step-title">Pesquisa e Seleção</h4>
+                        <p class="student-step-desc">Encontre universidades que correspondam perfeitamente aos seus objetivos acadêmicos e situação financeira.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="col-md-3">
+                    <div class="student-step-card shadow-sm h-100">
+                        <div class="student-step-number">2</div>
+                        <h4 class="student-step-title">Preparação para Testes</h4>
+                        <p class="student-step-desc">Saiba mais sobre programas de estudo para testes padronizados oferecidos por nossos parceiros.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="col-md-3">
+                    <div class="student-step-card shadow-sm h-100">
+                        <div class="student-step-number">3</div>
+                        <h4 class="student-step-title">Complete Aplicações</h4>
+                        <p class="student-step-desc">Obtenha cartas de recomendação de professores que melhorarão suas candidaturas.</p>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="col-md-3">
+                    <div class="student-step-card shadow-sm h-100">
+                        <div class="student-step-number">4</div>
+                        <h4 class="student-step-title">Crie Sua História</h4>
+                        <p class="student-step-desc">Escreva um statement pessoal convincente que destaque seu potencial e aspirações.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Expert Help -->
+            <div class="student-expert-help mt-5">
+                <p class="student-expert-text"><strong>Precisa de orientação personalizada?</strong> Conecte-se com nossos parceiros de confiança para suporte individual durante toda a sua jornada.</p>
+                <div class="student-partner-links">
+                    <a href="#dream" class="student-partner-btn">DREAM</a>
+                    <a href="#cac" class="student-partner-btn">C4C</a>
+                    <a href="#essay" class="student-partner-btn">Especialistas em Essay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loan Calculator Section -->
+    <section class="py-5 student-calculator-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 animate-fade-in">
+                    <h2 class="fw-bold">Planeje seu Financiamento</h2>
+                    <p class="lead">Use nossa calculadora para estimar seu empréstimo estudantil e planejar seu futuro acadêmico.</p>
+                    <ul class="student-benefits-list">
+                        <li><i class="bi bi-check-circle-fill text-primary"></i> Sem necessidade de fiador</li>
+                        <li><i class="bi bi-check-circle-fill text-primary"></i> Taxas flexíveis baseadas em seu potencial</li>
+                        <li><i class="bi bi-check-circle-fill text-primary"></i> Pague apenas após se formar e conseguir um emprego</li>
+                        <li><i class="bi bi-check-circle-fill text-primary"></i> Apoio e mentoria durante todo o processo</li>
+                    </ul>
+                    <a href="calculadora_emprestimos.php" class="btn btn-primary btn-lg mt-3">Calcular Empréstimo</a>
+                </div>
+                <div class="col-md-6 text-center animate-fade-in delay-200">
+                    <img src="img/custom.png" alt="Calculadora" class="img-fluid rounded-3 shadow-sm">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Histórias de Sucesso</h2>
+                <p class="lead text-muted">Conheça alguns dos estudantes que transformaram suas vidas com o EduBridge</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <div class="mb-3">
+                            <i class="bi bi-quote quote-icon"></i>
+                        </div>
+                        <p class="mb-4">"Graças ao EduBridge, consegui realizar meu sonho de estudar Engenharia de Computação nos EUA. O processo foi simples e o suporte foi incrível!"</p>
+                        <div class="d-flex align-items-center">
+                            <img src="img/testimonial1.jpg" class="rounded-circle me-3" width="50" height="50" alt="Maria Silva">
+                            <div>
+                                <h6 class="mb-0">Maria Silva</h6>
+                                <small class="text-muted">Engenheira, formada em 2024</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <div class="mb-3">
+                            <i class="bi bi-quote quote-icon"></i>
+                        </div>
+                        <p class="mb-4">"O que mais me impressionou foi como o EduBridge me conectou com mentores que me ajudaram em cada etapa do processo de admissão."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="img/testimonial2.jpg" class="rounded-circle me-3" width="50" height="50" alt="Carlos Mendes">
+                            <div>
+                                <h6 class="mb-0">Carlos Mendes</h6>
+                                <small class="text-muted">Estudante de Medicina, 2025</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial">
+                        <div class="mb-3">
+                            <i class="bi bi-quote quote-icon"></i>
+                        </div>
+                        <p class="mb-4">"Sem o financiamento do EduBridge, meu mestrado em Economia seria apenas um sonho distante. Hoje estou prestes a me formar e já tenho propostas de emprego!"</p>
+                        <div class="d-flex align-items-center">
+                            <img src="img/testimonial3.jpg" class="rounded-circle me-3" width="50" height="50" alt="Ana Costa">
+                            <div>
+                                <h6 class="mb-0">Ana Costa</h6>
+                                <small class="text-muted">Mestranda em Economia</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5 student-faq-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Perguntas Frequentes</h2>
+                <p class="lead text-muted">Respostas para as dúvidas mais comuns dos estudantes</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion" id="studentFAQ">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Como funciona o processo de financiamento?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#studentFAQ">
+                                <div class="accordion-body">
+                                    O EduBridge conecta estudantes a investidores que financiam sua educação. Você recebe o valor necessário para seus estudos e começa a pagar apenas depois de formado, com parcelas proporcionais ao seu salário.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Preciso de um fiador para obter o financiamento?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#studentFAQ">
+                                <div class="accordion-body">
+                                    Não! Este é um dos diferenciais do EduBridge. Nosso modelo de financiamento não exige fiador, pois acreditamos no seu potencial e utilizamos tecnologia avançada para avaliar suas chances de sucesso acadêmico e profissional.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Quais universidades participam do programa?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#studentFAQ">
+                                <div class="accordion-body">
+                                    Temos parcerias com diversas universidades de renome mundial, incluindo instituições nos EUA, Canadá, Reino Unido, Austrália e outros países. Entre em contato conosco para verificar se a universidade de seu interesse está em nossa rede.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    O que acontece se eu não conseguir um emprego após me formar?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#studentFAQ">
+                                <div class="accordion-body">
+                                    O EduBridge oferece proteção para períodos sem renda. Se você não estiver empregado ou sua renda estiver abaixo do valor mínimo estabelecido, seus pagamentos serão pausados até que sua situação financeira melhore.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <p>Tem mais perguntas? Entre em contato com nossa equipe de suporte.</p>
+                <a href="#contato" class="btn btn-primary">Fale Conosco</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Started Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold">Comece Sua Jornada Hoje</h2>
+                    <p class="lead">Dê o primeiro passo para transformar seu futuro acadêmico e profissional.</p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+                        <a href="#" class="btn btn-primary btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</a>
+                        <a href="calculadora_emprestimos.php" class="btn btn-outline-primary btn-lg px-4">Simular Financiamento</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-3">EduBridge</h5>
+                    <p class="text-muted mb-3">Conectando estudantes talentosos a investidores visionários.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h6 class="mb-3">Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-decoration-none text-muted">Home</a></li>
+                        <li class="mb-2"><a href="estudantes.html" class="text-decoration-none text-muted">Estudantes</a></li>
+                        <li class="mb-2"><a href="investidores.html" class="text-decoration-none text-muted">Investidores</a></li>
+                        <li class="mb-2"><a href="universidades.html" class="text-decoration-none text-muted">Universidades</a></li>
+                        <li class="mb-2"><a href="empresas.html" class="text-decoration-none text-muted">Empresas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h6 class="mb-3">Legal</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Termos de Uso</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Privacidade</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4" id="contato">
+                    <h6 class="mb-3">Contato</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> contato@edubridge.com</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i> +55 (11) 9999-9999</li>
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> São Paulo, Brasil</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center text-muted">
+                <small>&copy; 2025 EduBridge. Todos os direitos reservados.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Entrar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="login.php" method="post">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="loginPassword" name="senha" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Lembrar de mim</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-decoration-none">Esqueceu sua senha?</a>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Não tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#cadastroModal" data-bs-dismiss="modal">Cadastre-se</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cadastroModalLabel">Cadastro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="cadastro.html" method="get">
+                        <div class="mb-3">
+                            <label for="signupName" class="form-label">Nome completo</label>
+                            <input type="text" class="form-control" id="signupName" name="nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="signupEmail" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupType" class="form-label">Tipo de usuário</label>
+                            <select class="form-select" id="signupType" name="tipo" required>
+                                <option value="" selected disabled>Selecione...</option>
+                                <option value="estudante" selected>Estudante</option>
+                                <option value="investidor">Investidor</option>
+                                <option value="universidade">Universidade</option>
+                                <option value="empresa">Empresa</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Continuar</button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Já tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Entrar</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') !== '#' && !this.getAttribute('data-bs-toggle')) {
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

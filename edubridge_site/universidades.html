@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduBridge - Para Universidades</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/homepage.css">
+    <link rel="stylesheet" href="assets/css/universidades.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/EduBridge-logo.png" alt="EduBridge" class="logo" style="height: 90px; width: auto; transition: all 0.3s ease;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="estudantes.html">Estudantes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="investidores.html">Investidores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="universidades.html">Universidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="empresas.html">Empresas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nossa-equipe">Nossa Equipe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn-signup me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</a>
+                    <a href="#" class="btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- User Type Selector Section -->
+    <section class="user-type-selector py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="user-selector-card shadow-sm">
+                        <h3 class="text-center mb-3">Escolha sua Experiência</h3>
+                        <p class="text-center text-muted mb-4">Personalize o conteúdo com base no seu perfil</p>
+                        <div class="user-type-buttons">
+                            <a href="index.html" class="user-type-btn default-btn">
+                                <i class="bi bi-house"></i>
+                                <span>Página Inicial</span>
+                            </a>
+                            <a href="estudantes.html" class="user-type-btn student-btn">
+                                <i class="bi bi-mortarboard"></i>
+                                <span>Estudantes</span>
+                            </a>
+                            <a href="investidores.html" class="user-type-btn investor-btn">
+                                <i class="bi bi-cash-coin"></i>
+                                <span>Investidores</span>
+                            </a>
+                            <a href="universidades.html" class="user-type-btn university-btn active">
+                                <i class="bi bi-building"></i>
+                                <span>Universidades</span>
+                            </a>
+                            <a href="empresas.html" class="user-type-btn company-btn">
+                                <i class="bi bi-briefcase"></i>
+                                <span>Empresas</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- University Hero Section -->
+    <section class="university-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="university-main-title">Expanda seu Alcance Global com <span class="university-highlight">EduBridge</span></h1>
+                    <p class="university-hero-subtitle">Fazemos parcerias com instituições visionárias para abrir o acesso global à educação—garantindo que limitações financeiras nunca impeçam estudantes de alto potencial de se matricularem, terem sucesso e se formarem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="university-benefits-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Benefícios da Parceria</h2>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-card h-100">
+                        <div class="benefit-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h3 class="benefit-title">Aumente as Matrículas Internacionais</h3>
+                        <p class="benefit-desc">Expanda seu corpo discente ampliando o acesso para estudantes internacionais qualificados.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-card h-100">
+                        <div class="benefit-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3 class="benefit-title">Mensalidades Garantidas</h3>
+                        <p class="benefit-desc">Receba pagamentos integrais de mensalidades—de forma confiável e pontual—sem assumir riscos financeiros.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-card h-100">
+                        <div class="benefit-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h3 class="benefit-title">Acesso a Talentos de Elite</h3>
+                        <p class="benefit-desc">Conecte-se com estudantes motivados e academicamente fortes de mercados emergentes.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="benefit-card h-100">
+                        <div class="benefit-icon">
+                            <i class="bi bi-arrow-repeat"></i>
+                        </div>
+                        <h3 class="benefit-title">Maior Conversão e Retenção</h3>
+                        <p class="benefit-desc">Estudantes com financiamento garantido têm maior probabilidade de se matricular e completar seus programas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="university-process-section py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Como Funciona</h2>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="process-card h-100">
+                        <div class="step-number">1</div>
+                        <h3 class="process-title">Acordo Estratégico de Parceria</h3>
+                        <p class="process-desc">Estabelecemos uma parceria personalizada alinhada com os objetivos da sua universidade, promovendo colaboração e crescimento de longo prazo.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="process-card h-100">
+                        <div class="step-number">2</div>
+                        <h3 class="process-title">Financiamento Garantido para Estudantes</h3>
+                        <p class="process-desc">Com nossa gestão de pagamentos, sua universidade não assume absolutamente nenhum risco financeiro—tornando a participação simples e segura.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="process-card h-100">
+                        <div class="step-number">3</div>
+                        <h3 class="process-title">Maior Taxa de Matrícula</h3>
+                        <p class="process-desc">Sua instituição se beneficia de um influxo constante de estudantes internacionais, com menos desistências financeiras e maior compromisso com a matrícula.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="process-card h-100">
+                        <div class="step-number">4</div>
+                        <h3 class="process-title">Incentivos Colaborativos de Bolsas</h3>
+                        <p class="process-desc">Colaboramos para criar bolsas de estudo direcionadas que atraem os melhores estudantes e aumentam as taxas de inscrição.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <button id="partner-toggle" class="btn btn-primary btn-lg">Torne-se Parceiro EduBridge</button>
+                <a href="#" class="btn btn-outline-primary btn-lg ms-3" data-bs-toggle="modal" data-bs-target="#loginModal">Portal de Parceiros</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Form Section -->
+    <section id="partner-form-container" class="university-form-section py-5" style="display:none;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="mb-0">Formulário de Pré-Cadastro de Universidades</h3>
+                            <p class="mb-0">Complete este formulário para iniciar sua jornada de parceria com a EduBridge</p>
+                        </div>
+                        <div class="card-body">
+                            <form id="university-form" class="university-form" novalidate>
+                                <!-- University Information -->
+                                <fieldset class="form-section mb-4">
+                                    <legend>Informações da Universidade</legend>
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <label for="university-name" class="form-label">Nome da Universidade (Nome Oficial)*</label>
+                                            <input type="text" class="form-control" id="university-name" required>
+                                            <div class="invalid-feedback">Por favor, informe o nome da sua universidade</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="university-country" class="form-label">País*</label>
+                                            <select class="form-select" id="university-country" required>
+                                                <option value="">Selecione o País</option>
+                                                <option value="BR">Brasil</option>
+                                                <option value="US">Estados Unidos</option>
+                                                <option value="MEX">México</option>
+                                                <option value="PER">Peru</option>
+                                            </select>
+                                            <div class="invalid-feedback">Por favor, selecione seu país</div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="university-city" class="form-label">Cidade*</label>
+                                            <input type="text" class="form-control" id="university-city" required>
+                                            <div class="invalid-feedback">Por favor, informe sua cidade</div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!-- Primary Contact Information -->
+                                <fieldset class="form-section mb-4">
+                                    <legend>Informações de Contato Principal</legend>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="university-representative" class="form-label">Nome Completo (Representante da Universidade)*</label>
+                                            <input type="text" class="form-control" id="university-representative" required>
+                                            <div class="invalid-feedback">Por favor, informe o nome do representante</div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="university-position" class="form-label">Cargo/Título*</label>
+                                            <input type="text" class="form-control" id="university-position" required>
+                                            <div class="invalid-feedback">Por favor, informe seu cargo</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <label for="university-email" class="form-label">Email Institucional*</label>
+                                            <input type="email" class="form-control" id="university-email" required>
+                                            <div class="invalid-feedback">Por favor, informe um email institucional válido</div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!-- Interest -->
+                                <fieldset class="form-section mb-4">
+                                    <legend>Interesse</legend>
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <label for="university-interest" class="form-label">Por que você está interessado em se tornar parceiro da EduBridge?*</label>
+                                            <select class="form-select" id="university-interest" required>
+                                                <option value="">Selecione...</option>
+                                                <option value="enrollment">Aumentar matrículas de estudantes internacionais</option>
+                                                <option value="payments">Garantir pagamentos de mensalidades</option>
+                                                <option value="quality">Acessar estudantes de alta qualidade de mercados emergentes</option>
+                                                <option value="retention">Melhorar taxas de retenção e conclusão</option>
+                                                <option value="scholarship">Oportunidades de colaboração em bolsas</option>
+                                                <option value="other">Outro (especifique)</option>
+                                            </select>
+                                            <div class="invalid-feedback">Por favor, selecione seu interesse principal</div>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="other-reason-container" style="display: none;">
+                                        <div class="col-12 mb-3">
+                                            <label for="other-reason" class="form-label">Por favor, especifique*</label>
+                                            <input type="text" class="form-control" id="other-reason">
+                                            <div class="invalid-feedback">Por favor, especifique seu motivo</div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!-- Verification & Supporting Documents -->
+                                <fieldset class="form-section mb-4">
+                                    <legend>Verificação e Documentos de Apoio</legend>
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <label for="university-documents" class="form-label">Envie um Documento de Verificação (certificado de credenciamento, folheto da universidade ou documentação oficial)*</label>
+                                            <input type="file" class="form-control" id="university-documents" required>
+                                            <div class="invalid-feedback">Por favor, envie um documento</div>
+                                            <small class="text-muted">Formatos suportados: PDF, JPG, PNG</small>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <label for="university-optional" class="form-label">Comentários ou Perguntas Adicionais (Opcional)</label>
+                                            <textarea class="form-control" id="university-optional" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!-- Consent -->
+                                <fieldset class="form-section mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="university-agreement" required>
+                                        <label class="form-check-label" for="university-agreement">
+                                            Ao enviar este formulário, você concorda que a EduBridge pode revisar sua inscrição e entrar em contato com você sobre oportunidades de parceria.
+                                        </label>
+                                        <div class="invalid-feedback">Você deve concordar para continuar</div>
+                                    </div>
+                                </fieldset>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">Enviar Inscrição</button>
+                                    <p class="form-text mt-2">Campos marcados com * são obrigatórios</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="university-success-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Histórias de Sucesso</h2>
+                <p class="lead">Conheça algumas universidades que transformaram seu alcance global com o EduBridge</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="university-success-card h-100">
+                        <div class="university-logo">
+                            <img src="img/UM-logo.png" alt="Universidade de Michigan" class="img-fluid">
+                        </div>
+                        <h4>Universidade de Michigan</h4>
+                        <p class="university-quote">"A parceria com a EduBridge nos permitiu acessar um pool diversificado de talentos internacionais que simplesmente não conseguiríamos alcançar antes."</p>
+                        <div class="university-metrics">
+                            <div class="metric">
+                                <span class="metric-value">+35%</span>
+                                <span class="metric-label">Aumento em Matrículas Internacionais</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">98%</span>
+                                <span class="metric-label">Taxa de Retenção</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="university-success-card h-100">
+                        <div class="university-logo">
+                            <img src="img/university2.jpg" alt="Universidade de São Paulo" class="img-fluid rounded">
+                        </div>
+                        <h4>Universidade de São Paulo</h4>
+                        <p class="university-quote">"O programa da EduBridge revolucionou nossa abordagem para admissões internacionais, eliminando barreiras financeiras para estudantes talentosos."</p>
+                        <div class="university-metrics">
+                            <div class="metric">
+                                <span class="metric-value">+42%</span>
+                                <span class="metric-label">Aumento em Inscrições Qualificadas</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">100%</span>
+                                <span class="metric-label">Pagamentos Pontuais</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="university-success-card h-100">
+                        <div class="university-logo">
+                            <img src="img/university3.jpg" alt="UNAM" class="img-fluid rounded">
+                        </div>
+                        <h4>Universidad Nacional Autónoma de México</h4>
+                        <p class="university-quote">"A abordagem da EduBridge para o financiamento estudantil nos permitiu atrair estudantes de alta qualidade de regiões que nunca tínhamos alcançado antes."</p>
+                        <div class="university-metrics">
+                            <div class="metric">
+                                <span class="metric-value">+28%</span>
+                                <span class="metric-label">Diversidade Geográfica</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">+15%</span>
+                                <span class="metric-label">Rendimento Acadêmico</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="university-faq-section py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <p class="lead">Respostas para as dúvidas mais comuns das universidades parceiras</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion" id="universityFAQ">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Como a EduBridge garante o pagamento de mensalidades?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#universityFAQ">
+                                <div class="accordion-body">
+                                    A EduBridge paga as mensalidades diretamente à universidade em nome do estudante. Trabalhamos com um modelo de financiamento baseado em renda futura, onde os estudantes pagam apenas após se formarem e conseguirem emprego. Seu risco financeiro é zero—garantimos que todas as mensalidades acordadas serão pagas integralmente e no prazo, independentemente da situação do estudante.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Nossa universidade precisa alterar seus processos de admissão?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#universityFAQ">
+                                <div class="accordion-body">
+                                    Absolutamente não. Sua universidade mantém total autonomia sobre seus critérios e processos de admissão. Nós simplesmente oferecemos uma opção de financiamento para estudantes internacionais já aprovados por você. Nossa integração é projetada para ser perfeitamente incorporada aos seus processos existentes, com o mínimo de obstáculos administrativos.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Quais são os custos para a universidade se tornar parceira?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#universityFAQ">
+                                <div class="accordion-body">
+                                    Não há taxas para as universidades se tornarem parceiras da EduBridge. Na verdade, o programa é projetado para aumentar sua receita, fornecendo acesso a estudantes internacionais qualificados que, de outra forma, não poderiam se matricular devido a barreiras financeiras. Geramos nossa receita através da participação no sucesso futuro dos estudantes, não cobrando das instituições.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Como avaliamos o impacto da parceria com a EduBridge?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#universityFAQ">
+                                <div class="accordion-body">
+                                    Fornecemos aos parceiros um dashboard abrangente que monitora métricas-chave como aumento nas inscrições internacionais, diversidade geográfica, taxas de retenção e conclusão, e conformidade com os pagamentos. Realizamos também revisões trimestrais com nossa equipe dedicada de relacionamento para garantir que nossas parcerias estejam atingindo os objetivos estabelecidos.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="mb-3">EduBridge</h5>
+                    <p class="text-muted mb-3">Conectando estudantes talentosos a investidores visionários.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-decoration-none me-2"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h6 class="mb-3">Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html" class="text-decoration-none text-muted">Home</a></li>
+                        <li class="mb-2"><a href="estudantes.html" class="text-decoration-none text-muted">Estudantes</a></li>
+                        <li class="mb-2"><a href="investidores.html" class="text-decoration-none text-muted">Investidores</a></li>
+                        <li class="mb-2"><a href="universidades.html" class="text-decoration-none text-muted">Universidades</a></li>
+                        <li class="mb-2"><a href="empresas.html" class="text-decoration-none text-muted">Empresas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h6 class="mb-3">Legal</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Termos de Uso</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Privacidade</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4" id="contato">
+                    <h6 class="mb-3">Contato</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> contato@edubridge.com</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i> +55 (11) 9999-9999</li>
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> São Paulo, Brasil</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center text-muted">
+                <small>&copy; 2025 EduBridge. Todos os direitos reservados.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Entrar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="login.php" method="post">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="loginPassword" name="senha" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Lembrar de mim</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-decoration-none">Esqueceu sua senha?</a>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Não tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#cadastroModal" data-bs-dismiss="modal">Cadastre-se</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="cadastroModal" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cadastroModalLabel">Cadastro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="cadastro.html" method="get">
+                        <div class="mb-3">
+                            <label for="signupName" class="form-label">Nome completo</label>
+                            <input type="text" class="form-control" id="signupName" name="nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="signupEmail" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupType" class="form-label">Tipo de usuário</label>
+                            <select class="form-select" id="signupType" name="tipo" required>
+                                <option value="" selected disabled>Selecione...</option>
+                                <option value="estudante">Estudante</option>
+                                <option value="investidor">Investidor</option>
+                                <option value="universidade" selected>Universidade</option>
+                                <option value="empresa">Empresa</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Continuar</button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <p class="mb-0">Já tem uma conta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Entrar</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle form display
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.getElementById('partner-toggle');
+            const formContainer = document.getElementById('partner-form-container');
+            
+            toggleButton.addEventListener('click', function() {
+                if (formContainer.style.display === 'none') {
+                    formContainer.style.display = 'block';
+                    toggleButton.textContent = 'Ocultar Formulário';
+                    // Scroll to form
+                    formContainer.scrollIntoView({behavior: 'smooth'});
+                } else {
+                    formContainer.style.display = 'none';
+                    toggleButton.textContent = 'Torne-se Parceiro EduBridge';
+                }
+            });
+            
+            // Form validation and submission
+            const universityForm = document.getElementById('university-form');
+            if (universityForm) {
+                universityForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    if (!this.checkValidity()) {
+                        e.stopPropagation();
+                        this.classList.add('was-validated');
+                    } else {
+                        // Success submission logic
+                        alert('Obrigado pelo seu interesse! Nossa equipe entrará em contato em breve.');
+                        formContainer.style.display = 'none';
+                        toggleButton.textContent = 'Torne-se Parceiro EduBridge';
+                        this.reset();
+                        this.classList.remove('was-validated');
+                    }
+                });
+            }
+            
+            // Show/hide "other reason" field based on selection
+            const interestSelect = document.getElementById('university-interest');
+            const otherReasonContainer = document.getElementById('other-reason-container');
+            
+            if (interestSelect && otherReasonContainer) {
+                interestSelect.addEventListener('change', function() {
+                    if (this.value === 'other') {
+                        otherReasonContainer.style.display = 'block';
+                    } else {
+                        otherReasonContainer.style.display = 'none';
+                    }
+                });
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#' && !this.getAttribute('data-bs-toggle')) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

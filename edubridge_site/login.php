@@ -181,21 +181,14 @@ $csrf_token = generate_csrf_token();
     <title>Login - EduBridge</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <style>
-        :root {
-            --primary-color: #3066BE;
-            --secondary-color: #119DA4;
-            --accent-color: #6D9DC5;
-            --light-color: #F2F5FF;
-            --dark-color: #253237;
-        }
         body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark-color);
-            background: linear-gradient(135deg, var(--light-color) 0%, #ffffff 100%);
+            background: var(--light-color);
             min-height: 100vh;
             display: flex;
             align-items: center;
+            padding-top: 0;
         }
         .login-container {
             margin-top: 2rem;
@@ -208,32 +201,28 @@ $csrf_token = generate_csrf_token();
         }
         .login-header {
             background-color: var(--primary-color);
-            color: white;
             padding: 25px 30px;
+        }
+        .login-header h4 {
+            color: var(--accent-color);
+            font-weight: 800;
+        }
+        .login-header p {
+            color: var(--accent-color);
         }
         .login-body {
             padding: 30px;
-        }
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        .btn-outline-primary {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        .form-control:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 0.25rem rgba(109, 157, 197, 0.25);
+            background-color: white;
         }
         .login-footer {
-            background-color: rgba(242, 245, 255, 0.5);
+            background-color: white;
             padding: 15px;
-            text-align: center.
+            text-align: center;
+            border-top: 1px solid var(--border-color);
         }
         .brand-logo {
             font-size: 2rem;
-            color: white;
+            color: var(--accent-color);
         }
         .form-floating .form-control {
             height: calc(3.5rem + 2px);
@@ -255,7 +244,7 @@ $csrf_token = generate_csrf_token();
             right: 0;
             bottom: 0;
             left: 0;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+            background: linear-gradient(0deg, rgba(3, 19, 74, 0.7) 0%, rgba(3, 19, 74, 0.4) 100%);
             border-radius: 0 15px 15px 0;
         }
         .login-sidebar-content {
@@ -268,6 +257,9 @@ $csrf_token = generate_csrf_token();
             flex-direction: column;
             justify-content: center;
         }
+        .login-sidebar-content h3 {
+            font-weight: 800;
+        }
     </style>
 </head>
 <body>
@@ -279,8 +271,8 @@ $csrf_token = generate_csrf_token();
                         <div class="col-md-6">
                             <div class="login-header">
                                 <div class="d-flex align-items-center">
-                                    <div class="brand-logo me-3">
-                                        <i class="bi bi-mortarboard-fill"></i>
+                                    <div class="me-3">
+                                        <img src="../img/EduBridge-logo.png" alt="EduBridge" class="logo" style="height: 55px; width: auto;">
                                     </div>
                                     <div>
                                         <h4 class="mb-0">EduBridge</h4>
@@ -315,7 +307,7 @@ $csrf_token = generate_csrf_token();
                                     <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                                     
                                     <div class="mb-4 form-floating">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>" required>
                                         <label for="email"><i class="bi bi-envelope me-2"></i>Email</label>
                                         <div class="invalid-feedback">
                                             Por favor, informe um email válido.

@@ -1,0 +1,607 @@
+/* Estilos melhorados para a página inicial do EduBridge */
+
+:root {
+  --edubridge-yellow: #FFC107;
+  --edubridge-blue: #2C3E50;
+  --edubridge-light-blue: #3498DB;
+  --white: #ffffff;
+}
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  overflow-x: hidden;
+  background-color: #f8f9fa;
+  position: relative;
+}
+
+/* Adicionando bordas decorativas laterais */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  width: 25px; /* Aumentado de 15px para 25px */
+  height: 100%;
+  background-color: var(--edubridge-yellow);
+  z-index: 999;
+}
+
+body::before {
+  left: 0;
+}
+
+body::after {
+  right: 0;
+}
+
+/* Melhorando o header/navbar */
+.navbar {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 15px 0;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand .logo {
+  height: 90px !important; /* Logo maior (aumentado de 80px para 90px) */
+  width: auto;
+  transition: transform 0.3s;
+}
+
+.navbar-brand:hover .logo {
+  transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+  color: var(--edubridge-blue);
+  font-weight: 600;
+  padding: 10px 15px;
+  transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--edubridge-yellow);
+}
+
+/* Botões de ação */
+.btn-signup, .btn-login {
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+.btn-signup {
+  background-color: var(--edubridge-yellow);
+  color: var(--edubridge-blue);
+}
+
+.btn-signup:hover {
+  background-color: #e6ad00;
+  transform: translateY(-2px);
+}
+
+.btn-login {
+  border: 2px solid var(--edubridge-blue);
+  color: var(--edubridge-blue);
+}
+
+.btn-login:hover {
+  background-color: var(--edubridge-blue);
+  color: var(--white);
+}
+
+/* Seção Hero melhorada */
+.hero {
+  background: linear-gradient(135deg, #f8f9fa 50%, var(--edubridge-yellow) 100%); /* Ajustado para mais amarelo */
+  padding: 100px 0 120px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 350px; /* Aumentado de 300px para 350px */
+  height: 350px; /* Aumentado de 300px para 350px */
+  border-radius: 50%;
+  background-color: rgba(255, 193, 7, 0.3); /* Aumentado opacity de 0.2 para 0.3 */
+}
+
+/* Adicionar outro círculo decorativo */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: rgba(255, 193, 7, 0.25);
+  z-index: 0;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: var(--edubridge-blue);
+  margin-bottom: 25px;
+  line-height: 1.2;
+}
+
+.hero p.lead {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  color: #495057;
+}
+
+.hero .img-fluid {
+  border: 8px solid white;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Botões de ação na seção hero */
+.btn-primary {
+  background-color: var(--edubridge-yellow);
+  border-color: var(--edubridge-yellow);
+  color: var(--edubridge-blue);
+  font-weight: 700;
+  padding: 12px 30px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #e6ad00;
+  border-color: #e6ad00;
+  color: var(--edubridge-blue);
+  transform: translateY(-3px);
+}
+
+.btn-outline-primary {
+  border-color: var(--edubridge-blue);
+  color: var(--edubridge-blue);
+  font-weight: 700;
+  padding: 12px 30px;
+  border-radius: 50px;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--edubridge-blue);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Melhorias nas seções de conteúdo */
+section {
+  padding: 80px 0;
+}
+
+section h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--edubridge-blue);
+  margin-bottom: 20px;
+}
+
+section p.lead {
+  font-size: 1.25rem;
+  margin-bottom: 50px;
+}
+
+/* Cards de recursos melhorados */
+.feature-card {
+  border: none;
+  border-radius: 15px;
+  transition: all 0.3s;
+  height: 100%;
+  border-bottom: 4px solid var(--edubridge-yellow); /* Adicionando borda amarela inferior */
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.feature-icon {
+  width: 90px; /* Aumentado de 80px para 90px */
+  height: 90px; /* Aumentado de 80px para 90px */
+  margin: 0 auto 20px;
+  background-color: var(--edubridge-yellow);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3); /* Adicionando sombra amarela */
+}
+
+.feature-icon i {
+  font-size: 2rem;
+  color: var(--edubridge-blue);
+}
+
+.feature-card h4 {
+  font-weight: 700;
+  color: var(--edubridge-blue);
+}
+
+/* Depoimentos melhorados */
+.testimonial {
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  height: 100%;
+  transition: all 0.3s;
+  border-left: 4px solid var(--edubridge-yellow); /* Adicionando borda amarela à esquerda */
+}
+
+.testimonial:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.quote-icon {
+  font-size: 2rem;
+  color: var(--edubridge-yellow);
+}
+
+/* Equipe */
+.team-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.team-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.team-card img.rounded-circle {
+  border: 5px solid var(--edubridge-yellow);
+}
+
+.social-icons a {
+  display: inline-block;
+  margin: 0 5px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  background-color: var(--edubridge-yellow);
+  color: var(--edubridge-blue);
+  border-radius: 50%;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.social-icons a:hover {
+  background-color: var(--edubridge-blue);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Footer melhorado */
+footer {
+  background-color: var(--edubridge-blue);
+  color: white;
+  padding: 60px 0 30px;
+  position: relative;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background-color: var(--edubridge-yellow);
+}
+
+footer h5 {
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--edubridge-yellow);
+}
+
+footer ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
+
+footer ul li a {
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer ul li a:hover {
+  color: var(--edubridge-yellow);
+}
+
+/* Contato */
+.contact-info {
+  padding: 30px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.contact-form {
+  padding: 30px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Efeito de ondas na parte inferior */
+.wave-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-bottom svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 80px;
+}
+
+.wave-bottom .shape-fill {
+  fill: var(--edubridge-yellow);
+}
+
+/* Animação de fade-in para elementos */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+/* Classes de delay para elementos sequenciais */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Responsividade */
+@media (max-width: 991px) {
+  .hero {
+    padding: 80px 0;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  body::before, body::after {
+    width: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  section h2 {
+    font-size: 2rem;
+  }
+  
+  body::before, body::after {
+    width: 5px;
+  }
+}
+
+/* Seção de estatísticas com destaque em amarelo */
+.stats-section {
+  background-color: var(--edubridge-blue);
+  color: white;
+  position: relative;
+  padding: 80px 0;
+}
+
+.stats-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background-color: var(--edubridge-yellow);
+}
+
+.stats-item {
+  text-align: center;
+  padding: 30px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  transition: all 0.3s;
+  border-bottom: 3px solid var(--edubridge-yellow);
+}
+
+.stats-item:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.stats-number {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: var(--edubridge-yellow);
+}
+
+.stats-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* User Type Selector */
+.user-type-selector {
+  padding: 30px 0;
+  background-color: rgba(255, 193, 7, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.user-selector-card {
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.user-selector-card h3 {
+  color: var(--edubridge-blue);
+  font-weight: 700;
+}
+
+.user-type-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.user-type-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 12px;
+  transition: all 0.3s;
+  color: #555;
+  text-decoration: none;
+  flex: 1;
+  min-width: 120px;
+  max-width: 180px;
+  background-color: #f8f9fa;
+  border: 1px solid #eee;
+}
+
+.user-type-btn i {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.user-type-btn span {
+  font-weight: 600;
+}
+
+.default-btn {
+  border-color: var(--edubridge-blue);
+  background-color: var(--edubridge-blue);
+  color: white;
+}
+
+.default-btn:hover, .default-btn.active {
+  background-color: var(--edubridge-blue);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.student-btn {
+  border-color: #FDB815;
+}
+
+.student-btn:hover, .student-btn.active {
+  background-color: #FDB815;
+  color: #1d2337;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(253, 184, 21, 0.3);
+}
+
+.investor-btn {
+  border-color: #28a745;
+}
+
+.investor-btn:hover, .investor-btn.active {
+  background-color: #28a745;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.university-btn {
+  border-color: #3498db;
+}
+
+.university-btn:hover, .university-btn.active {
+  background-color: #3498db;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.company-btn {
+  border-color: #e74c3c;
+}
+
+.company-btn:hover, .company-btn.active {
+  background-color: #e74c3c;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* About Us Link Section */
+.about-us-link {
+  padding: 40px 0;
+  background-color: #f8f9fa;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.about-us-link h3 {
+  color: var(--edubridge-blue);
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.about-us-link p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.about-us-link .btn-info {
+  background-color: var(--edubridge-yellow);
+  border-color: var(--edubridge-yellow);
+  color: var(--edubridge-blue);
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 50px;
+  transition: all 0.3s;
+}
+
+.about-us-link .btn-info:hover {
+  background-color: #e6ad00;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+}
