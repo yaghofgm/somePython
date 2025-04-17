@@ -27,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = sanitizeInput($_POST['nome'] ?? '');
     $sobrenome = sanitizeInput($_POST['sobrenome'] ?? '');
     $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
-    $telefone = sanitizeInput($_POST['telefone'] ?? '');
     $categoria = sanitizeInput($_POST['categoria'] ?? '');
     $senha = $_POST['senha'] ?? ''; // Não sanitizamos a senha antes do hash
     $confirmar_senha = $_POST['confirmar_senha'] ?? '';
@@ -96,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Hash seguro da senha usando Bcrypt
                 $senha_hash = password_hash($senha, PASSWORD_BCRYPT, ['cost' => 12]);
                 $status = 'ativo'; // Pode ser alterado para 'pendente' se quiser confirmação por email
+                $telefone = ''; // Campo vazio para ser preenchido posteriormente
                 
                 // Prepara a consulta SQL para inserir o novo usuário
                 $sql = "INSERT INTO usuarios (nome, sobrenome, email, senha, telefone, categoria, status) 
@@ -137,7 +137,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         } else {
                             error_log("Error al crear perfil de universidad: " . $conn->error);
                         }
-                    }
+                    } 
+                    // Removido o código para criar perfis de investidor e empresa
                     
                     // Registra o cadastro no log
                     $log_sql = "INSERT INTO usuarios_logs (usuario_id, acao, ip, user_agent, detalhes) VALUES (?, 'cadastro', ?, ?, ?)";
@@ -158,13 +159,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
                     $resposta['sucesso'] = true;
                     $resposta['mensagem'] = "Cadastro realizado com sucesso! Você já pode fazer login.";
+                    $resposta['redirect'] = "login.php?cadastro=sucesso&email=" . urlencode($email);
+                    $resposta['usuario_id'] = $usuario_id;
                     
                     // Fecha a conexão com o banco de dados
                     $conn->close();
                     
-                    // SOLUÇÃO: Redirecionamento direto do servidor em vez de resposta JSON
-                    header("Location: login.php?cadastro=sucesso&email=" . urlencode($email));
-                    exit(); // Termina a execução do script após o redirecionamento
+                    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                        // Se for uma requisição AJAX, retorna JSON
+                        header('Content-Type: application/json');
+                        echo json_encode($resposta);
+                    } else {
+                        // Se for uma requisição normal, redireciona
+                        header("Location: login.php?cadastro=sucesso&email=" . urlencode($email));
+                    }
+                    exit(); // Termina a execução do script após o redirecionamento ou resposta JSON
                     
                 } else {
                     throw new Exception("Erro ao cadastrar: " . $stmt->error);

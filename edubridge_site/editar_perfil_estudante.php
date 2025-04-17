@@ -211,11 +211,11 @@ $conn->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Perfil - EduBridge</title>
+    <title>Edit Academic Profile - EduBridge</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -330,7 +330,7 @@ $conn->close();
                     </div>
                     <div>
                         <div class="fw-bold"><?php echo $_SESSION['usuario_nome'] . ' ' . $_SESSION['usuario_sobrenome']; ?></div>
-                        <small class="text-white-50">Estudante</small>
+                        <small class="text-white-50">Student</small>
                     </div>
                 </div>
                 <ul class="nav flex-column px-3">
@@ -338,19 +338,19 @@ $conn->close();
                         <a class="nav-link" href="painel_estudante.php"><i class="bi bi-speedometer2"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#"><i class="bi bi-person"></i> Meu Perfil</a>
+                        <a class="nav-link active" href="#"><i class="bi bi-person"></i> My Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-cash-coin"></i> Financiamentos</a>
+                        <a class="nav-link" href="#"><i class="bi bi-cash-coin"></i> Financing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-mortarboard"></i> Meu Curso</a>
+                        <a class="nav-link" href="#"><i class="bi bi-mortarboard"></i> My Course</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-chat-dots"></i> Mensagens</a>
+                        <a class="nav-link" href="#"><i class="bi bi-chat-dots"></i> Messages</a>
                     </li>
                     <li class="nav-item mt-4">
-                        <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-left"></i> Sair</a>
+                        <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-left"></i> Logout</a>
                     </li>
                 </ul>
             </div>
@@ -358,9 +358,9 @@ $conn->close();
             <!-- Main Content -->
             <div class="col-lg-10 main-content">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="mb-0">Editar Perfil Acadêmico</h2>
+                    <h2 class="mb-0">Edit Academic Profile</h2>
                     <a href="painel_estudante.php" class="btn btn-outline-secondary">
-                        <i class="bi bi-arrow-left me-2"></i>Voltar ao Dashboard
+                        <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
                     </a>
                 </div>
                 
@@ -375,30 +375,30 @@ $conn->close();
                     <div class="card-body">
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                             <div class="form-section">
-                                <h4 class="form-section-title">Informações Acadêmicas</h4>
+                                <h4 class="form-section-title">Academic Information</h4>
                                 
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <label for="universidade" class="form-label">Universidade</label>
+                                        <label for="universidade" class="form-label">University</label>
                                         <select class="form-select" id="universidade" name="universidade_id" required>
-                                            <option value="" selected disabled>Selecione sua universidade</option>
-                                            <!-- As opções serão carregadas via AJAX -->
+                                            <option value="" selected disabled>Select your university</option>
+                                            <!-- Options will be loaded via AJAX -->
                                         </select>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="curso" class="form-label">Curso</label>
+                                        <label for="curso" class="form-label">Course</label>
                                         <select class="form-select" id="curso" name="curso_id" required disabled>
-                                            <option value="" selected disabled>Primeiro selecione uma universidade</option>
-                                            <!-- As opções serão carregadas via AJAX depois de selecionar a universidade -->
+                                            <option value="" selected disabled>First select a university</option>
+                                            <!-- Options will be loaded via AJAX after selecting a university -->
                                         </select>
                                     </div>
                                 </div>
                                 
                                 <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <label for="ano_ingresso" class="form-label">Ano de Ingresso</label>
+                                        <label for="ano_ingresso" class="form-label">Enrollment Year</label>
                                         <select class="form-select" id="ano_ingresso" name="ano_ingresso" required>
-                                            <option value="" disabled <?php echo empty($perfil['ano_ingresso']) ? 'selected' : ''; ?>>Selecione o ano</option>
+                                            <option value="" disabled <?php echo empty($perfil['ano_ingresso']) ? 'selected' : ''; ?>>Select a year</option>
                                             <?php 
                                             $ano_atual = date('Y');
                                             for ($ano = $ano_atual; $ano >= $ano_atual - 10; $ano--) {
@@ -409,13 +409,15 @@ $conn->close();
                                         </select>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="semestre_atual" class="form-label">Semestre Atual</label>
+                                        <label for="semestre_atual" class="form-label">Current Semester</label>
                                         <select class="form-select" id="semestre_atual" name="semestre_atual" required>
-                                            <option value="" disabled <?php echo empty($perfil['semestre_atual']) ? 'selected' : ''; ?>>Selecione o semestre</option>
+                                            <option value="" disabled <?php echo empty($perfil['semestre_atual']) ? 'selected' : ''; ?>>Select a semester</option>
                                             <?php 
                                             for ($sem = 1; $sem <= 12; $sem++) {
                                                 $selected = (isset($perfil['semestre_atual']) && $perfil['semestre_atual'] == $sem) ? 'selected' : '';
-                                                echo "<option value=\"$sem\" $selected>$sem º semestre</option>";
+                                                echo "<option value=\"$sem\" $selected>$sem";
+                                                echo $sem == 1 ? "st" : ($sem == 2 ? "nd" : ($sem == 3 ? "rd" : "th"));
+                                                echo " semester</option>";
                                             }
                                             ?>
                                         </select>
@@ -429,44 +431,44 @@ $conn->close();
                                                value="<?php echo htmlspecialchars($perfil['gpa'] ?? ''); ?>" required>
                                         <span class="input-group-text">/ 4.00</span>
                                     </div>
-                                    <div class="form-text">Informe seu GPA na escala de 0 a 4.</div>
+                                    <div class="form-text">Enter your GPA on a scale of 0 to 4.</div>
                                 </div>
                             </div>
                             
                             <div class="form-section">
-                                <h4 class="form-section-title">Currículo e Links Profissionais</h4>
+                                <h4 class="form-section-title">Curriculum & Professional Links</h4>
                                 
-                                <!-- Seção de Upload de CV -->
+                                <!-- CV Upload Section -->
                                 <div class="form-group">
-                                    <label for="cv">Currículo (PDF ou DOCX):</label>
-                                    <input type="file" class="form-control-file" id="cv" name="cv">
+                                    <label for="cv">Curriculum/Resume (PDF or DOCX):</label>
+                                    <input type="file" class="form-control" id="cv" name="cv">
                                     <?php
                                     if (!empty($cv_atual)) {
                                         echo '<div class="mt-2">';
-                                        echo '<p>CV atual: <a href="' . htmlspecialchars($cv_atual) . '" target="_blank">Ver currículo</a> ';
-                                        echo '<a href="remover_cv.php?id=' . $usuario_id . '" class="btn btn-sm btn-danger">Remover CV</a></p>';
+                                        echo '<p>Current resume: <a href="' . htmlspecialchars($cv_atual) . '" target="_blank">View resume</a> ';
+                                        echo '<a href="remover_cv.php?id=' . $usuario_id . '" class="btn btn-sm btn-danger">Remove</a></p>';
                                         echo '</div>';
                                     }
                                     ?>
-                                    <small class="form-text text-muted">Envie seu currículo atualizado. O arquivo deve ser em formato PDF ou DOCX.</small>
+                                    <small class="form-text text-muted">Upload your updated resume. File must be in PDF or DOCX format.</small>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="linkedin" class="form-label">Perfil LinkedIn</label>
+                                    <label for="linkedin" class="form-label">LinkedIn Profile</label>
                                     <div class="input-group">
                                         <span class="input-group-text">linkedin.com/in/</span>
                                         <input type="text" class="form-control" id="linkedin" name="linkedin" 
-                                               placeholder="seu-nome-de-usuario" 
+                                               placeholder="your-username" 
                                                value="<?php echo str_replace('https://www.linkedin.com/in/', '', $perfil['linkedin'] ?? ''); ?>">
                                     </div>
-                                    <div class="form-text">Informe apenas seu nome de usuário do LinkedIn.</div>
+                                    <div class="form-text">Enter only your LinkedIn username.</div>
                                 </div>
                             </div>
                             
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                                <a href="painel_estudante.php" class="btn btn-outline-secondary me-md-2">Cancelar</a>
+                                <a href="painel_estudante.php" class="btn btn-outline-secondary me-md-2">Cancel</a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="bi bi-save me-2"></i>Salvar Informações
+                                    <i class="bi bi-save me-2"></i>Save Information
                                 </button>
                             </div>
                         </form>
@@ -475,19 +477,19 @@ $conn->close();
                 
                 <div class="card mt-4">
                     <div class="card-header bg-light">
-                        <i class="bi bi-info-circle me-2"></i>Por que completar seu perfil?
+                        <i class="bi bi-info-circle me-2"></i>Why Complete Your Profile?
                     </div>
                     <div class="card-body">
-                        <p>Manter seu perfil acadêmico completo e atualizado aumenta significativamente suas chances de conseguir financiamento na plataforma EduBridge. Os investidores buscam estudantes com:</p>
+                        <p>Keeping your academic profile complete and up-to-date significantly increases your chances of securing funding on the EduBridge platform. Investors are looking for students with:</p>
                         
                         <ul>
-                            <li>Informações acadêmicas completas e verificáveis</li>
-                            <li>Histórico acadêmico sólido (GPA)</li>
-                            <li>Currículo profissional bem estruturado</li>
-                            <li>Presença profissional online (LinkedIn)</li>
+                            <li>Complete and verifiable academic information</li>
+                            <li>Solid academic record (GPA)</li>
+                            <li>Well-structured professional resume</li>
+                            <li>Professional online presence (LinkedIn)</li>
                         </ul>
                         
-                        <p class="mb-0">Quanto mais completo seu perfil estiver, melhor será sua classificação nos algoritmos de correspondência com investidores.</p>
+                        <p class="mb-0">The more complete your profile is, the better your ranking will be in the matching algorithms with investors.</p>
                     </div>
                 </div>
             </div>
@@ -503,34 +505,34 @@ $conn->close();
         let universidadeSelecionada = '<?php echo $perfil['universidade_id'] ?? ''; ?>';
         let cursoSelecionado = '<?php echo $perfil['curso_id'] ?? ''; ?>';
         
-        // Cargar universidades al iniciar la página
-        cargarUniversidades();
+        // Load universities on page load
+        loadUniversities();
         
-        // Configurar evento para actualizar cursos cuando cambia la universidad
+        // Set up event to update courses when university changes
         universidadeSelect.addEventListener('change', function() {
             const universidadeId = this.value;
             if (universidadeId) {
                 cursoSelect.disabled = false;
-                cargarCursos(universidadeId);
+                loadCourses(universidadeId);
             } else {
                 cursoSelect.disabled = true;
-                cursoSelect.innerHTML = '<option value="" selected disabled>Primeiro selecione uma universidade</option>';
+                cursoSelect.innerHTML = '<option value="" selected disabled>First select a university</option>';
             }
         });
         
-        // Función para cargar todas las universidades
-        function cargarUniversidades() {
+        // Function to load all universities
+        function loadUniversities() {
             fetch('api_universidades_cursos.php?action=get_universidades')
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        universidadeSelect.innerHTML = '<option value="" selected disabled>Selecione sua universidade</option>';
+                        universidadeSelect.innerHTML = '<option value="" selected disabled>Select your university</option>';
                         data.data.forEach(univ => {
                             const option = document.createElement('option');
                             option.value = univ.id;
                             option.textContent = univ.nome;
                             
-                            // Si hay una universidad previamente seleccionada, marcarla
+                            // If a university is already selected, mark it
                             if (univ.id == universidadeSelecionada) {
                                 option.selected = true;
                             }
@@ -538,24 +540,24 @@ $conn->close();
                             universidadeSelect.appendChild(option);
                         });
                         
-                        // Si hay una universidad seleccionada, cargar sus cursos
+                        // If a university is selected, load its courses
                         if (universidadeSelecionada) {
                             cursoSelect.disabled = false;
-                            cargarCursos(universidadeSelecionada);
+                            loadCourses(universidadeSelecionada);
                         }
                     } else {
-                        console.error('Error al cargar universidades:', data.message);
+                        console.error('Error loading universities:', data.message);
                     }
                 })
-                .catch(error => console.error('Error en la solicitud:', error));
+                .catch(error => console.error('Request error:', error));
         }
         
-        // Función para cargar cursos de una universidad específica
-        function cargarCursos(universidadeId) {
+        // Function to load courses for a specific university
+        function loadCourses(universidadeId) {
             fetch(`api_universidades_cursos.php?action=get_cursos&universidade_id=${universidadeId}`)
                 .then(response => response.json())
                 .then(data => {
-                    cursoSelect.innerHTML = '<option value="" selected disabled>Selecione seu curso</option>';
+                    cursoSelect.innerHTML = '<option value="" selected disabled>Select your course</option>';
                     
                     if (data.success) {
                         data.data.forEach(curso => {
@@ -563,7 +565,7 @@ $conn->close();
                             option.value = curso.id;
                             option.textContent = curso.nome_curso;
                             
-                            // Si hay un curso previamente seleccionado, marcarlo
+                            // If a course is already selected, mark it
                             if (curso.id == cursoSelecionado) {
                                 option.selected = true;
                             }
@@ -571,10 +573,10 @@ $conn->close();
                             cursoSelect.appendChild(option);
                         });
                     } else {
-                        console.warn('No se encontraron cursos para esta universidad:', data.message);
+                        console.warn('No courses found for this university:', data.message);
                     }
                 })
-                .catch(error => console.error('Error en la solicitud:', error));
+                .catch(error => console.error('Request error:', error));
         }
     });
     </script>

@@ -1,19 +1,23 @@
 <?php
 session_start();
 
-// Verifica se o usuário está logado e é administrador
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Check if the user is logged in and is an administrator
 if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_categoria'] !== 'admin') {
     header("Location: login.php?expirado=1");
     exit();
 }
 
-// Inclui a conexão com o banco de dados
+// Include database connection
 include 'conexao.php';
 
-// Atualiza o timestamp de último acesso
+// Update last access timestamp
 $_SESSION['ultimo_acesso'] = time();
 
-// Busca dados do usuário atual
+// Get current user data
 $id = $_SESSION['usuario_id'];
 $sql = "SELECT * FROM usuarios WHERE id = ?";
 $stmt = $conn->prepare($sql);
@@ -23,43 +27,71 @@ $resultado = $stmt->get_result();
 $usuario = $resultado->fetch_assoc();
 $stmt->close();
 
-// Busca totais para o dashboard
-$sql_total_estudantes = "SELECT COUNT(*) as total FROM usuarios WHERE categoria = 'estudante'";
-$sql_total_investidores = "SELECT COUNT(*) as total FROM usuarios WHERE categoria = 'investidor'";
-$sql_total_universidades = "SELECT COUNT(*) as total FROM usuarios WHERE categoria = 'universidade'";
-$sql_total_empresas = "SELECT COUNT(*) as total FROM usuarios WHERE categoria = 'empresa'";
+// Get dashboard totals with error handling
+try {
+    $sql_total_estudantes = "SELECT COUNT(*) as total FROM usuarios WHERE categoria = 'estudante'";
+    $result_estudantes = $conn->query($sql_total_estudantes);
+    if (!$result_estudantes) {
+        throw new Exception("Database error: " . $conn->error);
+    }
+    $total_estudantes = $result_estudantes->fetch_assoc()['total'];
+    
+    $sql_total_investidores = "SELECT COUNT(*) as total FROM usuarios WHERE categoria = 'investidor'";
+    $result_investidores = $conn->query($sql_total_investidores);
+    if (!$result_investidores) {
+        throw new Exception("Database error: " . $conn->error);
+    }
+    $total_investidores = $result_investidores->fetch_assoc()['total'];
+    
+    $sql_total_universidades = "SELECT COUNT(*) as total FROM usuarios WHERE categoria = 'universidade'";
+    $result_universidades = $conn->query($sql_total_universidades);
+    if (!$result_universidades) {
+        throw new Exception("Database error: " . $conn->error);
+    }
+    $total_universidades = $result_universidades->fetch_assoc()['total'];
+    
+    $sql_total_empresas = "SELECT COUNT(*) as total FROM usuarios WHERE categoria = 'empresa'";
+    $result_empresas = $conn->query($sql_total_empresas);
+    if (!$result_empresas) {
+        throw new Exception("Database error: " . $conn->error);
+    }
+    $total_empresas = $result_empresas->fetch_assoc()['total'];
 
-$result_estudantes = $conn->query($sql_total_estudantes);
-$result_investidores = $conn->query($sql_total_investidores);
-$result_universidades = $conn->query($sql_total_universidades);
-$result_empresas = $conn->query($sql_total_empresas);
+    // Get recent users with error handling
+    $sql_usuarios_recentes = "SELECT id, nome, sobrenome, email, categoria, status, data_criacao 
+                           FROM usuarios 
+                           ORDER BY data_criacao DESC 
+                           LIMIT 10";
+    $result_usuarios_recentes = $conn->query($sql_usuarios_recentes);
+    if (!$result_usuarios_recentes) {
+        throw new Exception("Database error: " . $conn->error);
+    }
 
-$total_estudantes = $result_estudantes->fetch_assoc()['total'];
-$total_investidores = $result_investidores->fetch_assoc()['total'];
-$total_universidades = $result_universidades->fetch_assoc()['total'];
-$total_empresas = $result_empresas->fetch_assoc()['total'];
-
-// Busca usuários recentes
-$sql_usuarios_recentes = "SELECT id, nome, sobrenome, email, categoria, status, data_criacao 
-                         FROM usuarios 
-                         ORDER BY data_criacao DESC 
-                         LIMIT 10";
-$result_usuarios_recentes = $conn->query($sql_usuarios_recentes);
-
-// Busca atividades recentes
-$sql_atividades = "SELECT ul.id, ul.usuario_id, ul.acao, ul.data_hora, u.nome, u.sobrenome, u.email, u.categoria
-                  FROM usuarios_logs ul
-                  JOIN usuarios u ON ul.usuario_id = u.id
-                  ORDER BY ul.data_hora DESC
-                  LIMIT 20";
-$result_atividades = $conn->query($sql_atividades);
+    // Get recent activities with error handling
+    $sql_atividades = "SELECT ul.id, ul.usuario_id, ul.acao, ul.data_hora, u.nome, u.sobrenome, u.email, u.categoria
+                    FROM usuarios_logs ul
+                    JOIN usuarios u ON ul.usuario_id = u.id
+                    ORDER BY ul.data_hora DESC
+                    LIMIT 20";
+    $result_atividades = $conn->query($sql_atividades);
+    if (!$result_atividades) {
+        throw new Exception("Database error: " . $conn->error);
+    }
+} catch (Exception $e) {
+    echo '<div class="alert alert-danger">Error: ' . $e->getMessage() . '</div>';
+    // Set default values in case of error
+    $total_estudantes = 0;
+    $total_investidores = 0;
+    $total_universidades = 0;
+    $total_empresas = 0;
+}
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo - EduBridge</title>
+    <title>Admin Dashboard - EduBridge</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -170,7 +202,7 @@ $result_atividades = $conn->query($sql_atividades);
             <i class="bi bi-mortarboard-fill me-2 fs-4"></i>
             <h4 class="mb-0">EduBridge</h4>
         </div>
-        <p class="text-white-50 small px-2 mb-2">MENU PRINCIPAL</p>
+        <p class="text-white-50 small px-2 mb-2">MAIN MENU</p>
         <ul class="nav flex-column mb-auto">
             <li class="nav-item">
                 <a href="#" class="nav-link active">
@@ -179,39 +211,39 @@ $result_atividades = $conn->query($sql_atividades);
             </li>
             <li class="nav-item">
                 <a href="listar_usuarios.php" class="nav-link">
-                    <i class="bi bi-people"></i> Usuários
+                    <i class="bi bi-people"></i> Users
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="bi bi-mortarboard"></i> Universidades
+                    <i class="bi bi-mortarboard"></i> Universities
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="bi bi-bank"></i> Investidores
+                    <i class="bi bi-bank"></i> Investors
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="bi bi-briefcase"></i> Empresas
+                    <i class="bi bi-briefcase"></i> Companies
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="bi bi-file-earmark-text"></i> Relatórios
+                    <i class="bi bi-file-earmark-text"></i> Reports
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="bi bi-gear"></i> Configurações
+                    <i class="bi bi-gear"></i> Settings
                 </a>
             </li>
         </ul>
         <hr class="text-white-50">
         <div class="px-2">
             <a href="logout.php" class="nav-link text-white-50">
-                <i class="bi bi-box-arrow-right"></i> Sair
+                <i class="bi bi-box-arrow-right"></i> Logout
             </a>
         </div>
     </div>
@@ -230,7 +262,7 @@ $result_atividades = $conn->query($sql_atividades);
                             <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Relatórios</a>
+                            <a class="nav-link" href="#">Reports</a>
                         </li>
                     </ul>
                     <div class="d-flex align-items-center">
@@ -240,10 +272,10 @@ $result_atividades = $conn->query($sql_atividades);
                                 <span><?php echo $usuario['nome'] . ' ' . $usuario['sobrenome']; ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Meu Perfil</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i> Configurações</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i> Sair</a></li>
+                                <li><a class="dropdown-item" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -253,10 +285,10 @@ $result_atividades = $conn->query($sql_atividades);
 
         <!-- Dashboard Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Dashboard Administrativo</h2>
+            <h2 class="mb-0">Admin Dashboard</h2>
             <div>
                 <button class="btn btn-primary">
-                    <i class="bi bi-download me-2"></i> Exportar Relatório
+                    <i class="bi bi-download me-2"></i> Export Report
                 </button>
             </div>
         </div>
@@ -268,14 +300,14 @@ $result_atividades = $conn->query($sql_atividades);
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <div>
-                                <p class="title mb-0">Total de Estudantes</p>
+                                <p class="title mb-0">Total Students</p>
                                 <h3 class="number"><?php echo $total_estudantes; ?></h3>
                             </div>
                             <div class="icon">
                                 <i class="bi bi-mortarboard"></i>
                             </div>
                         </div>
-                        <p class="text-success mb-0"><i class="bi bi-graph-up me-1"></i> +5% desde o mês passado</p>
+                        <p class="text-success mb-0"><i class="bi bi-graph-up me-1"></i> +5% since last month</p>
                     </div>
                 </div>
             </div>
@@ -284,14 +316,14 @@ $result_atividades = $conn->query($sql_atividades);
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <div>
-                                <p class="title mb-0">Total de Investidores</p>
+                                <p class="title mb-0">Total Investors</p>
                                 <h3 class="number"><?php echo $total_investidores; ?></h3>
                             </div>
                             <div class="icon">
                                 <i class="bi bi-bank"></i>
                             </div>
                         </div>
-                        <p class="text-success mb-0"><i class="bi bi-graph-up me-1"></i> +3% desde o mês passado</p>
+                        <p class="text-success mb-0"><i class="bi bi-graph-up me-1"></i> +3% since last month</p>
                     </div>
                 </div>
             </div>
@@ -300,14 +332,14 @@ $result_atividades = $conn->query($sql_atividades);
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <div>
-                                <p class="title mb-0">Total de Universidades</p>
+                                <p class="title mb-0">Total Universities</p>
                                 <h3 class="number"><?php echo $total_universidades; ?></h3>
                             </div>
                             <div class="icon">
                                 <i class="bi bi-building"></i>
                             </div>
                         </div>
-                        <p class="text-success mb-0"><i class="bi bi-graph-up me-1"></i> +2% desde o mês passado</p>
+                        <p class="text-success mb-0"><i class="bi bi-graph-up me-1"></i> +2% since last month</p>
                     </div>
                 </div>
             </div>
@@ -316,14 +348,14 @@ $result_atividades = $conn->query($sql_atividades);
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3">
                             <div>
-                                <p class="title mb-0">Total de Empresas</p>
+                                <p class="title mb-0">Total Companies</p>
                                 <h3 class="number"><?php echo $total_empresas; ?></h3>
                             </div>
                             <div class="icon">
                                 <i class="bi bi-briefcase"></i>
                             </div>
                         </div>
-                        <p class="text-success mb-0"><i class="bi bi-graph-up me-1"></i> +4% desde o mês passado</p>
+                        <p class="text-success mb-0"><i class="bi bi-graph-up me-1"></i> +4% since last month</p>
                     </div>
                 </div>
             </div>
@@ -333,20 +365,20 @@ $result_atividades = $conn->query($sql_atividades);
         <div class="card dashboard-card mb-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="card-title mb-0">Usuários Recentes</h5>
-                    <a href="listar_usuarios.php" class="btn btn-sm btn-outline-primary">Ver Todos</a>
+                    <h5 class="card-title mb-0">Recent Users</h5>
+                    <a href="listar_usuarios.php" class="btn btn-sm btn-outline-primary">View All</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nome</th>
+                                <th>Name</th>
                                 <th>Email</th>
-                                <th>Categoria</th>
+                                <th>Category</th>
                                 <th>Status</th>
-                                <th>Data de Criação</th>
-                                <th>Ação</th>
+                                <th>Creation Date</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -359,16 +391,16 @@ $result_atividades = $conn->query($sql_atividades);
                                     <?php 
                                     switch ($usuario['categoria']) {
                                         case 'estudante':
-                                            echo '<span class="badge bg-primary">Estudante</span>';
+                                            echo '<span class="badge bg-primary">Student</span>';
                                             break;
                                         case 'investidor':
-                                            echo '<span class="badge bg-success">Investidor</span>';
+                                            echo '<span class="badge bg-success">Investor</span>';
                                             break;
                                         case 'universidade':
-                                            echo '<span class="badge bg-info">Universidade</span>';
+                                            echo '<span class="badge bg-info">University</span>';
                                             break;
                                         case 'empresa':
-                                            echo '<span class="badge bg-secondary">Empresa</span>';
+                                            echo '<span class="badge bg-secondary">Company</span>';
                                             break;
                                         case 'admin':
                                             echo '<span class="badge bg-dark">Admin</span>';
@@ -380,16 +412,16 @@ $result_atividades = $conn->query($sql_atividades);
                                     <?php 
                                     switch ($usuario['status']) {
                                         case 'ativo':
-                                            echo '<span class="status-badge status-ativo">Ativo</span>';
+                                            echo '<span class="status-badge status-ativo">Active</span>';
                                             break;
                                         case 'pendente':
-                                            echo '<span class="status-badge status-pendente">Pendente</span>';
+                                            echo '<span class="status-badge status-pendente">Pending</span>';
                                             break;
                                         case 'suspenso':
-                                            echo '<span class="status-badge status-suspenso">Suspenso</span>';
+                                            echo '<span class="status-badge status-suspenso">Suspended</span>';
                                             break;
                                         case 'inativo':
-                                            echo '<span class="status-badge status-inativo">Inativo</span>';
+                                            echo '<span class="status-badge status-inativo">Inactive</span>';
                                             break;
                                     }
                                     ?>
@@ -398,18 +430,18 @@ $result_atividades = $conn->query($sql_atividades);
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownActions<?php echo $usuario['id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Ações
+                                            Actions
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownActions<?php echo $usuario['id']; ?>">
-                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i> Ver Detalhes</a></li>
-                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i> Editar</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i> View Details</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i> Edit</a></li>
                                             <?php if ($usuario['status'] == 'ativo'): ?>
-                                            <li><a class="dropdown-item text-warning" href="#"><i class="bi bi-pause-circle me-2"></i> Suspender</a></li>
+                                            <li><a class="dropdown-item text-warning" href="#"><i class="bi bi-pause-circle me-2"></i> Suspend</a></li>
                                             <?php else: ?>
-                                            <li><a class="dropdown-item text-success" href="#"><i class="bi bi-check-circle me-2"></i> Ativar</a></li>
+                                            <li><a class="dropdown-item text-success" href="#"><i class="bi bi-check-circle me-2"></i> Activate</a></li>
                                             <?php endif; ?>
                                             <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i> Excluir</a></li>
+                                            <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i> Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -425,17 +457,17 @@ $result_atividades = $conn->query($sql_atividades);
         <div class="card dashboard-card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="card-title mb-0">Atividades Recentes</h5>
-                    <a href="#" class="btn btn-sm btn-outline-primary">Ver Todas</a>
+                    <h5 class="card-title mb-0">Recent Activities</h5>
+                    <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Usuário</th>
-                                <th>Categoria</th>
-                                <th>Ação</th>
-                                <th>Data/Hora</th>
+                                <th>User</th>
+                                <th>Category</th>
+                                <th>Action</th>
+                                <th>Date/Time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -446,16 +478,16 @@ $result_atividades = $conn->query($sql_atividades);
                                     <?php 
                                     switch ($atividade['categoria']) {
                                         case 'estudante':
-                                            echo '<span class="badge bg-primary">Estudante</span>';
+                                            echo '<span class="badge bg-primary">Student</span>';
                                             break;
                                         case 'investidor':
-                                            echo '<span class="badge bg-success">Investidor</span>';
+                                            echo '<span class="badge bg-success">Investor</span>';
                                             break;
                                         case 'universidade':
-                                            echo '<span class="badge bg-info">Universidade</span>';
+                                            echo '<span class="badge bg-info">University</span>';
                                             break;
                                         case 'empresa':
-                                            echo '<span class="badge bg-secondary">Empresa</span>';
+                                            echo '<span class="badge bg-secondary">Company</span>';
                                             break;
                                         case 'admin':
                                             echo '<span class="badge bg-dark">Admin</span>';
@@ -470,20 +502,23 @@ $result_atividades = $conn->query($sql_atividades);
                                             echo '<span class="text-success"><i class="bi bi-box-arrow-in-right me-1"></i> Login</span>';
                                             break;
                                         case 'login_falha':
-                                            echo '<span class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i> Tentativa de Login Falha</span>';
+                                            echo '<span class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i> Failed Login Attempt</span>';
                                             break;
                                         case 'logout':
-                                            echo '<span class="text-secondary"><i class="bi bi-box-arrow-left me-1"></i> Logout</span>';
+                                            echo '<span class="text-secondary"><i class="bi bi-box-arrow-right me-1"></i> Logout</span>';
                                             break;
                                         case 'perfil_atualizado':
-                                            echo '<span class="text-primary"><i class="bi bi-person-check me-1"></i> Perfil Atualizado</span>';
+                                            echo '<span class="text-primary"><i class="bi bi-person-check me-1"></i> Profile Updated</span>';
+                                            break;
+                                        case 'cadastro':
+                                            echo '<span class="text-info"><i class="bi bi-person-plus me-1"></i> Registration</span>';
                                             break;
                                         default:
-                                            echo '<span><i class="bi bi-activity me-1"></i> ' . ucfirst($atividade['acao']) . '</span>';
+                                            echo $atividade['acao'];
                                     }
                                     ?>
                                 </td>
-                                <td><?php echo date('d/m/Y H:i:s', strtotime($atividade['data_hora'])); ?></td>
+                                <td><?php echo date('d/m/Y H:i', strtotime($atividade['data_hora'])); ?></td>
                             </tr>
                             <?php endwhile; ?>
                         </tbody>

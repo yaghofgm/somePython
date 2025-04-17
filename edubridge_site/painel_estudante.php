@@ -1,19 +1,19 @@
 <?php
 session_start();
-// Configurações de erro para desenvolvimento
+// Error settings for development
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Inclui a conexão com o banco de dados
+// Include database connection
 include 'conexao.php';
 
-// Verifica se o usuário está logado e é um estudante
+// Check if user is logged in and is a student
 if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_categoria'] !== 'estudante') {
     header("Location: login.php?expirado=1");
     exit();
 }
 
-// Obter dados do perfil do estudante
+// Get student profile data
 $usuario_id = $_SESSION['usuario_id'];
 $sql_perfil = "SELECT u.*, pe.*, 
                pu.nome as universidade_nome,
@@ -30,7 +30,7 @@ $result_perfil = $stmt_perfil->get_result();
 $perfil = $result_perfil->fetch_assoc();
 $stmt_perfil->close();
 
-// Inicializar variables para estadísticas (ya que financiamentos no existe)
+// Initialize variables for statistics (since financiamentos doesn't exist yet)
 $total_financiamentos = 0;
 $valor_total = 0;
 $financiamentos_aprovados = 0;
@@ -39,11 +39,11 @@ $financiamentos = [];
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Estudante - EduBridge</title>
+    <title>Student Dashboard - EduBridge</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -196,7 +196,7 @@ $financiamentos = [];
                     </div>
                     <div>
                         <div class="fw-bold"><?php echo $_SESSION['usuario_nome'] . ' ' . $_SESSION['usuario_sobrenome']; ?></div>
-                        <small class="text-white-50">Estudante</small>
+                        <small class="text-white-50">Student</small>
                     </div>
                 </div>
                 <ul class="nav flex-column px-3">
@@ -204,19 +204,19 @@ $financiamentos = [];
                         <a class="nav-link active" href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="editar_perfil_estudante.php"><i class="bi bi-person"></i> Meu Perfil</a>
+                        <a class="nav-link" href="editar_perfil_estudante.php"><i class="bi bi-person"></i> My Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-mortarboard"></i> Meu Curso</a>
+                        <a class="nav-link" href="#"><i class="bi bi-mortarboard"></i> My Course</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="calcular_emprestimos_v2.php"><i class="bi bi-calculator"></i> Calcular Empréstimos</a>
+                        <a class="nav-link" href="calcular_emprestimos_v2.php"><i class="bi bi-calculator"></i> Calculate Loans</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-chat-dots"></i> Mensagens</a>
+                        <a class="nav-link" href="#"><i class="bi bi-chat-dots"></i> Messages</a>
                     </li>
                     <li class="nav-item mt-4">
-                        <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-left"></i> Sair</a>
+                        <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-left"></i> Logout</a>
                     </li>
                 </ul>
             </div>
@@ -230,9 +230,9 @@ $financiamentos = [];
                     </div>
                     <div>
                         <h2 class="mb-1"><?php echo $_SESSION['usuario_nome'] . ' ' . $_SESSION['usuario_sobrenome']; ?></h2>
-                        <p class="mb-0"><?php echo !empty($perfil['universidade_nome']) ? $perfil['universidade_nome'] : 'Universidade não informada'; ?> | 
-                           <?php echo !empty($perfil['curso_nome']) ? $perfil['curso_nome'] : 'Curso não informado'; ?></p>
-                        <a href="editar_perfil_estudante.php" class="btn btn-sm btn-light mt-2">Completar Perfil</a>
+                        <p class="mb-0"><?php echo !empty($perfil['universidade_nome']) ? $perfil['universidade_nome'] : 'University not specified'; ?> | 
+                           <?php echo !empty($perfil['curso_nome']) ? $perfil['curso_nome'] : 'Course not specified'; ?></p>
+                        <a href="editar_perfil_estudante.php" class="btn btn-sm btn-light mt-2">Complete Profile</a>
                     </div>
                 </div>
                 
@@ -243,17 +243,17 @@ $financiamentos = [];
                         <!-- Financial Overview -->
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <span><i class="bi bi-cash me-2"></i>Visão Geral Financeira</span>
+                                <span><i class="bi bi-cash me-2"></i>Financial Overview</span>
                             </div>
                             <div class="card-body">
                                 <div class="text-center py-4">
                                     <div class="mb-3">
                                         <i class="bi bi-cash-coin fs-1 text-muted"></i>
                                     </div>
-                                    <h5>Sistema de financiamentos em desenvolvimento</h5>
-                                    <p class="text-muted">Estamos trabalhando para oferecer opções de financiamento educacional.</p>
+                                    <h5>Financing system under development</h5>
+                                    <p class="text-muted">We're working to offer educational financing options.</p>
                                     <a href="calcular_emprestimos_v2.php" class="btn btn-primary">
-                                        <i class="bi bi-calculator me-2"></i>Calculadora de Financiamento
+                                        <i class="bi bi-calculator me-2"></i>Financing Calculator
                                     </a>
                                 </div>
                             </div>
@@ -262,19 +262,19 @@ $financiamentos = [];
                         <!-- Academic Progress -->
                         <div class="card">
                             <div class="card-header">
-                                <i class="bi bi-journal-bookmark me-2"></i>Progresso Acadêmico
+                                <i class="bi bi-journal-bookmark me-2"></i>Academic Progress
                             </div>
                             <div class="card-body">
                                 <div class="mb-4">
                                     <div class="d-flex justify-content-between align-items-center mb-1">
-                                        <span>Progresso do Curso</span>
-                                        <span><?php echo (!empty($perfil['semestre_atual']) && !empty($perfil['ano_ingresso'])) ? $perfil['semestre_atual'] . 'º semestre' : 'Não informado'; ?></span>
+                                        <span>Course Progress</span>
+                                        <span><?php echo (!empty($perfil['semestre_atual']) && !empty($perfil['ano_ingresso'])) ? $perfil['semestre_atual'] . 'th semester' : 'Not specified'; ?></span>
                                     </div>
                                     <div class="progress">
                                         <?php
                                         $progresso = 0;
                                         if (!empty($perfil['semestre_atual'])) {
-                                            // Estimando um curso de 8 semestres
+                                            // Estimating an 8-semester course
                                             $progresso = min(($perfil['semestre_atual'] / 8) * 100, 100);
                                         }
                                         ?>
@@ -285,7 +285,7 @@ $financiamentos = [];
                                 <div class="mb-4">
                                     <div class="d-flex justify-content-between align-items-center mb-1">
                                         <span>GPA</span>
-                                        <span><?php echo !empty($perfil['gpa']) ? number_format($perfil['gpa'], 2, ',', '.') . ' / 4.00' : 'Não informado'; ?></span>
+                                        <span><?php echo !empty($perfil['gpa']) ? number_format($perfil['gpa'], 2, '.', ',') . ' / 4.00' : 'Not specified'; ?></span>
                                     </div>
                                     <div class="progress">
                                         <?php
@@ -301,12 +301,12 @@ $financiamentos = [];
                                 <?php if (empty($perfil['curso_nome']) || empty($perfil['universidade_nome']) || empty($perfil['gpa'])): ?>
                                 <div class="alert alert-warning">
                                     <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                                    Seu perfil acadêmico está incompleto. Complete-o para aumentar suas chances de conseguir financiamento.
+                                    Your academic profile is incomplete. Complete it to increase your chances of getting financing.
                                 </div>
                                 <?php endif; ?>
                                 
                                 <a href="editar_perfil_estudante.php" class="btn btn-outline-primary">
-                                    <i class="bi bi-pencil me-2"></i>Atualizar Informações Acadêmicas
+                                    <i class="bi bi-pencil me-2"></i>Update Academic Information
                                 </a>
                             </div>
                         </div>
@@ -317,7 +317,7 @@ $financiamentos = [];
                         <!-- Profile Completion -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="bi bi-person-check me-2"></i>Conclusão do Perfil
+                                <i class="bi bi-person-check me-2"></i>Profile Completion
                             </div>
                             <div class="card-body">
                                 <?php
@@ -353,12 +353,12 @@ $financiamentos = [];
                                     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                                         <?php 
                                         $nomes = [
-                                            'universidade_nome' => 'Universidade',
-                                            'curso_nome' => 'Curso',
-                                            'ano_ingresso' => 'Ano de Ingresso',
-                                            'semestre_atual' => 'Semestre Atual',
+                                            'universidade_nome' => 'University',
+                                            'curso_nome' => 'Course',
+                                            'ano_ingresso' => 'Enrollment Year',
+                                            'semestre_atual' => 'Current Semester',
                                             'gpa' => 'GPA',
-                                            'cv_path' => 'Currículo',
+                                            'cv_path' => 'Resume/CV',
                                             'linkedin' => 'LinkedIn'
                                         ];
                                         echo $nomes[$campo] ?? ucfirst($campo); 
@@ -374,7 +374,7 @@ $financiamentos = [];
                                 </ul>
                                 
                                 <div class="mt-3">
-                                    <a href="editar_perfil_estudante.php" class="btn btn-primary w-100">Completar Perfil</a>
+                                    <a href="editar_perfil_estudante.php" class="btn btn-primary w-100">Complete Profile</a>
                                 </div>
                             </div>
                         </div>
@@ -382,32 +382,32 @@ $financiamentos = [];
                         <!-- Opportunities -->
                         <div class="card">
                             <div class="card-header">
-                                <i class="bi bi-lightning-charge me-2"></i>Oportunidades
+                                <i class="bi bi-lightning-charge me-2"></i>Opportunities
                             </div>
                             <div class="card-body">
                                 <div class="list-group list-group-flush mb-3">
                                     <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center px-0">
                                         <div>
-                                            <h6 class="mb-1">Bolsa de Estudo - Intercâmbio</h6>
-                                            <p class="mb-0 small text-muted">Universidade de Cambridge</p>
+                                            <h6 class="mb-1">Scholarship - Study Abroad</h6>
+                                            <p class="mb-0 small text-muted">University of Cambridge</p>
                                         </div>
-                                        <span class="badge bg-primary rounded-pill">Novo</span>
+                                        <span class="badge bg-primary rounded-pill">New</span>
                                     </a>
                                     <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center px-0">
                                         <div>
-                                            <h6 class="mb-1">Estágio em Tecnologia</h6>
-                                            <p class="mb-0 small text-muted">Microsoft Brasil</p>
+                                            <h6 class="mb-1">Technology Internship</h6>
+                                            <p class="mb-0 small text-muted">Microsoft Brazil</p>
                                         </div>
-                                        <span class="badge bg-primary rounded-pill">Novo</span>
+                                        <span class="badge bg-primary rounded-pill">New</span>
                                     </a>
                                     <a href="#" class="list-group-item list-group-item-action px-0">
                                         <div>
-                                            <h6 class="mb-1">Programa de Financiamento</h6>
-                                            <p class="mb-0 small text-muted">Parceria EduBridge e BNDES</p>
+                                            <h6 class="mb-1">Financing Program</h6>
+                                            <p class="mb-0 small text-muted">EduBridge and BNDES Partnership</p>
                                         </div>
                                     </a>
                                 </div>
-                                <a href="#" class="btn btn-outline-primary w-100">Ver Todas</a>
+                                <a href="#" class="btn btn-outline-primary w-100">View All</a>
                             </div>
                         </div>
                     </div>

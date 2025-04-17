@@ -71,6 +71,36 @@ CREATE TABLE
     CONSTRAINT `perfil_universidade_relation_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
   ) ENGINE = InnoDB AUTO_INCREMENT = 5 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
 
+-- Investor-specific profile information
+CREATE TABLE
+  `perfil_investidor` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `usuario_id` int(11) NOT NULL,
+    `area_interesse` text DEFAULT NULL,
+    `valor_disponivel` decimal(15, 2) DEFAULT NULL,
+    `descricao` text DEFAULT NULL,
+    `linkedin` varchar(255) DEFAULT NULL,
+    `data_atualizacao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+    PRIMARY KEY (`id`),
+    KEY `usuario_id` (`usuario_id`),
+    CONSTRAINT `perfil_investidor_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+-- Company-specific profile information
+CREATE TABLE
+  `perfil_empresa` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `usuario_id` int(11) NOT NULL,
+    `nome_empresa` varchar(255) DEFAULT NULL,
+    `industria` varchar(100) DEFAULT NULL,
+    `website` varchar(255) DEFAULT NULL,
+    `descricao` text DEFAULT NULL,
+    `data_atualizacao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+    PRIMARY KEY (`id`),
+    KEY `usuario_id` (`usuario_id`),
+    CONSTRAINT `perfil_empresa_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
+  ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
 CREATE TABLE
   `curso_universidade` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -93,7 +123,7 @@ CREATE TABLE
     `ip` varchar(45) DEFAULT NULL,
     `user_agent` varchar(255) DEFAULT NULL,
     `data_hora` timestamp NOT NULL DEFAULT current_timestamp(),
-    `detalhes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`detalhes`)),
+    `detalhes` longtext CHARACTER SET utf8mb4 COLLATE = utf8mb4_bin DEFAULT NULL CHECK (json_valid(`detalhes`)),
     PRIMARY KEY (`id`),
     KEY `idx_usuario` (`usuario_id`),
     KEY `idx_acao` (`acao`),

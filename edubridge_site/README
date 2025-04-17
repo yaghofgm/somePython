@@ -1,3 +1,64 @@
 // sudo cp -r ~/python/edubridge_site/* /var/www/html/edubridge_site/
 // rsync -av --ignore-existing /var/www/html/edubridge_site/ /home/yagho/python/edubridge_site/
 // no folder do edubridge_site, sudo systemtcl start apache2; ngrok http 80; access the <stuff>/edubridge_site/index.html
+
+
+
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     $gpa = isset($_POST['gpa']) ? (float) $_POST['gpa'] : 0;
+//     $university = isset($_POST['university']) ? trim($_POST['university']) : '';
+//     $course = isset($_POST['course']) ? trim($_POST['course']) : '';
+//     $semester_cost = isset($_POST['semester_cost']) ? (float) $_POST['semester_cost'] : 0;
+//     $expected_salary = isset($_POST['expected_salary']) ? (float) $_POST['expected_salary'] : 0;
+//     $remaining_semesters = isset($_POST['remaining_semesters']) ? (int) $_POST['remaining_semesters'] : 0;
+//     $country = isset($_POST['country']) ? trim($_POST['country']) : 'BR'; // Valor padrão: Brasil
+    
+//     // Validación básica
+//     if ($gpa < 0 || $gpa > 4.00) {
+//         $errores[] = 'El GPA debe estar entre 0 y 4.00';
+//     }
+    
+//     if (empty($university)) {
+//         $errores[] = 'Debe seleccionar una universidad';
+//     }
+    
+//     if (empty($course)) {
+//         $errores[] = 'Debe seleccionar un curso';
+//     }
+    
+//     if ($semester_cost <= 0) {
+//         $errores[] = 'El costo del semestre debe ser mayor que cero';
+//     }
+    
+//     if ($expected_salary <= 0) {
+//         $errores[] = 'El salario esperado debe ser mayor que cero';
+//     }
+    
+//     if ($remaining_semesters <= 0) {
+//         $errores[] = 'Los semestres restantes deben ser mayor que cero';
+//     }
+    
+//     if (!in_array($country, ['BR', 'US', 'MX'])) {
+//         $errores[] = 'El país debe ser Brasil (BR), Estados Unidos (US) o México (MX)';
+//     }
+    
+//     // Buscar admin configurations para obtener el umbral de ganancia
+//     $profit_threshold = 0.05; // Valor predeterminado
+    
+//     // Si no hay errores, calcular opciones de préstamo
+//     if (empty($errores)) {
+//         $student_data = [
+//             'gpa' => $gpa,
+//             'university' => $university,
+//             'course' => $course,
+//             'semester_cost' => $semester_cost,
+//             'expected_salary' => $expected_salary,
+//             'remaining_semesters' => $remaining_semesters,
+//             'country' => $country, // Agregar el país al cálculo
+//             'profit_threshold' => $profit_threshold // Usando el valor predeterminado
+//         ];
+        
+//         $opciones_prestamo = calcular_opciones_prestamo($student_data);
+//         $processed = true;
+//     }
+// }

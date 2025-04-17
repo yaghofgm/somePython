@@ -1,19 +1,19 @@
 <?php
 session_start();
-// Configurações de erro para desenvolvimento
+// Error settings for development
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Inclui a conexão com o banco de dados
+// Include database connection
 include 'conexao.php';
 
-// Verifica se o usuário está logado e é uma empresa
+// Check if the user is logged in and is a company
 if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_categoria'] !== 'empresa') {
     header("Location: login.php?expirado=1");
     exit();
 }
 
-// Obter informações da empresa atual
+// Get current company information
 $empresa_id = $_SESSION['usuario_id'];
 $sql_empresa = "SELECT * FROM usuarios WHERE id = ?";
 $stmt = $conn->prepare($sql_empresa);
@@ -22,7 +22,7 @@ $stmt->execute();
 $result_empresa = $stmt->get_result();
 $empresa_data = $result_empresa->fetch_assoc();
 
-// Buscar estudantes com filtros de interesse que correspondam ao perfil da empresa
+// Search for students with interest filters that match the company profile
 $sql_estudantes_compativeis = "SELECT 
                            u.id, 
                            u.nome, 
@@ -44,19 +44,19 @@ $sql_estudantes_compativeis = "SELECT
                            
 $result_estudantes = $conn->query($sql_estudantes_compativeis);
 
-// Inicializa um array vazio para oportunidades
+// Initialize an empty array for opportunities
 $oportunidades = [];
 
-// Mensagem vazia por padrão
+// Empty message by default
 $mensagem = '';
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" width="device-width, initial-scale=1.0">
-    <title>Painel da Empresa - EduBridge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard - EduBridge</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -200,7 +200,7 @@ $mensagem = '';
                     </div>
                     <div>
                         <div class="fw-bold"><?php echo $_SESSION['usuario_nome']; ?></div>
-                        <small class="text-white-50">Empresa</small>
+                        <small class="text-white-50">Company</small>
                     </div>
                 </div>
                 <ul class="nav flex-column px-3">
@@ -208,13 +208,13 @@ $mensagem = '';
                         <a class="nav-link active" href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#estudantes"><i class="bi bi-people"></i> Estudantes</a>
+                        <a class="nav-link" href="#estudantes"><i class="bi bi-people"></i> Students</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#perfil"><i class="bi bi-person"></i> Perfil da Empresa</a>
+                        <a class="nav-link" href="#perfil"><i class="bi bi-person"></i> Company Profile</a>
                     </li>
                     <li class="nav-item mt-4">
-                        <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-left"></i> Sair</a>
+                        <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-left"></i> Logout</a>
                     </li>
                 </ul>
             </div>
@@ -222,9 +222,9 @@ $mensagem = '';
             <!-- Main Content -->
             <div class="col-lg-10 main-content">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="mb-0">Painel da Empresa</h2>
+                    <h2 class="mb-0">Company Dashboard</h2>
                     <div>
-                        <span class="text-muted me-2"><?php echo date('d/m/Y H:i'); ?></span>
+                        <span class="text-muted me-2"><?php echo date('m/d/Y H:i'); ?></span>
                     </div>
                 </div>
                 
@@ -240,7 +240,7 @@ $mensagem = '';
                             <div class="stat-value">
                                 <?php echo $result_estudantes ? $result_estudantes->num_rows : 0; ?>
                             </div>
-                            <div class="stat-label">Estudantes Disponíveis</div>
+                            <div class="stat-label">Available Students</div>
                         </div>
                     </div>
                     
@@ -252,20 +252,20 @@ $mensagem = '';
                             <div class="stat-value">
                                 1
                             </div>
-                            <div class="stat-label">Perfil Empresarial</div>
+                            <div class="stat-label">Company Profile</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Estudantes Section -->
+                <!-- Students Section -->
                 <div class="card" id="estudantes">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <div>
                             <i class="bi bi-people me-2"></i>
-                            Estudantes Compatíveis
+                            Compatible Students
                         </div>
                         <div>
-                            <input type="text" class="form-control form-control-sm" placeholder="Buscar estudantes..." id="searchEstudantes">
+                            <input type="text" class="form-control form-control-sm" placeholder="Search students..." id="searchEstudantes">
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -273,11 +273,11 @@ $mensagem = '';
                             <table class="table table-hover mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Nome</th>
-                                        <th>Universidade</th>
-                                        <th>Curso</th>
+                                        <th>Name</th>
+                                        <th>University</th>
+                                        <th>Course</th>
                                         <th>GPA</th>
-                                        <th>Ações</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -285,18 +285,18 @@ $mensagem = '';
                                         <?php while ($estudante = $result_estudantes->fetch_assoc()): ?>
                                             <tr>
                                                 <td><?php echo htmlspecialchars($estudante['nome'] . ' ' . $estudante['sobrenome']); ?></td>
-                                                <td><?php echo ($estudante['nome_universidade'] ? $estudante['nome_universidade'] : 'Não informado'); ?></td>
-                                                <td><?php echo ($estudante['nome_curso'] ? $estudante['nome_curso'] : 'Não informado'); ?></td>
-                                                <td><?php echo ($estudante['gpa'] ? $estudante['gpa'] : 'Não informado'); ?></td>
+                                                <td><?php echo ($estudante['nome_universidade'] ? $estudante['nome_universidade'] : 'Not specified'); ?></td>
+                                                <td><?php echo ($estudante['nome_curso'] ? $estudante['nome_curso'] : 'Not specified'); ?></td>
+                                                <td><?php echo ($estudante['gpa'] ? $estudante['gpa'] : 'Not specified'); ?></td>
                                                 <td>
-                                                    <a href="#" class="btn btn-sm btn-outline-primary">Ver Perfil</a>
-                                                    <a href="#" class="btn btn-sm btn-outline-success">Convidar</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-primary">View Profile</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-success">Invite</a>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="5" class="text-center">Nenhum estudante compatível encontrado</td>
+                                            <td colspan="5" class="text-center">No compatible students found</td>
                                         </tr>
                                     <?php endif; ?>
                                 </tbody>
@@ -311,7 +311,7 @@ $mensagem = '';
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Filtro para tabela de estudantes
+        // Filter for student table
         document.getElementById('searchEstudantes').addEventListener('keyup', function() {
             const searchText = this.value.toLowerCase();
             const table = document.querySelector('#estudantes table');

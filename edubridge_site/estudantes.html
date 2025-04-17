@@ -48,7 +48,7 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <a href="#" class="btn-signup me-2" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</a>
+                    <a href="cadastro.html" class="btn-signup me-2">Cadastre-se</a>
                     <a href="#" class="btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Entrar</a>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                         <h1 class="display-4">Desbloquei seu futuro com <span class="student-highlight">EduBridge</span></h1>
                         <p class="lead mb-4">Dê o primeiro passo para financiar sua educação e alcançar seus sonhos acadêmicos.</p>
                         <div class="student-cta-container">
-                            <a href="#" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#cadastroModal">Registre-se Hoje →</a>
+                            <a href="cadastro.html" class="btn btn-primary btn-lg">Registre-se Hoje →</a>
                             <a href="#caminho" class="btn btn-outline-primary btn-lg">Saiba Mais</a>
                         </div>
                     </div>
@@ -331,7 +331,7 @@
                     <h2 class="fw-bold">Comece Sua Jornada Hoje</h2>
                     <p class="lead">Dê o primeiro passo para transformar seu futuro acadêmico e profissional.</p>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-                        <a href="#" class="btn btn-primary btn-lg px-4 gap-3" data-bs-toggle="modal" data-bs-target="#cadastroModal">Cadastre-se</a>
+                        <a href="cadastro.html" class="btn btn-primary btn-lg px-4 gap-3">Cadastre-se</a>
                         <a href="calculadora_emprestimos.php" class="btn btn-outline-primary btn-lg px-4">Simular Financiamento</a>
                     </div>
                 </div>
@@ -433,16 +433,12 @@
                 <div class="modal-body">
                     <form action="cadastro.html" method="get">
                         <div class="mb-3">
-                            <label for="signupName" class="form-label">Nome completo</label>
-                            <input type="text" class="form-control" id="signupName" name="nome" required>
-                        </div>
-                        <div class="mb-3">
                             <label for="signupEmail" class="form-label">Email</label>
                             <input type="email" class="form-control" id="signupEmail" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="signupType" class="form-label">Tipo de usuário</label>
-                            <select class="form-select" id="signupType" name="tipo" required>
+                            <select class="form-select" id="signupType" name="categoria" required>
                                 <option value="" selected disabled>Selecione...</option>
                                 <option value="estudante" selected>Estudante</option>
                                 <option value="investidor">Investidor</option>

@@ -1,28 +1,28 @@
 <?php
 session_start();
-// Configurações de erro para desenvolvimento
+// Error settings for development
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Inclui a conexão com o banco de dados
+// Include database connection
 include 'conexao.php';
 
-// Verifica se o usuário está logado e é uma universidade
+// Check if the user is logged in and is a university
 if (!isset($_SESSION['usuario_id']) || $_SESSION['usuario_categoria'] !== 'universidade') {
     header("Location: login.php?expirado=1");
     exit();
 }
 
-// Obter dados da universidade
+// Get university data
 $usuario_id = $_SESSION['usuario_id'];
 
-// Obter perfil da universidade
+// Get university profile
 $sql_universidade = "SELECT pu.nome FROM perfil_universidade pu WHERE pu.usuario_id = ?";
 $stmt_universidade = $conn->prepare($sql_universidade);
 $stmt_universidade->bind_param("i", $usuario_id);
 $stmt_universidade->execute();
 $result_universidade = $stmt_universidade->get_result();
-$nome_universidade = "Não definido";
+$nome_universidade = "Not defined";
 
 if ($result_universidade->num_rows > 0) {
     $universidade_data = $result_universidade->fetch_assoc();
@@ -30,7 +30,7 @@ if ($result_universidade->num_rows > 0) {
 }
 $stmt_universidade->close();
 
-// Obter cursos da universidade
+// Get university courses
 $sql_cursos = "SELECT cu.* FROM curso_universidade cu 
               JOIN perfil_universidade pu ON cu.universidade_id = pu.id 
               WHERE pu.usuario_id = ?";
@@ -44,7 +44,7 @@ while ($row = $result_cursos->fetch_assoc()) {
 }
 $stmt_cursos->close();
 
-// Obter estudantes da universidade
+// Get university students
 $sql_estudantes = "SELECT u.id, u.nome, u.sobrenome, u.email, 
                   cu.nome_curso as curso, 
                   pe.ano_ingresso, pe.semestre_atual, pe.gpa
@@ -79,11 +79,11 @@ $stmt_estudantes->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel da Universidade - EduBridge</title>
+    <title>University Dashboard - EduBridge</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -252,7 +252,7 @@ $stmt_estudantes->close();
                     </div>
                     <div>
                         <div class="fw-bold"><?php echo $_SESSION['usuario_nome']; ?></div>
-                        <small class="text-white-50">Universidade</small>
+                        <small class="text-white-50">University</small>
                     </div>
                 </div>
                 <ul class="nav flex-column px-3">
@@ -260,19 +260,19 @@ $stmt_estudantes->close();
                         <a class="nav-link active" href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-building"></i> Perfil da Universidade</a>
+                        <a class="nav-link" href="#"><i class="bi bi-building"></i> University Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-mortarboard"></i> Cursos</a>
+                        <a class="nav-link" href="#"><i class="bi bi-mortarboard"></i> Courses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-people"></i> Estudantes</a>
+                        <a class="nav-link" href="#"><i class="bi bi-people"></i> Students</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-graph-up"></i> Relatórios</a>
+                        <a class="nav-link" href="#"><i class="bi bi-graph-up"></i> Reports</a>
                     </li>
                     <li class="nav-item mt-4">
-                        <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-left"></i> Sair</a>
+                        <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-left"></i> Logout</a>
                     </li>
                 </ul>
             </div>
@@ -282,7 +282,7 @@ $stmt_estudantes->close();
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="mb-0">Dashboard - <?php echo htmlspecialchars($nome_universidade); ?></h2>
                     <div>
-                        <span class="text-muted me-2"><?php echo date('d/m/Y H:i'); ?></span>
+                        <span class="text-muted me-2"><?php echo date('m/d/Y H:i'); ?></span>
                     </div>
                 </div>
                 
@@ -296,7 +296,7 @@ $stmt_estudantes->close();
                             <div class="stat-value">
                                 <?php echo count($cursos); ?>
                             </div>
-                            <div class="stat-label">Cursos Oferecidos</div>
+                            <div class="stat-label">Courses Offered</div>
                         </div>
                     </div>
                     
@@ -308,7 +308,7 @@ $stmt_estudantes->close();
                             <div class="stat-value">
                                 <?php echo $total_estudantes; ?>
                             </div>
-                            <div class="stat-label">Total de Estudantes</div>
+                            <div class="stat-label">Total Students</div>
                         </div>
                     </div>
                     
@@ -318,9 +318,9 @@ $stmt_estudantes->close();
                                 <i class="bi bi-award"></i>
                             </div>
                             <div class="stat-value">
-                                <?php echo number_format($gpa_medio, 2, ',', '.'); ?>
+                                <?php echo number_format($gpa_medio, 2, '.', ','); ?>
                             </div>
-                            <div class="stat-label">GPA Médio</div>
+                            <div class="stat-label">Average GPA</div>
                         </div>
                     </div>
                     
@@ -332,7 +332,7 @@ $stmt_estudantes->close();
                             <div class="stat-value">
                                 <?php echo count($estudantes) > 0 ? '80%' : '0%'; ?>
                             </div>
-                            <div class="stat-label">Taxa de Retenção</div>
+                            <div class="stat-label">Retention Rate</div>
                         </div>
                     </div>
                 </div>
@@ -344,19 +344,19 @@ $stmt_estudantes->close();
                         <!-- Message about future features -->
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <span><i class="bi bi-info-circle me-2"></i>Informações Importantes</span>
+                                <span><i class="bi bi-info-circle me-2"></i>Important Information</span>
                             </div>
                             <div class="card-body">
                                 <div class="alert alert-info mb-0">
-                                    <h5><i class="bi bi-lightbulb me-2"></i>Bem-vindo ao seu Dashboard!</h5>
-                                    <p>Estamos em processo de implementação do sistema de EduBridge para universidades. Em breve você poderá:</p>
+                                    <h5><i class="bi bi-lightbulb me-2"></i>Welcome to your Dashboard!</h5>
+                                    <p>We are in the process of implementing the EduBridge system for universities. Soon you will be able to:</p>
                                     <ul>
-                                        <li>Ver estatísticas detalhadas sobre seus cursos e estudantes</li>
-                                        <li>Acompanhar o progresso acadêmico dos alunos</li>
-                                        <li>Visualizar oportunidades de financiamento para seus estudantes</li>
-                                        <li>Receber análises de desempenho e sugestões para melhorias</li>
+                                        <li>See detailed statistics about your courses and students</li>
+                                        <li>Track students' academic progress</li>
+                                        <li>View financing opportunities for your students</li>
+                                        <li>Receive performance analysis and suggestions for improvements</li>
                                     </ul>
-                                    <p class="mb-0">Fique atento às nossas atualizações!</p>
+                                    <p class="mb-0">Stay tuned for our updates!</p>
                                 </div>
                             </div>
                         </div>
@@ -364,8 +364,8 @@ $stmt_estudantes->close();
                         <!-- Courses -->
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <span><i class="bi bi-mortarboard me-2"></i>Cursos Oferecidos</span>
-                                <a href="#" class="btn btn-sm btn-outline-primary">Gerenciar Cursos</a>
+                                <span><i class="bi bi-mortarboard me-2"></i>Courses Offered</span>
+                                <a href="#" class="btn btn-sm btn-outline-primary">Manage Courses</a>
                             </div>
                             <div class="card-body">
                                 <?php if (count($cursos) > 0): ?>
@@ -373,19 +373,19 @@ $stmt_estudantes->close();
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Curso</th>
-                                                <th>GPA Médio</th>
-                                                <th>Custo/Semestre</th>
-                                                <th>Salário Esperado</th>
+                                                <th>Course</th>
+                                                <th>Average GPA</th>
+                                                <th>Cost/Semester</th>
+                                                <th>Expected Salary</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($cursos as $curso): ?>
                                             <tr>
                                                 <td><?php echo htmlspecialchars($curso['nome_curso']); ?></td>
-                                                <td><?php echo $curso['gpa_medio'] ? number_format($curso['gpa_medio'], 2, ',', '.') : 'N/A'; ?></td>
-                                                <td>US$ <?php echo $curso['custo_semestre'] ? number_format($curso['custo_semestre'], 2, ',', '.') : 'N/A'; ?></td>
-                                                <td>US$ <?php echo $curso['salario_esperado'] ? number_format($curso['salario_esperado'], 2, ',', '.') : 'N/A'; ?></td>
+                                                <td><?php echo $curso['gpa_medio'] ? number_format($curso['gpa_medio'], 2, '.', ',') : 'N/A'; ?></td>
+                                                <td>US$ <?php echo $curso['custo_semestre'] ? number_format($curso['custo_semestre'], 2, '.', ',') : 'N/A'; ?></td>
+                                                <td>US$ <?php echo $curso['salario_esperado'] ? number_format($curso['salario_esperado'], 2, '.', ',') : 'N/A'; ?></td>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -396,10 +396,10 @@ $stmt_estudantes->close();
                                     <div class="mb-3">
                                         <i class="bi bi-mortarboard fs-1 text-muted"></i>
                                     </div>
-                                    <h5>Nenhum curso cadastrado</h5>
-                                    <p class="text-muted">Adicione cursos para começar a gerenciar seus estudantes.</p>
+                                    <h5>No courses registered</h5>
+                                    <p class="text-muted">Add courses to start managing your students.</p>
                                     <a href="#" class="btn btn-primary">
-                                        <i class="bi bi-plus-circle me-2"></i>Adicionar Curso
+                                        <i class="bi bi-plus-circle me-2"></i>Add Course
                                     </a>
                                 </div>
                                 <?php endif; ?>
@@ -409,7 +409,7 @@ $stmt_estudantes->close();
                         <!-- Students Distribution Chart -->
                         <div class="card">
                             <div class="card-header">
-                                <i class="bi bi-graph-up me-2"></i>Distribuição de Estudantes por Curso
+                                <i class="bi bi-graph-up me-2"></i>Student Distribution by Course
                             </div>
                             <div class="card-body">
                                 <div class="chart-container">
@@ -424,8 +424,8 @@ $stmt_estudantes->close();
                         <!-- Recent Students -->
                         <div class="card mb-4">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <span><i class="bi bi-people me-2"></i>Estudantes Recentes</span>
-                                <a href="#" class="btn btn-sm btn-outline-primary">Ver Todos</a>
+                                <span><i class="bi bi-people me-2"></i>Recent Students</span>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
                             </div>
                             <div class="card-body">
                                 <?php if (count($estudantes) > 0): ?>
@@ -441,7 +441,7 @@ $stmt_estudantes->close();
                                             </div>
                                             <div>
                                                 <h6 class="mb-1"><?php echo htmlspecialchars($estudante['nome'] . ' ' . $estudante['sobrenome']); ?></h6>
-                                                <p class="mb-0 small"><?php echo htmlspecialchars($estudante['curso']); ?> - Ano: <?php echo $estudante['ano_ingresso']; ?></p>
+                                                <p class="mb-0 small"><?php echo htmlspecialchars($estudante['curso']); ?> - Year: <?php echo $estudante['ano_ingresso']; ?></p>
                                             </div>
                                             <?php if ($estudante['gpa']): ?>
                                             <div class="gpa-badge"><?php echo number_format($estudante['gpa'], 1); ?></div>
@@ -452,7 +452,7 @@ $stmt_estudantes->close();
                                 <?php else: ?>
                                     <div class="text-center py-4">
                                         <i class="bi bi-people fs-1 text-muted mb-3"></i>
-                                        <p>Não há estudantes cadastrados para esta universidade.</p>
+                                        <p>There are no students registered for this university.</p>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -461,11 +461,11 @@ $stmt_estudantes->close();
                         <!-- University Performance -->
                         <div class="card">
                             <div class="card-header">
-                                <i class="bi bi-graph-up me-2"></i>Desempenho da Universidade
+                                <i class="bi bi-graph-up me-2"></i>University Performance
                             </div>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span>Taxa de Conclusão:</span>
+                                    <span>Graduation Rate:</span>
                                     <div class="progress w-50" style="height: 10px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 85%"></div>
                                     </div>
@@ -473,7 +473,7 @@ $stmt_estudantes->close();
                                 </div>
                                 
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span>Empregabilidade:</span>
+                                    <span>Employability:</span>
                                     <div class="progress w-50" style="height: 10px;">
                                         <div class="progress-bar bg-primary" role="progressbar" style="width: 78%"></div>
                                     </div>
@@ -481,7 +481,7 @@ $stmt_estudantes->close();
                                 </div>
                                 
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span>Satisfação:</span>
+                                    <span>Satisfaction:</span>
                                     <div class="progress w-50" style="height: 10px;">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 90%"></div>
                                     </div>
@@ -492,7 +492,7 @@ $stmt_estudantes->close();
                                 
                                 <div class="d-grid">
                                     <a href="#" class="btn btn-outline-primary">
-                                        <i class="bi bi-file-earmark-text me-2"></i>Relatório Completo
+                                        <i class="bi bi-file-earmark-text me-2"></i>Complete Report
                                     </a>
                                 </div>
                             </div>
@@ -537,7 +537,7 @@ $stmt_estudantes->close();
                 data: {
                     labels: <?php echo json_encode($courseNames); ?>,
                     datasets: [{
-                        label: 'Número de Estudantes',
+                        label: 'Number of Students',
                         data: <?php echo json_encode($studentCounts); ?>,
                         backgroundColor: [
                             '#3066BE',

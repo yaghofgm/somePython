@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - EduBridge</title>
+    <title>Registration - EduBridge</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -54,44 +54,6 @@
             border-color: var(--accent-color);
             box-shadow: 0 0 0 0.25rem rgba(109, 157, 197, 0.25);
         }
-        .progress-step {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            position: relative;
-        }
-        .progress-step::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #dee2e6;
-            z-index: 1;
-        }
-        .step {
-            position: relative;
-            z-index: 2;
-            background-color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #dee2e6;
-        }
-        .step.active {
-            border-color: var(--primary-color);
-            background-color: var(--primary-color);
-            color: white;
-        }
-        .step.completed {
-            border-color: var(--secondary-color);
-            background-color: var(--secondary-color);
-            color: white;
-        }
     </style>
 </head>
 <body>
@@ -107,10 +69,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Voltar para Home</a>
+                        <a class="nav-link" href="index.html">Back to Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-primary ms-2" href="login.php">Já tenho uma conta</a>
+                        <a class="btn btn-outline-primary ms-2" href="login.php">I already have an account</a>
                     </li>
                 </ul>
             </div>
@@ -122,179 +84,111 @@
             <div class="col-md-8">
                 <div class="card registro-card">
                     <div class="card-header">
-                        <h4 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i>Cadastre-se no EduBridge</h4>
+                        <h4 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i>Sign Up for EduBridge</h4>
                     </div>
                     <div class="card-body p-4">
-                        <div class="progress-step mb-4">
-                            <div class="step active" id="step1">1</div>
-                            <div class="step" id="step2">2</div>
-                            <div class="step" id="step3">3</div>
-                        </div>
-
                         <form id="registrationForm" action="salvar_usuario.php" method="post" class="needs-validation" novalidate>
-                            <!-- Alerta para mostrar errores -->
+                            <!-- Alert to show errors -->
                             <div id="form-error" class="alert alert-danger d-none" role="alert"></div>
 
-                            <!-- Step 1: Basic Information -->
-                            <div class="step-content" id="step1-content">
-                                <h5 class="card-title mb-4">Informações Básicas</h5>
-                                
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="nome" name="nome" required>
-                                        <div class="invalid-feedback">
-                                            Por favor, informe seu nome.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="sobrenome" class="form-label">Sobrenome <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
-                                        <div class="invalid-feedback">
-                                            Por favor, informe seu sobrenome.
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nome" class="form-label">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="nome" name="nome" required>
                                     <div class="invalid-feedback">
-                                        Por favor, informe um email válido.
+                                        Please enter your first name.
                                     </div>
                                 </div>
-                                
-                                <div class="mb-3">
-                                    <label for="telefone" class="form-label">Telefone</label>
-                                    <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(DDD) 99999-9999">
-                                    <div class="form-text">Opcional, mas recomendado para comunicações importantes.</div>
-                                </div>
-                                
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-primary next-step" data-step="1">Próximo <i class="bi bi-arrow-right"></i></button>
+                                <div class="col-md-6">
+                                    <label for="sobrenome" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your last name.
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- Step 2: Profile Information -->
-                            <div class="step-content d-none" id="step2-content">
-                                <h5 class="card-title mb-4">Perfil do Usuário</h5>
-                                
-                                <div class="mb-3">
-                                    <label for="categoria" class="form-label">Qual a sua relação com o EduBridge? <span class="text-danger">*</span></label>
-                                    <select class="form-select" id="categoria" name="categoria" required>
-                                        <option value="" selected disabled>Selecione uma opção</option>
-                                        <option value="estudante">Sou Estudante buscando financiamento</option>
-                                        <option value="investidor">Sou Investidor interessado em financiar estudantes</option>
-                                        <option value="universidade">Represento uma Universidade</option>
-                                        <option value="empresa">Represento uma Empresa</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Por favor, selecione uma opção.
-                                    </div>
-                                </div>
-                                
-                                <!-- Conditional fields based on categoria -->
-                                <div id="estudante-fields" class="categoria-fields d-none">
-                                    <div class="mb-3">
-                                        <label for="universidade" class="form-label">Universidade</label>
-                                        <input type="text" class="form-control" id="universidade" name="universidade">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="curso" class="form-label">Curso</label>
-                                        <input type="text" class="form-control" id="curso" name="curso">
-                                    </div>
-                                </div>
-                                
-                                <div id="investidor-fields" class="categoria-fields d-none">
-                                    <div class="mb-3">
-                                        <label for="area_interesse" class="form-label">Áreas de interesse</label>
-                                        <select class="form-select" multiple id="area_interesse" name="area_interesse[]">
-                                            <option value="engenharia">Engenharia</option>
-                                            <option value="medicina">Medicina</option>
-                                            <option value="direito">Direito</option>
-                                            <option value="tecnologia">Tecnologia</option>
-                                            <option value="negocios">Negócios</option>
-                                            <option value="artes">Artes e Humanidades</option>
-                                        </select>
-                                        <div class="form-text">Opcional. Segure CTRL para selecionar múltiplos.</div>
-                                    </div>
-                                </div>
-                                
-                                <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-primary prev-step" data-step="2"><i class="bi bi-arrow-left"></i> Anterior</button>
-                                    <button type="button" class="btn btn-primary next-step" data-step="2">Próximo <i class="bi bi-arrow-right"></i></button>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid email.
                                 </div>
                             </div>
-
-                            <!-- Step 3: Account Security -->
-                            <div class="step-content d-none" id="step3-content">
-                                <h5 class="card-title mb-4">Segurança da Conta</h5>
-                                
-                                <div class="mb-3">
-                                    <label for="senha" class="form-label">Senha <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <input type="password" class="form-control" id="senha" name="senha" required minlength="8">
-                                        <button class="btn btn-outline-secondary toggle-password" type="button"><i class="bi bi-eye"></i></button>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        A senha deve ter pelo menos 8 caracteres.
-                                    </div>
-                                    <div class="form-text">
-                                        <div class="password-strength mt-2">
-                                            <small>Força da senha:</small>
-                                            <div class="progress" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
-                                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="categoria" class="form-label">What is your relationship with EduBridge? <span class="text-danger">*</span></label>
+                                <select class="form-select" id="categoria" name="categoria" required>
+                                    <option value="" selected disabled>Select an option</option>
+                                    <option value="estudante">I'm a Student seeking funding</option>
+                                    <option value="investidor">I'm an Investor interested in funding students</option>
+                                    <option value="universidade">I represent a University</option>
+                                    <option value="empresa">I represent a Company</option>
+                                </select>
+                                <div class="form-text">You will be able to complete your profile after logging in.</div>
+                                <div class="invalid-feedback">
+                                    Please select an option.
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Password <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="senha" name="senha" required minlength="8">
+                                    <button class="btn btn-outline-secondary toggle-password" type="button"><i class="bi bi-eye"></i></button>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Password must be at least 8 characters.
+                                </div>
+                                <div class="form-text">
+                                    <div class="password-strength mt-2">
+                                        <small>Password strength:</small>
+                                        <div class="progress" style="height: 5px;">
+                                            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
                                         </div>
-                                        <ul class="small mt-2">
-                                            <li id="length" class="text-muted">Mínimo de 8 caracteres</li>
-                                            <li id="uppercase" class="text-muted">Pelo menos uma letra maiúscula</li>
-                                            <li id="lowercase" class="text-muted">Pelo menos uma letra minúscula</li>
-                                            <li id="number" class="text-muted">Pelo menos um número</li>
-                                            <li id="special" class="text-muted">Pelo menos um caractere especial</li>
-                                        </ul>
                                     </div>
+                                    <ul class="small mt-2">
+                                        <li id="length" class="text-muted">Minimum 8 characters</li>
+                                        <li id="uppercase" class="text-muted">At least one uppercase letter</li>
+                                        <li id="lowercase" class="text-muted">At least one lowercase letter</li>
+                                        <li id="number" class="text-muted">At least one number</li>
+                                        <li id="special" class="text-muted">At least one special character</li>
+                                    </ul>
                                 </div>
-                                
-                                <div class="mb-3">
-                                    <label for="confirmar_senha" class="form-label">Confirmar Senha <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha" required>
-                                        <button class="btn btn-outline-secondary toggle-password" type="button"><i class="bi bi-eye"></i></button>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        As senhas não conferem.
-                                    </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="confirmar_senha" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha" required>
+                                    <button class="btn btn-outline-secondary toggle-password" type="button"><i class="bi bi-eye"></i></button>
                                 </div>
-                                
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="termos" name="termos" required>
-                                    <label class="form-check-label" for="termos">Concordo com os <a href="#" target="_blank">Termos de Serviço</a> e a <a href="#" target="_blank">Política de Privacidade</a> <span class="text-danger">*</span></label>
-                                    <div class="invalid-feedback">
-                                        Você deve concordar com os termos para continuar.
-                                    </div>
+                                <div class="invalid-feedback">
+                                    Passwords do not match.
                                 </div>
-                                
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="newsletter" name="newsletter">
-                                    <label class="form-check-label" for="newsletter">Desejo receber atualizações e novidades por email</label>
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="termos" name="termos" required>
+                                <label class="form-check-label" for="termos">I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a> <span class="text-danger">*</span></label>
+                                <div class="invalid-feedback">
+                                    You must agree to the terms to continue.
                                 </div>
-                                
-                                <div class="alert alert-info" role="alert">
-                                    <i class="bi bi-info-circle"></i> Ao se cadastrar, você reconhece que leu e entendeu nossa política de privacidade e uso de dados.
-                                </div>
-                                
-                                <div id="form-success" class="alert alert-success d-none" role="alert"></div>
-                                
-                                <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-primary prev-step" data-step="3"><i class="bi bi-arrow-left"></i> Anterior</button>
-                                    <button type="submit" class="btn btn-success"><i class="bi bi-check2-circle"></i> Finalizar Cadastro</button>
-                                </div>
+                            </div>
+                            
+                            <div class="alert alert-info" role="alert">
+                                <i class="bi bi-info-circle"></i> After signing up, you'll be able to complete your profile in your dashboard.
+                            </div>
+                            
+                            <div id="form-success" class="alert alert-success d-none" role="alert"></div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-success btn-lg"><i class="bi bi-check2-circle"></i> Complete Registration</button>
                             </div>
                         </form>
                     </div>
                     <div class="card-footer bg-white text-center py-3">
-                        <p class="mb-0">Já tem uma conta? <a href="login.php" class="text-decoration-none">Faça login</a></p>
+                        <p class="mb-0">Already have an account? <a href="login.php" class="text-decoration-none">Log in</a></p>
                     </div>
                 </div>
             </div>
@@ -302,71 +196,26 @@
     </div>
 
     <footer class="bg-white text-center p-3 mt-5">
-        <p class="text-muted mb-0">&copy; 2025 EduBridge. Todos os direitos reservados.</p>
+        <p class="text-muted mb-0">&copy; 2025 EduBridge. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Multi-step form navigation
-            document.querySelectorAll('.next-step').forEach(button => {
-                button.addEventListener('click', function() {
-                    const currentStep = parseInt(this.getAttribute('data-step'));
-                    const currentContent = document.getElementById(`step${currentStep}-content`);
-                    const nextContent = document.getElementById(`step${currentStep+1}-content`);
-                    const currentStepIndicator = document.getElementById(`step${currentStep}`);
-                    const nextStepIndicator = document.getElementById(`step${currentStep+1}`);
-                    
-                    // Validate current step
-                    let isValid = true;
-                    currentContent.querySelectorAll('input[required], select[required]').forEach(input => {
-                        if (!input.validity.valid) {
-                            isValid = false;
-                            input.classList.add('is-invalid');
-                        } else {
-                            input.classList.remove('is-invalid');
-                        }
-                    });
-                    
-                    if (isValid) {
-                        currentContent.classList.add('d-none');
-                        nextContent.classList.remove('d-none');
-                        currentStepIndicator.classList.remove('active');
-                        currentStepIndicator.classList.add('completed');
-                        nextStepIndicator.classList.add('active');
-                    }
-                });
-            });
+            // Controle para determinar se o envio será via AJAX ou formulário tradicional
+            const isAjaxSubmit = false; // Por padrão, usamos o envio tradicional do formulário
             
-            document.querySelectorAll('.prev-step').forEach(button => {
-                button.addEventListener('click', function() {
-                    const currentStep = parseInt(this.getAttribute('data-step'));
-                    const currentContent = document.getElementById(`step${currentStep}-content`);
-                    const prevContent = document.getElementById(`step${currentStep-1}-content`);
-                    const currentStepIndicator = document.getElementById(`step${currentStep}`);
-                    const prevStepIndicator = document.getElementById(`step${currentStep-1}`);
-                    
-                    currentContent.classList.add('d-none');
-                    prevContent.classList.remove('d-none');
-                    currentStepIndicator.classList.remove('active');
-                    prevStepIndicator.classList.remove('completed');
-                    prevStepIndicator.classList.add('active');
-                });
-            });
-            
-            // Show/hide conditional fields based on category selection
-            const categoriaSelect = document.getElementById('categoria');
-            categoriaSelect.addEventListener('change', function() {
-                document.querySelectorAll('.categoria-fields').forEach(field => field.classList.add('d-none'));
-                
-                const selectedValue = this.value;
-                if (selectedValue) {
-                    const fieldElement = document.getElementById(`${selectedValue}-fields`);
-                    if (fieldElement) {
-                        fieldElement.classList.remove('d-none');
-                    }
-                }
-            });
+            // Preencher campos do formulário com dados da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('nome')) {
+                document.getElementById('nome').value = urlParams.get('nome');
+            }
+            if (urlParams.has('email')) {
+                document.getElementById('email').value = urlParams.get('email');
+            }
+            if (urlParams.has('categoria')) {
+                document.getElementById('categoria').value = urlParams.get('categoria');
+            }
             
             // Toggle password visibility
             document.querySelectorAll('.toggle-password').forEach(button => {
@@ -447,7 +296,7 @@
             const confirmarSenha = document.getElementById('confirmar_senha');
             confirmarSenha.addEventListener('input', function() {
                 if (this.value !== passwordInput.value) {
-                    this.setCustomValidity('As senhas não conferem');
+                    this.setCustomValidity('Passwords do not match');
                 } else {
                     this.setCustomValidity('');
                 }
@@ -463,38 +312,89 @@
                     return;
                 }
 
-                // Mostrar indicador de carga
+                // Se for envio direto (não AJAX), permite o comportamento padrão do formulário
+                if (!isAjaxSubmit) {
+                    return true;
+                }
+
+                // Apenas para envios AJAX, prevenimos o comportamento padrão
+                event.preventDefault();
+
+                // Show loading indicator
                 const submitButton = this.querySelector('button[type="submit"]');
                 const originalText = submitButton.innerHTML;
                 submitButton.disabled = true;
-                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cadastrando...';
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Registering...';
                 
-                // En caso de que la redirección del servidor falle, capturaremos la respuesta JSON
+                // In case server redirection fails, we'll capture the JSON response
                 const formData = new FormData(this);
                 
-                fetch('salvar_usuario.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .catch(error => {
-                    console.error('Error:', error);
-                    // Si llegamos aquí, significa que el servidor no redireccionó correctamente
-                    // Esto podría ser debido a un error o porque hay errores de validación
-                    
-                    // Restaurar botón de envío
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = originalText;
-                    
-                    // Mostrar mensaje de error genérico
+                // Add AJAX header to the request
+                const ajaxRequest = new XMLHttpRequest();
+                ajaxRequest.open('POST', 'salvar_usuario.php', true);
+                ajaxRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                
+                ajaxRequest.onload = function() {
+                    if (this.status >= 200 && this.status < 400) {
+                        try {
+                            const response = JSON.parse(this.response);
+                            
+                            if (response.sucesso) {
+                                // Redirect on success
+                                window.location.href = response.redirect;
+                            } else {
+                                // Show error message
+                                const errorDiv = document.getElementById('form-error');
+                                errorDiv.textContent = response.mensagem;
+                                errorDiv.classList.remove('d-none');
+                                errorDiv.scrollIntoView({ behavior: 'smooth' });
+                                
+                                // Restore submit button
+                                submitButton.disabled = false;
+                                submitButton.innerHTML = originalText;
+                            }
+                        } catch (e) {
+                            // If the response is a redirect (not JSON), follow it
+                            if (this.responseURL && this.responseURL !== window.location.href) {
+                                window.location.href = this.responseURL;
+                            } else {
+                                // Show generic error message
+                                const errorDiv = document.getElementById('form-error');
+                                errorDiv.textContent = 'There was an error processing your registration. Please try again.';
+                                errorDiv.classList.remove('d-none');
+                                errorDiv.scrollIntoView({ behavior: 'smooth' });
+                                
+                                // Restore submit button
+                                submitButton.disabled = false;
+                                submitButton.innerHTML = originalText;
+                            }
+                        }
+                    } else {
+                        // Server error
+                        const errorDiv = document.getElementById('form-error');
+                        errorDiv.textContent = 'Server error. Please try again later.';
+                        errorDiv.classList.remove('d-none');
+                        errorDiv.scrollIntoView({ behavior: 'smooth' });
+                        
+                        // Restore submit button
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalText;
+                    }
+                };
+                
+                ajaxRequest.onerror = function() {
+                    // Network error
                     const errorDiv = document.getElementById('form-error');
-                    errorDiv.textContent = 'Houve um erro ao processar seu cadastro. Por favor, tente novamente.';
+                    errorDiv.textContent = 'Network error. Please check your connection and try again.';
                     errorDiv.classList.remove('d-none');
                     errorDiv.scrollIntoView({ behavior: 'smooth' });
                     
-                    // Prevenir el envío del formulario después de manejar errores
-                    event.preventDefault();
-                });
+                    // Restore submit button
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalText;
+                };
+                
+                ajaxRequest.send(formData);
             });
         });
     </script>

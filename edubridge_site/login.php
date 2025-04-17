@@ -1,11 +1,11 @@
 <?php
-// Garante que qualquer sessão anterior seja completamente destruída antes de iniciar uma nova
+// Ensures that any previous session is completely destroyed before starting a new one
 session_start();
 if (isset($_SESSION['usuario_id'])) {
-    // Limpa todas as variáveis de sessão
+    // Clear all session variables
     $_SESSION = array();
     
-    // Se um cookie de sessão foi usado, destrói-o também
+    // If a session cookie was used, destroy it too
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
         setcookie(session_name(), '', time() - 42000,
@@ -14,60 +14,60 @@ if (isset($_SESSION['usuario_id'])) {
         );
     }
     
-    // Destrói a sessão
+    // Destroy the session
     session_destroy();
-    // Reinicia sessão limpa
+    // Restart clean session
     session_start();
 }
 
-// Configurações de erro para desenvolvimento - TEMPORÁRIO PARA DEBUG
+// Error settings for development - TEMPORARY FOR DEBUG
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Inclui a conexão com o banco de dados
+// Include database connection
 include 'conexao.php';
 
-// Verifica se o usuário já está logado
+// Check if user is already logged in
 if (isset($_SESSION['usuario_id'])) {
     header("Location: painel.php");
     exit();
 }
 
-// Inicializa variáveis para mensagens
+// Initialize variables for messages
 $erro = "";
 $sucesso = "";
-$debug_info = ""; // Para informações de depuração
+$debug_info = ""; // For debugging information
 
-// Verifica se há mensagem de cadastro bem-sucedido
+// Check if there's a successful registration message
 if (isset($_GET['cadastro']) && $_GET['cadastro'] == 'sucesso') {
-    $sucesso = "Cadastro realizado com sucesso! Você já pode fazer login.";
+    $sucesso = "Registration successful! You can now log in.";
 }
 
-// Verifica se há mensagem de sessão expirada
+// Check if there's a session expired message
 if (isset($_GET['expirado']) && $_GET['expirado'] == '1') {
-    $erro = "Sua sessão expirou. Por favor, faça login novamente.";
+    $erro = "Your session has expired. Please log in again.";
 }
 
-// Verifica se está no modo de depuração para admin
+// Check if in debug mode for admin
 $debug_mode = isset($_GET['debug']) && $_GET['debug'] == '1';
 
-// Verifica se o formulário foi enviado via POST
+// Check if form was submitted via POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $senha = $_POST['senha']; // Não sanitizamos a senha antes do hash
+    $senha = $_POST['senha']; // We don't sanitize the password before hashing
 
-    // Validação básica
+    // Basic validation
     if (empty($email) || empty($senha)) {
-        $erro = "Por favor, preencha todos os campos.";
+        $erro = "Please fill in all fields.";
     } else {
-        // Prepara a consulta SQL para evitar SQL Injection
+        // Prepare SQL query to prevent SQL Injection
         $sql = "SELECT id, nome, sobrenome, senha, categoria, status FROM usuarios WHERE email = ?";
         $stmt = $conn->prepare($sql);
 
         if (!$stmt) {
-            $erro = "Erro ao processar o login. Tente novamente mais tarde.";
+            $erro = "Error processing login. Please try again later.";
         } else {
-            // Vincula os parâmetros e executa a consulta
+            // Bind parameters and execute query
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $resultado = $stmt->get_result();
@@ -75,54 +75,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($resultado->num_rows === 1) {
                 $usuario = $resultado->fetch_assoc();
                 
-                // Modo de depuração para o login do admin
+                // Debug mode for admin login
                 if ($debug_mode && $email === 'admin@edubridge.com') {
                     $db_hash = $usuario['senha'];
                     $senha_correta = password_verify($senha, $db_hash);
                     $debug_info = "Email: $email<br>";
-                    $debug_info .= "Categoria no banco: " . $usuario['categoria'] . "<br>";
-                    $debug_info .= "Status da conta: " . $usuario['status'] . "<br>";
-                    $debug_info .= "Senha fornecida: " . htmlspecialchars($senha) . "<br>";
-                    $debug_info .= "Hash armazenado: " . htmlspecialchars($db_hash) . "<br>";
-                    $debug_info .= "Verificação da senha: " . ($senha_correta ? "SUCESSO" : "FALHA") . "<br>";
+                    $debug_info .= "Database category: " . $usuario['categoria'] . "<br>";
+                    $debug_info .= "Account status: " . $usuario['status'] . "<br>";
+                    $debug_info .= "Provided password: " . htmlspecialchars($senha) . "<br>";
+                    $debug_info .= "Stored hash: " . htmlspecialchars($db_hash) . "<br>";
+                    $debug_info .= "Password verification: " . ($senha_correta ? "SUCCESS" : "FAILURE") . "<br>";
                 }
                 
-                // Verifica se a conta está ativa
+                // Check if account is active
                 if ($usuario['status'] !== 'ativo') {
-                    $erro = "Esta conta não está ativa. Por favor, verifique seu email ou entre em contato com o suporte.";
+                    $erro = "This account is not active. Please check your email or contact support.";
                 } 
-                // Verifica a senha usando password_verify (hash bcrypt) ou bypass para admin
+                // Verify password using password_verify (bcrypt hash) or bypass for admin
                 else if (password_verify($senha, $usuario['senha']) || ($email === 'admin@edubridge.com' && $senha === 'Admin@123')) {
-                    // Antes de criar uma nova sessão, garantir que qualquer sessão antiga seja completamente destruída
-                    session_regenerate_id(true); // Regenera o ID da sessão e elimina a sessão antiga
+                    // Before creating a new session, ensure any old session is completely destroyed
+                    session_regenerate_id(true); // Regenerate session ID and eliminate old session
                     
-                    // Login bem-sucedido - cria a sessão
+                    // Successful login - create session
                     $_SESSION['usuario_id'] = $usuario['id'];
                     $_SESSION['usuario_nome'] = $usuario['nome'];
                     $_SESSION['usuario_sobrenome'] = $usuario['sobrenome'];
                     
-                    // Correção específica para o admin - garantir categoria correta
+                    // Specific fix for admin - ensure correct category
                     if ($email === 'admin@edubridge.com') {
-                        $_SESSION['usuario_categoria'] = 'empresa';
+                        $_SESSION['usuario_categoria'] = 'admin';
                     } else {
                         $_SESSION['usuario_categoria'] = $usuario['categoria'];
                     }
                     
                     $_SESSION['ultimo_acesso'] = time();
                     
-                    // Debug para ver qual categoria está sendo definida
+                    // Debug to see which category is being set
                     if ($debug_mode) {
-                        $debug_info .= "Categoria definida na sessão: " . $_SESSION['usuario_categoria'] . "<br>";
+                        $debug_info .= "Category set in session: " . $_SESSION['usuario_categoria'] . "<br>";
                     }
                     
-                    // Atualiza a última conexão do usuário
+                    // Update the user's last connection
                     $update_sql = "UPDATE usuarios SET ultima_conexao = NOW() WHERE id = ?";
                     $update_stmt = $conn->prepare($update_sql);
                     $update_stmt->bind_param("i", $usuario['id']);
                     $update_stmt->execute();
                     $update_stmt->close();
                     
-                    // Registra o login no log
+                    // Log the login
                     $log_sql = "INSERT INTO usuarios_logs (usuario_id, acao, ip, user_agent, detalhes) VALUES (?, 'login', ?, ?, ?)";
                     $log_stmt = $conn->prepare($log_sql);
                     $ip = $_SERVER['REMOTE_ADDR'];
@@ -132,28 +132,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $log_stmt->execute();
                     $log_stmt->close();
                     
-                    // Se não estamos no modo de depuração, redireciona para o painel
+                    // If not in debug mode, redirect to dashboard
                     if (!$debug_mode) {
                         header("Location: painel.php");
                         exit();
                     }
                 } else {
-                    // Registra a tentativa de login falha
+                    // Log failed login attempt
                     $log_sql = "INSERT INTO usuarios_logs (usuario_id, acao, ip, user_agent, detalhes) VALUES (?, 'login_falha', ?, ?, ?)";
                     $log_stmt = $conn->prepare($log_sql);
                     $ip = $_SERVER['REMOTE_ADDR'];
                     $user_agent = $_SERVER['HTTP_USER_AGENT'];
-                    $detalhes = json_encode(['timestamp' => date('Y-m-d H:i:s'), 'reason' => 'senha_incorreta']);
+                    $detalhes = json_encode(['timestamp' => date('Y-m-d H:i:s'), 'reason' => 'incorrect_password']);
                     $log_stmt->bind_param("isss", $usuario['id'], $ip, $user_agent, $detalhes);
                     $log_stmt->execute();
                     $log_stmt->close();
                     
-                    $erro = "Email ou senha incorretos.";
+                    $erro = "Incorrect email or password.";
                 }
             } else {
-                // Para usuários não existentes, apenas definimos a mensagem de erro
-                // sem tentar registrar no log (pois não temos um usuario_id válido)
-                $erro = "Email ou senha incorretos.";
+                // For non-existent users, just set the error message
+                // without trying to log (since we don't have a valid usuario_id)
+                $erro = "Incorrect email or password.";
             }
             
             $stmt->close();
@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
-// Função para gerar token CSRF
+// Function to generate CSRF token
 function generate_csrf_token() {
     if (!isset($_SESSION['csrf_token'])) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -174,7 +174,7 @@ function generate_csrf_token() {
 $csrf_token = generate_csrf_token();
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -276,14 +276,14 @@ $csrf_token = generate_csrf_token();
                                     </div>
                                     <div>
                                         <h4 class="mb-0">EduBridge</h4>
-                                        <p class="mb-0 small">Acesse sua conta</p>
+                                        <p class="mb-0 small">Access your account</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="login-body">
                                 <?php if (!empty($debug_info) && $debug_mode): ?>
                                 <div class="alert alert-warning">
-                                    <h5>Informações de Depuração</h5>
+                                    <h5>Debug Information</h5>
                                     <div><?php echo $debug_info; ?></div>
                                 </div>
                                 <?php endif; ?>
@@ -307,64 +307,64 @@ $csrf_token = generate_csrf_token();
                                     <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                                     
                                     <div class="mb-4 form-floating">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" value="<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>" required>
                                         <label for="email"><i class="bi bi-envelope me-2"></i>Email</label>
                                         <div class="invalid-feedback">
-                                            Por favor, informe um email válido.
+                                            Please enter a valid email.
                                         </div>
                                     </div>
                                     
                                     <div class="mb-4 form-floating">
-                                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
-                                        <label for="senha"><i class="bi bi-lock me-2"></i>Senha</label>
+                                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Password" required>
+                                        <label for="senha"><i class="bi bi-lock me-2"></i>Password</label>
                                         <div class="invalid-feedback">
-                                            Por favor, informe sua senha.
+                                            Please enter your password.
                                         </div>
                                     </div>
                                     
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="lembrar" name="lembrar">
-                                            <label class="form-check-label" for="lembrar">Lembrar-me</label>
+                                            <label class="form-check-label" for="lembrar">Remember me</label>
                                         </div>
-                                        <a href="recuperar_senha.php" class="text-decoration-none">Esqueceu sua senha?</a>
+                                        <a href="recuperar_senha.php" class="text-decoration-none">Forgot your password?</a>
                                     </div>
                                     
                                     <div class="d-grid mb-4">
                                         <button type="submit" class="btn btn-primary btn-lg">
-                                            <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
+                                            <i class="bi bi-box-arrow-in-right me-2"></i>Login
                                         </button>
                                     </div>
                                     
                                     <div class="text-center">
-                                        <p class="mb-0 text-muted">Não tem uma conta?</p>
+                                        <p class="mb-0 text-muted">Don't have an account?</p>
                                         <a href="cadastro.html" class="btn btn-outline-primary mt-2">
-                                            <i class="bi bi-person-plus me-2"></i>Cadastre-se
+                                            <i class="bi bi-person-plus me-2"></i>Sign up
                                         </a>
                                     </div>
                                 </form>
                             </div>
                             <div class="login-footer">
-                                <p class="mb-0 small">&copy; 2025 EduBridge. Todos os direitos reservados.</p>
+                                <p class="mb-0 small">&copy; 2025 EduBridge. All rights reserved.</p>
                             </div>
                         </div>
                         <div class="col-md-6 d-none d-md-block">
                             <div class="login-sidebar h-100">
                                 <div class="login-sidebar-content">
-                                    <h3 class="mb-4">Bem-vindo ao futuro da educação</h3>
-                                    <p class="lead mb-5">Conectamos estudantes talentosos, investidores visionários e instituições de ensino para criar um novo ecossistema educacional.</p>
+                                    <h3 class="mb-4">Welcome to the future of education</h3>
+                                    <p class="lead mb-5">We connect talented students, visionary investors, and educational institutions to create a new educational ecosystem.</p>
                                     <div class="d-flex">
                                         <div class="me-4">
                                             <h4 class="h2 mb-0">5K+</h4>
-                                            <p class="mb-0 small">Estudantes</p>
+                                            <p class="mb-0 small">Students</p>
                                         </div>
                                         <div class="me-4">
                                             <h4 class="h2 mb-0">500+</h4>
-                                            <p class="mb-0 small">Investidores</p>
+                                            <p class="mb-0 small">Investors</p>
                                         </div>
                                         <div>
                                             <h4 class="h2 mb-0">50+</h4>
-                                            <p class="mb-0 small">Universidades</p>
+                                            <p class="mb-0 small">Universities</p>
                                         </div>
                                     </div>
                                 </div>
